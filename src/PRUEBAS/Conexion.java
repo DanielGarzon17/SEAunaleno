@@ -14,7 +14,7 @@ import org.json.simple.JSONArray;
 import LOGICA.*;
 
 public class Conexion {
-    final static int x=100000;
+    final static int x=1000;
     public static void main(String[] args) {
         
         double[] data1 = new double[x];
@@ -25,16 +25,16 @@ public class Conexion {
         Stack<Double> datos = llenarVector();
         for (int i = 0; i < x; i++) {
             data1[i] = (double) datos.pop();
+            System.out.print(datos.pop());
         }
 
         JButton button = new JButton("Generar gráfico");
         button.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
                 try {
-                    generarArchivoJSON(data1, "src\\PRUEBAS\\data1.json");
+                    // generarArchivoJSON(data1, "src\\PRUEBAS\\data.json");
 
                     ProcessBuilder processBuilder = new ProcessBuilder("python", "src\\PRUEBAS\\graficador.py");
-                    // data1String, data2String);
 
                     // Iniciar el proceso y esperar a que finalice
                     Process process = processBuilder.start();
@@ -56,19 +56,19 @@ public class Conexion {
         frame.setVisible(true);
     }
 
-    public static void generarArchivoJSON(double[] datos, String nombreArchivo) {
-        JSONArray jsonArray = new JSONArray();
-        for (double dato : datos) {
-            jsonArray.add(dato);
-        }
+    // public static void generarArchivoJSON(double[] datos, String nombreArchivo) {
+    //     JSONArray jsonArray = new JSONArray();
+    //     for (double dato : datos) {
+    //         jsonArray.add(dato);
+    //     }
 
-        try (FileWriter fileWriter = new FileWriter(nombreArchivo)) {
-            fileWriter.write(jsonArray.toJSONString());
-            System.out.println("Archivo JSON generado exitosamente.");
-        } catch (IOException e) {
-            System.out.println("Error al generar el archivo JSON: " + e.getMessage());
-        }
-    }
+    //     try (FileWriter fileWriter = new FileWriter(nombreArchivo)) {
+    //         fileWriter.write(jsonArray.toJSONString());
+    //         System.out.println("Archivo JSON generado exitosamente.");
+    //     } catch (IOException e) {
+    //         System.out.println("Error al generar el archivo JSON: " + e.getMessage());
+    //     }
+    // }
 
     public static double RandomDouble() {
         Random random = new Random();
