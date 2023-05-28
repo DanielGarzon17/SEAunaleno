@@ -61,15 +61,4 @@ public class Stack<T> {
         // Establece el valor del elemento en la posición del tope (top)
         items[top] = item;
     }
-
-    public static void main(String[] args) {
-        Stack<Integer> stack = new Stack<Integer>(5);
-        stack.push(1);
-        stack.push(2);
-        stack.push(3);
-        stack.set(5);
-        System.out.println(stack.pop()); // Output: 3
-        System.out.println(stack.pop());
-        System.out.println(stack.pop());
-    }
 }
