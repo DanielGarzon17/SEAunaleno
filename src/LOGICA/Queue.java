@@ -1,0 +1,99 @@
+package LOGICA;
+
+public class Queue<T> {
+
+    private node<T> head;
+    private node<T> tail;
+
+    public Queue() {
+        head = null;
+        tail = null;
+    }
+
+    public boolean empty() {
+        return head == null;
+    }
+
+    public void push(T key) {
+        node<T> nodito = new node<>(key, null);
+        if (empty()) {
+            head = nodito;
+        } else {
+            tail.next = nodito;
+        }
+        tail = nodito;
+    }
+
+    // public T pop() throws Exception {
+    //     if (!empty()) {
+    //         T data = head.key;
+    //         head = head.next;
+    //         if (empty()) {
+    //             tail = null;
+    //         }
+    //         return data;
+    //     } else {
+    //         throw new Exception("La lista esta vacia");
+    //     }
+    // }
+    public T pop() {
+        if (head == null) {
+            // La cola está vacía, no se puede extraer ningún elemento
+            return null; // O podrías lanzar una excepción apropiada, como NoSuchElementException
+        }
+        
+        T data = head.getData();
+        head = head.getNext();
+        
+        if (head == null) {
+            // Si head es null después de extraer el elemento, significa que la cola está vacía
+            tail = null;
+        }
+        
+        return data;
+    }
+
+    public void set(T dato) {
+        if (!empty()) {
+            head.key = dato;
+        } else {
+            System.out.println("La lista esta vacia");
+        }
+    }
+
+    public T peek() throws Exception {
+        if (!empty()) {
+            return head.key;
+        } else {
+            throw new Exception("La lista esta vacia");
+        }
+    }
+
+    /*
+    public T[] getAll() {
+        
+    }
+     */
+    public class node<T> {
+
+        T key;
+        node<T> next;
+
+        public node(T key, node next) {
+            this.key = key;
+            this.next = next;
+        }
+
+        public node(T key) {
+            this(key, null);
+        }
+
+        public T getData() {
+            return key;
+        }
+        
+        public node<T> getNext() {
+            return next;
+        }
+    }
+}
