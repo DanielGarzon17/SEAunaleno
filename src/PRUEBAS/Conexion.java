@@ -17,7 +17,6 @@ import LOGICA.*;
 public class Conexion {
     final static int x=1000;
     public static void main(String[] args) {
-        System.out.println("HOLAAAAA");
         
         double[] data1 = new double[x];
 
@@ -90,7 +89,6 @@ public class Conexion {
         for (int i = 0; i < x; i++) {
             double Rnd = RandomDouble();
             examenesCalificados.push(Rnd);
-            System.out.print(Rnd);
         }
         long tiempoInicial = System.nanoTime();
         examenesCalificados.push(RandomDouble());

@@ -9,7 +9,7 @@ def generar_grafico(datos):
     plt.xlabel('Puntaje obtenido')
     plt.ylabel('Intento')
     plt.title('Gráfico')
-    plt.savefig("src\RECURSOS\graphic.jpg")
+    plt.savefig("src/RECURSOS/graphic.jpg")
     # plt.show()
 
 def leer_archivo_json(nombre_archivo):
@@ -86,10 +86,10 @@ def generar_diagrama_pareto(datos):
 
     # Mostrar el gráfico
     plt.title('Diagrama de Pareto')
-    plt.savefig("src\RECURSOS\pareto-graphic.jpg")
+    plt.savefig("src/RECURSOS/pareto-graphic.jpg")
 
 if __name__ == '__main__':
-    data = leer_archivo_json("src\PRUEBAS\data.json")
+    data = leer_archivo_json("src/PRUEBAS/data.json")
     # Generar el gráfico
     generar_grafico(data)
     generar_diagrama_pareto(data)
