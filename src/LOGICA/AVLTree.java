@@ -14,28 +14,46 @@ class AVLNode<T> {
 
 public class AVLTree<T extends Comparable<T>> {
     private AVLNode<T> root;
-    public static void main(String[] args) {
-        AVLTree<Integer> avlTree = new AVLTree<>();
+    // public static void main(String[] args) {
+    //     AVLTree<Integer> avlTree = new AVLTree<>();
 
-        // Insertar elementos en el árbol AVL
-        avlTree.insert(10);
-        avlTree.insert(20);
-        avlTree.insert(30);
-        avlTree.insert(40);
-        avlTree.insert(50);
-        avlTree.insert(25);
+    //     // Insertar elementos en el árbol AVL
+    //     avlTree.insert(10);
+    //     avlTree.insert(20);
+    //     avlTree.insert(30);
+    //     avlTree.insert(40);
+    //     avlTree.insert(50);
+    //     avlTree.insert(25);
 
-        // Imprimir el árbol AVL
-        System.out.println("Árbol AVL después de la inserción:");
-        avlTree.print();
+    //     // Imprimir el árbol AVL
+    //     System.out.println("Árbol AVL después de la inserción:");
+    //     avlTree.print();
 
-        // Eliminar elementos del árbol AVL
-        avlTree.delete(30);
-        avlTree.delete(25);
+    //     // Eliminar elementos del árbol AVL
+    //     avlTree.delete(30);
+    //     avlTree.delete(25);
 
-        // Imprimir el árbol AVL después de la eliminación
-        System.out.println("Árbol AVL después de la eliminación:");
-        avlTree.print();
+    //     // Imprimir el árbol AVL después de la eliminación
+    //     System.out.println("Árbol AVL después de la eliminación:");
+    //     avlTree.print();
+    // }
+
+    public boolean find(T data) {
+        return findNode(root, data);
+    }
+    
+    private boolean findNode(AVLNode<T> node, T data) {
+        if (node == null) {
+            return false;
+        }
+    
+        if (data.compareTo(node.data) < 0) {
+            return findNode(node.left, data);
+        } else if (data.compareTo(node.data) > 0) {
+            return findNode(node.right, data);
+        } else {
+            return true;
+        }
     }
 
     public void print() {
