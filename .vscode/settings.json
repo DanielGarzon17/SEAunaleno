@@ -2,6 +2,6 @@
     "java.project.referencedLibraries": [
         "lib/**/*.jar",
         "c:\\Users\\delog\\Downloads\\json-simple-1.1.1.jar",
-        "c:\\Program Files\\NetBeans-17\\netbeans\\java\\modules\\ext\\AbsoluteLayout.jar"
+        "c:\\Users\\Cristian\\Downloads\\json-simple-1.1.1.jar"
     ]
 }
