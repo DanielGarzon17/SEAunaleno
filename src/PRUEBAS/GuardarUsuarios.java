@@ -86,16 +86,15 @@ public class GuardarUsuarios {
 
 
     public GuardarUsuarios() {
-        int x = 1000000;
+        int x = 100000000;
         AVLTree<String> usuarios = new AVLTree<String>();
         for (int i = 0; i < x; i++) {
             String name=generarNombreAleatorio();
             usuarios.insert(name);
             // System.out.println(name);
         }
-        
         long tiempoInicial = System.nanoTime();
-        usuarios.insert( "" + fragmentos1[0]+ " " + fragmentos2[0] + " " + fragmentos3[0]);
+        usuarios.insert("Pablito clavo un Clavito");
         System.out.println("s"+x + "=" + (System.nanoTime() - tiempoInicial));
     }
 
