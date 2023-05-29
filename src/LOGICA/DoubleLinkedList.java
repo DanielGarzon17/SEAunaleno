@@ -16,7 +16,7 @@ public class DoubleLinkedList<T> {
     }
 
     public void pushBack(T key) {
-        node<T> nodito = new node<>(key, null, null);
+        node nodito = new node(key, null, null);
         if (empty()) {
             head = nodito;
         } else {
@@ -28,7 +28,7 @@ public class DoubleLinkedList<T> {
     }
 
     public void pushFront(T key) {
-        node<T> nodito = new node<>(key, null, null);
+        node nodito = new node(key, null, null);
         if (empty()) {
             tail = nodito;
         } else {
@@ -48,8 +48,8 @@ public class DoubleLinkedList<T> {
                 if (posicion == size) {
                     pushBack(key);
                 } else {
-                    node<T> nodito = new node<>(key, null, null);
-                    node<T> iterador = head;
+                    node nodito = new node(key, null, null);
+                    node iterador = head;
                     for (int i = 1; i < posicion; i++) {
                         iterador = iterador.derecha;
                     }
@@ -102,7 +102,7 @@ public class DoubleLinkedList<T> {
                 if (posicion == size - 1) {
                     popBack();
                 } else {
-                    node<T> iterador = head;
+                    node iterador = head;
                     for (int i = 1; i < posicion; i++) {
                         iterador = iterador.derecha;
                     }
@@ -118,7 +118,7 @@ public class DoubleLinkedList<T> {
 
     public void set(T dato, int posicion) {
         if (posicion < size && posicion >= 0) {
-            node<T> iterador = head;
+            node iterador = head;
             for (int i = 0; i < posicion; i++) {
                 iterador = iterador.izquierda;
             }
@@ -130,7 +130,7 @@ public class DoubleLinkedList<T> {
 
     public T get(int posicion) throws Exception {
         if (posicion < size && posicion >= 0) {
-            node<T> iterador = head;
+            node iterador = head;
             for (int i = 0; i < posicion; i++) {
                 iterador = iterador.izquierda;
             }
@@ -158,7 +158,7 @@ public class DoubleLinkedList<T> {
         System.out.println("");
     }
 
-    public class node<T> {
+    public class node {
 
         T key;
         node izquierda, derecha;

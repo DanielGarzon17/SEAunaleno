@@ -2,8 +2,8 @@ package LOGICA;
 
 public class LinkedList<T> {
 
-    private node<T> head;
-    private node<T> tail;
+    private node head;
+    private node tail;
     private int size;
 
     public LinkedList() {
@@ -17,7 +17,7 @@ public class LinkedList<T> {
     }
 
     public void pushBack(T key) {
-        node<T> nodito = new node<>(key, null);
+        node nodito = new node(key, null);
         if (empty()) {
             head = nodito;
         } else {
@@ -28,7 +28,7 @@ public class LinkedList<T> {
     }
 
     public void pushFront(T key) {
-        node<T> nodito = new node<>(key, null);
+        node nodito = new node(key, null);
         if (empty()) {
             tail = nodito;
         } else {
@@ -40,14 +40,14 @@ public class LinkedList<T> {
 
     public void push(T key, int posicion) {
         if (posicion <= size && posicion >= 0) {
-            node<T> nodito = new node<>(key, null);
+            node nodito = new node(key, null);
             if (posicion == 0) {
                 pushFront(key);
             } else {
                 if (posicion == size) {
                     pushBack(key);
                 } else {
-                    node<T> iterador = head;
+                    node iterador = head;
                     for (int i = 1; i < posicion; i++) {
                         iterador = iterador.next;
                     }
@@ -77,7 +77,7 @@ public class LinkedList<T> {
     public void popBack() {
         if (!empty()) {
             if (head.next != null) {
-                node<T> nodito = head;
+                node nodito = head;
                 while (nodito.next.next != null) {
                     nodito = nodito.next;
                 }
@@ -102,7 +102,7 @@ public class LinkedList<T> {
                 if (posicion == size - 1) {
                     popBack();
                 } else {
-                    node<T> iterador = head;
+                    node iterador = head;
                     for (int i = 1; i < posicion; i++) {
                         iterador = iterador.next;
                     }
@@ -117,7 +117,7 @@ public class LinkedList<T> {
 
     public void set(T dato, int posicion) {
         if (posicion < size && posicion >= 0) {
-            node<T> iterador = head;
+            node iterador = head;
             for (int i = 0; i < posicion; i++) {
                 iterador = iterador.next;
             }
@@ -129,7 +129,7 @@ public class LinkedList<T> {
 
     public T get(int posicion) throws Exception {
         if (posicion < size && posicion >= 0) {
-            node<T> iterador = head;
+            node iterador = head;
             for (int i = 0; i < posicion; i++) {
                 iterador = iterador.next;
             }
@@ -142,7 +142,7 @@ public class LinkedList<T> {
     public T[] getAll() throws Exception {
         if (!empty()) {
             T[] todos = (T[]) new Object[size];
-            node<T> iterador = head;
+            node iterador = head;
             for (int i = 0; i < size; i++) {
                 todos[i] = iterador.key;
                 iterador = iterador.next;
@@ -154,7 +154,7 @@ public class LinkedList<T> {
     }
 
     public void imprimir() {
-        node<T> iterador = head;
+        node iterador = head;
         while (iterador != null) {
             System.out.print(iterador.key + " ");
             iterador = iterador.next;
@@ -162,8 +162,7 @@ public class LinkedList<T> {
         System.out.print("\n");
     }
 
-    public class node<T> {
-
+    public class node {
         T key;
         node next;
 

@@ -2,8 +2,8 @@ package LOGICA;
 
 public class Queue<T> {
 
-    private node<T> head;
-    private node<T> tail;
+    private node head;
+    private node tail;
 
     public Queue() {
         head = null;
@@ -15,7 +15,7 @@ public class Queue<T> {
     }
 
     public void push(T key) {
-        node<T> nodito = new node<>(key, null);
+        node nodito = new node(key, null);
         if (empty()) {
             head = nodito;
         } else {
@@ -62,10 +62,10 @@ public class Queue<T> {
         
     }
      */
-    public class node<T> {
+    public class node {
 
         T key;
-        node<T> next;
+        node next;
 
         public node(T key, node next) {
             this.key = key;
@@ -80,7 +80,7 @@ public class Queue<T> {
             return key;
         }
         
-        public node<T> getNext() {
+        public node getNext() {
             return next;
         }
     }
