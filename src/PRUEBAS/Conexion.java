@@ -10,12 +10,14 @@ import javax.swing.JFrame;
 
 import java.io.FileWriter;
 import org.json.simple.JSONArray;
+import org.json.simple.JSONObject;
 
 import LOGICA.*;
 
 public class Conexion {
     final static int x=1000;
     public static void main(String[] args) {
+        System.out.println("HOLAAAAA");
         
         double[] data1 = new double[x];
 
@@ -25,7 +27,6 @@ public class Conexion {
         Stack<Double> datos = llenarVector();
         for (int i = 0; i < x; i++) {
             data1[i] = (double) datos.pop();
-            System.out.print(datos.pop());
         }
 
         JButton button = new JButton("Generar gráfico");
@@ -89,6 +90,7 @@ public class Conexion {
         for (int i = 0; i < x; i++) {
             double Rnd = RandomDouble();
             examenesCalificados.push(Rnd);
+            System.out.print(Rnd);
         }
         long tiempoInicial = System.nanoTime();
         examenesCalificados.push(RandomDouble());

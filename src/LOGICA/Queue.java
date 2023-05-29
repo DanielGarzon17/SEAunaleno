@@ -24,18 +24,6 @@ public class Queue<T> {
         tail = nodito;
     }
 
-    // public T pop() throws Exception {
-    //     if (!empty()) {
-    //         T data = head.key;
-    //         head = head.next;
-    //         if (empty()) {
-    //             tail = null;
-    //         }
-    //         return data;
-    //     } else {
-    //         throw new Exception("La lista esta vacia");
-    //     }
-    // }
     public T pop() {
         if (head == null) {
             // La cola está vacía, no se puede extraer ningún elemento

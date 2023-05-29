@@ -177,15 +177,4 @@ public class LinkedList<T> {
         }
     }
     
-    public static void main(String[] args) {
-        LinkedList<String> lista = new LinkedList<>();
-        for (int i = 0; i < 10; i++) {
-            lista.pushFront("a");
-        }
-        try{
-            Object[] todos = lista.getAll();
-        }catch (Exception ex) {
-            System.out.println("ERROR"+ex);
-        }
-    }
 }
