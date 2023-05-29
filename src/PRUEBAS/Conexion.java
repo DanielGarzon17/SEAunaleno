@@ -11,7 +11,7 @@ import javax.swing.JFrame;
 import java.io.FileWriter;
 import org.json.simple.JSONArray;
 import LOGICA.*;
-# a
+
 public class Conexion {
     final static int x=1000;
     public static void main(String[] args) {
