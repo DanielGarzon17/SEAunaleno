@@ -33,7 +33,7 @@ public class Conexion {
         button.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
                 try {
-                    // generarArchivoJSON(data1, "src\\PRUEBAS\\data.json");
+                    generarArchivoJSON(data1, "src\\PRUEBAS\\data.json");
 
                     ProcessBuilder processBuilder = new ProcessBuilder("python", "src\\PRUEBAS\\graficador.py");
 
@@ -57,19 +57,19 @@ public class Conexion {
         frame.setVisible(true);
     }
 
-    // public static void generarArchivoJSON(double[] datos, String nombreArchivo) {
-    //     JSONArray jsonArray = new JSONArray();
-    //     for (double dato : datos) {
-    //         jsonArray.add(dato);
-    //     }
+    public static void generarArchivoJSON(double[] datos, String nombreArchivo) {
+        JSONArray jsonArray = new JSONArray();
+        for (double dato : datos) {
+            jsonArray.add(dato);
+        }
 
-    //     try (FileWriter fileWriter = new FileWriter(nombreArchivo)) {
-    //         fileWriter.write(jsonArray.toJSONString());
-    //         System.out.println("Archivo JSON generado exitosamente.");
-    //     } catch (IOException e) {
-    //         System.out.println("Error al generar el archivo JSON: " + e.getMessage());
-    //     }
-    // }
+        try (FileWriter fileWriter = new FileWriter(nombreArchivo)) {
+            fileWriter.write(jsonArray.toJSONString());
+            System.out.println("Archivo JSON generado exitosamente.");
+        } catch (IOException e) {
+            System.out.println("Error al generar el archivo JSON: " + e.getMessage());
+        }
+    }
 
     public static double RandomDouble() {
         Random random = new Random();

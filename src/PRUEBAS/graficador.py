@@ -89,7 +89,7 @@ def generar_diagrama_pareto(datos):
     plt.savefig("src\RECURSOS\pareto-graphic.jpg")
 
 if __name__ == '__main__':
-    data = leer_archivo_json("src\PRUEBAS\data1.json")
+    data = leer_archivo_json("src\PRUEBAS\data.json")
     # Generar el gráfico
     generar_grafico(data)
     generar_diagrama_pareto(data)
