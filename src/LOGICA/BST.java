@@ -80,12 +80,21 @@ public class BST {
         if (root != null) {
             node nodito = find(nombre, root);
             if (nodito.key.getNombre().compareTo(nombre) == 0) {
-                
+
             }else{
                 System.out.println("El elemento no se encuentra en el arbol");
             }
         } else {
             System.out.println("El arbol esta vacio");
+        }
+    }
+
+    public Usuario get(String nombre){
+        node nodito = find(nombre, root);
+        if (nodito.key.getNombre().compareTo(nombre) == 0) {
+            return nodito.key;
+        }else{
+            return null;
         }
     }
 
