@@ -93,4 +93,5 @@ if __name__ == '__main__':
     # Generar el gráfico
     generar_grafico(data)
     generar_diagrama_pareto(data)
+    print("graficos generados exitosamente")
     
