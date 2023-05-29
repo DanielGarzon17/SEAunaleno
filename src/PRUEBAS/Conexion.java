@@ -11,7 +11,7 @@ import javax.swing.JFrame;
 import java.io.FileWriter;
 import org.json.simple.JSONArray;
 import LOGICA.*;
-# a
+
 public class Conexion {
     final static int x=1000;
     public static void main(String[] args) {
@@ -31,7 +31,6 @@ public class Conexion {
             public void actionPerformed(ActionEvent e) {
                 try {
                     generarArchivoJSON(data1, "src\\PRUEBAS\\data.json");
-
                     ProcessBuilder processBuilder = new ProcessBuilder("python", "src\\PRUEBAS\\graficador.py");
 
                     // Iniciar el proceso y esperar a que finalice
