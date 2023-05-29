@@ -10,8 +10,6 @@ import javax.swing.JFrame;
 
 import java.io.FileWriter;
 import org.json.simple.JSONArray;
-import org.json.simple.JSONObject;
-
 import LOGICA.*;
 
 public class Conexion {
