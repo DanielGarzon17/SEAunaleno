@@ -134,7 +134,7 @@ public class BST {
     public static void main(String[] args) {
         BST bst = new BST();
         for (int i = 0; i < 50; i++) {
-            bst.insert(new Usuario(null, null, "" + (int) (Math.random() * 100 + 1)));
+            bst.insert(new Usuario(null,"" + (int) (Math.random() * 100 + 1)));
         }
         bst.imprimir();
     }

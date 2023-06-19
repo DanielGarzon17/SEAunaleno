@@ -10,12 +10,12 @@ import LOGICA.Logica;
  *
  * @author Cristian
  */
-public class Panel2Usuario extends javax.swing.JPanel {
+public class PanelUsuario extends javax.swing.JPanel {
 
     /**
      * Creates new form PanelUsuario
      */
-    public Panel2Usuario() {
+    public PanelUsuario() {
         initComponents();
     }
 
@@ -27,8 +27,6 @@ public class Panel2Usuario extends javax.swing.JPanel {
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
-
-        jScrollPane1 = new javax.swing.JScrollPane();
         jScrollPane2 = new javax.swing.JScrollPane();
         jPanel1 = new javax.swing.JPanel();
         jLabel1 = new javax.swing.JLabel();
@@ -41,7 +39,7 @@ public class Panel2Usuario extends javax.swing.JPanel {
         jLabel1.setText("USUARIO");
 
         jLabel2.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        jLabel2.setText("Bienvenido " + usuario.getNombre());
+        jLabel2.setText("Bienvenido " + usuario.getNombres()+usuario.getApellidos());
         jLabel2.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
@@ -86,7 +84,6 @@ public class Panel2Usuario extends javax.swing.JPanel {
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JPanel jPanel1;
-    private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JScrollPane jScrollPane2;
     // End of variables declaration//GEN-END:variables
     private Logica logica = new Logica();

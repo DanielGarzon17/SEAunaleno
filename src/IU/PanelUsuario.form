@@ -83,7 +83,7 @@
               <Properties>
                 <Property name="horizontalAlignment" type="int" value="0"/>
                 <Property name="text" type="java.lang.String" editor="org.netbeans.modules.form.RADConnectionPropertyEditor">
-                  <Connection code="&quot;Bienvenido &quot; + usuario.getNombre()" type="code"/>
+                  <Connection code="&quot;Bienvenido &quot; usuario.getNombres()+usuario.getApellidos()" type="code"/>
                 </Property>
                 <Property name="horizontalTextPosition" type="int" value="0"/>
               </Properties>

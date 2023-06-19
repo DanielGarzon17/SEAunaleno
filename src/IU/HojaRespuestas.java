@@ -55,7 +55,7 @@ public class HojaRespuestas extends JFrame {
         //CONFIGURACION DE OBJETOS:
 
         //ventana
-        setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        // setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setBounds(0, 0, 270, screenSize.height - 50);
         setTitle("Hoja de respuestas");//titulo de la ventana
         setResizable(false);

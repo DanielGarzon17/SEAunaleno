@@ -37,7 +37,7 @@ public class AVLTree<T extends Comparable<T>> {
     //     System.out.println("Árbol AVL después de la eliminación:");
     //     avlTree.print();
     // }
-
+    //give me a method for print in generic class AVLTree?
     public boolean find(T data) {
         return findNode(root, data);
     }

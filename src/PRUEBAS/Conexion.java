@@ -13,16 +13,16 @@ import org.json.simple.JSONArray;
 import LOGICA.*;
 
 public class Conexion {
-    final static int x=1000;
+    final static int NumAleatorios=1000;
     public static void main(String[] args) {
         
-        double[] data1 = new double[x];
+        double[] data1 = new double[NumAleatorios];
 
         JFrame frame = new JFrame("Ejemplo de gráfico");
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 
         Stack<Double> datos = llenarVector();
-        for (int i = 0; i < x; i++) {
+        for (int i = 0; i < NumAleatorios; i++) {
             data1[i] = (double) datos.pop();
         }
 
@@ -82,14 +82,14 @@ public class Conexion {
     }
 
     public static Stack<Double> llenarVector() {
-        Stack<Double> examenesCalificados = new Stack<Double>(x+1);
-        for (int i = 0; i < x; i++) {
+        Stack<Double> examenesCalificados = new Stack<Double>(NumAleatorios+1);
+        for (int i = 0; i < NumAleatorios; i++) {
             double Rnd = RandomDouble();
             examenesCalificados.push(Rnd);
         }
         long tiempoInicial = System.nanoTime();
         examenesCalificados.push(RandomDouble());
-        System.out.println("s" + x + "=" + (System.nanoTime() - tiempoInicial));
+        System.out.println("s" + NumAleatorios + "=" + (System.nanoTime() - tiempoInicial));
         return examenesCalificados;
     }
 
