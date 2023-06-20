@@ -7,6 +7,7 @@ import java.awt.event.ActionListener;
 import java.nio.charset.StandardCharsets;
 import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
+import java.io.File;
 
 public class RegistroUsuarios extends JFrame {
     private JTextField emailField;
@@ -18,16 +19,25 @@ public class RegistroUsuarios extends JFrame {
     private JLabel imageLabel;
     private JButton uploadButton;
 
+    private ImageIcon defaultImage;
+
     public RegistroUsuarios() {
         setTitle("Sea unaleño - Registro de Usuarios");
-        setSize(400, 500);
+        setSize(600, 500);
         setDefaultCloseOperation(EXIT_ON_CLOSE);
         setLayout(new BorderLayout());
         setResizable(false);
+        getContentPane().setBackground(Color.decode("#94B43B"));
+
+        defaultImage = new ImageIcon("src/main/java/RECURSOS/defaultuser1.jpg");
+
+        JPanel mainPanel = new JPanel();
+        mainPanel.setLayout(new BorderLayout());
+        mainPanel.setBorder(BorderFactory.createEmptyBorder(20, 20, 20, 20));
+        mainPanel.setBackground(Color.WHITE);
 
         JPanel formPanel = new JPanel();
         formPanel.setLayout(new GridBagLayout());
-        formPanel.setBorder(BorderFactory.createEmptyBorder(20, 20, 20, 20));
         formPanel.setBackground(Color.WHITE);
 
         GridBagConstraints constraints = new GridBagConstraints();
@@ -57,21 +67,21 @@ public class RegistroUsuarios extends JFrame {
         telefonoField = new JTextField(20);
         formPanel.add(telefonoField, constraints);
 
-        formPanel.add(new JLabel("Imagen de perfil:"), constraints);
         JPanel imagePanel = new JPanel();
         imagePanel.setLayout(new BorderLayout());
         imageLabel = new JLabel();
+        imageLabel.setIcon(defaultImage);
         imagePanel.add(imageLabel, BorderLayout.CENTER);
         uploadButton = new JButton("Subir imagen");
         imagePanel.add(uploadButton, BorderLayout.SOUTH);
-        formPanel.add(imagePanel, constraints);
 
-        constraints.anchor = GridBagConstraints.CENTER;
-        constraints.insets = new Insets(20, 0, 0, 0);
+        mainPanel.add(imagePanel, BorderLayout.WEST);
+        mainPanel.add(formPanel, BorderLayout.CENTER);
+
         addButton = new JButton("Agregar");
-        formPanel.add(addButton, constraints);
+        mainPanel.add(addButton, BorderLayout.SOUTH);
 
-        add(formPanel, BorderLayout.CENTER);
+        add(mainPanel, BorderLayout.CENTER);
 
         addButton.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
@@ -94,8 +104,10 @@ public class RegistroUsuarios extends JFrame {
 
                 int result = fileChooser.showOpenDialog(RegistroUsuarios.this);
                 if (result == JFileChooser.APPROVE_OPTION) {
-                    // Procesar la imagen seleccionada
-                    // ...
+                    File selectedFile = fileChooser.getSelectedFile();
+                    ImageIcon imageIcon = new ImageIcon(selectedFile.getAbsolutePath());
+                    Image image = imageIcon.getImage().getScaledInstance(250, 250, Image.SCALE_SMOOTH);
+                    imageLabel.setIcon(new ImageIcon(image));
                 }
             }
         });

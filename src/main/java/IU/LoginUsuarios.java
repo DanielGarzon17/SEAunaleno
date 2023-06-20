@@ -9,12 +9,12 @@ import java.awt.image.BufferedImage;
 import java.io.File;
 import java.io.IOException;
 
-public class SeaUnalenoLogin extends JFrame {
+public class LoginUsuarios extends JFrame {
     private JTextField usernameField;
     private JPasswordField passwordField;
     private JButton loginButton;
 
-    public SeaUnalenoLogin() {
+    public LoginUsuarios() {
         // Configurar la ventana
         setTitle("Sea unaleño - Iniciar sesión");
         setSize(400, 400);
@@ -104,7 +104,7 @@ public class SeaUnalenoLogin extends JFrame {
     public static void main(String[] args) {
         SwingUtilities.invokeLater(new Runnable() {
             public void run() {
-                SeaUnalenoLogin loginFrame = new SeaUnalenoLogin();
+                LoginUsuarios loginFrame = new LoginUsuarios();
                 loginFrame.setVisible(true);
             }
         });
