@@ -5,5 +5,8 @@
         "c:\\Users\\Cristian\\Downloads\\json-simple-1.1.1.jar",
         "c:\\Users\\delog\\Downloads\\AbsoluteLayout.jar",
         "c:\\Users\\Cristian\\Downloads\\AbsoluteLayout.jar"
-    ]
+    ],
+    "maven.view": "hierarchical",
+    "java.configuration.updateBuildConfiguration": "automatic",
+    "java.debug.settings.onBuildFailureProceed": true
 }
