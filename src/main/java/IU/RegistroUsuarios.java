@@ -1,13 +1,20 @@
 package IU;
+
+import javax.imageio.ImageIO;
 import javax.swing.*;
 import javax.swing.filechooser.FileNameExtensionFilter;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.awt.geom.Ellipse2D;
+import java.awt.image.BufferedImage;
 import java.nio.charset.StandardCharsets;
 import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
 import java.io.File;
+import java.io.IOException;
+
+import org.imgscalr.Scalr;
 
 public class RegistroUsuarios extends JFrame {
     private JTextField emailField;
@@ -27,7 +34,7 @@ public class RegistroUsuarios extends JFrame {
         setDefaultCloseOperation(EXIT_ON_CLOSE);
         setLayout(new BorderLayout());
         setResizable(false);
-        getContentPane().setBackground(Color.decode("#94B43B"));
+        // setBackground(Color.decode("#94B43B"));
 
         defaultImage = new ImageIcon("src/main/java/RECURSOS/defaultuser1.jpg");
 
@@ -38,7 +45,6 @@ public class RegistroUsuarios extends JFrame {
 
         JPanel formPanel = new JPanel();
         formPanel.setLayout(new GridBagLayout());
-        formPanel.setBackground(Color.WHITE);
 
         GridBagConstraints constraints = new GridBagConstraints();
         constraints.gridx = 0;
@@ -105,9 +111,23 @@ public class RegistroUsuarios extends JFrame {
                 int result = fileChooser.showOpenDialog(RegistroUsuarios.this);
                 if (result == JFileChooser.APPROVE_OPTION) {
                     File selectedFile = fileChooser.getSelectedFile();
-                    ImageIcon imageIcon = new ImageIcon(selectedFile.getAbsolutePath());
-                    Image image = imageIcon.getImage().getScaledInstance(250, 250, Image.SCALE_SMOOTH);
-                    imageLabel.setIcon(new ImageIcon(image));
+
+                    // Recortar la imagen de forma circular
+                    try {
+                        Image originalImage = ImageIO.read(selectedFile);
+                        Image scaledImage = originalImage.getScaledInstance(250, 250, Image.SCALE_SMOOTH);
+                        BufferedImage bufferedImage = new BufferedImage(scaledImage.getWidth(null), scaledImage.getHeight(null), BufferedImage.TYPE_INT_ARGB);
+                        Graphics2D g2d = bufferedImage.createGraphics();
+                        g2d.setRenderingHint(RenderingHints.KEY_ANTIALIASING, RenderingHints.VALUE_ANTIALIAS_ON);
+                        g2d.setClip(new Ellipse2D.Float(0, 0, 250, 250));
+                        g2d.drawImage(scaledImage, 0, 0, null);
+                        g2d.dispose();
+
+                        ImageIcon imageIcon = new ImageIcon(bufferedImage);
+                        imageLabel.setIcon(imageIcon);
+                    } catch (IOException ex) {
+                        ex.printStackTrace();
+                    }
                 }
             }
         });

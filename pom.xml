@@ -15,6 +15,12 @@
 
 
   <dependencies>
+  <!-- bBUSCAR DEPENDENCIAS EN: https://central.sonatype.com/search -->
+    <dependency>
+      <groupId>org.imgscalr</groupId>
+      <artifactId>imgscalr-lib</artifactId>
+      <version>4.2</version>
+    </dependency>
     <dependency>
       <groupId>junit</groupId>
       <artifactId>junit</artifactId>
