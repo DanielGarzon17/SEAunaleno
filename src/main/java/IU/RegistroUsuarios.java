@@ -141,7 +141,7 @@ public class RegistroUsuarios extends JFrame {
         setBackground(Color.WHITE);
         formPanel.setBackground(Color.WHITE);
         imagePanel.setBackground(Color.WHITE);
-        uploadButton.setBackground(Color.BLUE);
+        uploadButton.setBackground(new Color(9,36,51));
         uploadButton.setForeground(Color.WHITE);
         showPasswordButton.setBackground(Color.WHITE);
 

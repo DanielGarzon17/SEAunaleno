@@ -16,7 +16,6 @@ public class LoginUsuarios extends JFrame {
     private JPasswordField passwordField;
     private JButton loginButton;
     private JButton registrarseButton;
-    private JLabel imageLabel;
 
     public LoginUsuarios() {
         // Configurar la ventana
@@ -55,7 +54,7 @@ public class LoginUsuarios extends JFrame {
         loginButton.setBackground(new Color(76, 175, 80)); // Color de fondo del botón personalizado
         loginButton.setForeground(Color.WHITE); // Color de texto del botón personalizado
         registrarseButton =new JButton("Registrarme");
-        registrarseButton.setBackground(new Color(0, 0, 255));
+        registrarseButton.setBackground(new Color(9,36,51));
         registrarseButton.setForeground(Color.WHITE);   
 
 

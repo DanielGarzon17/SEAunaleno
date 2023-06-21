@@ -23,6 +23,7 @@ IU\InterfazPrincipal$PanelBiblioteca$1.class
 IU\BibliotecaInterfaz.class
 LOGICA\AVLTree.class
 PRUEBAS\EliminarNota_Imp3.class
+PRUEBAS\LoginFrame.class
 LOGICA\BST$node.class
 IU\PanelLogo.class
 LOGICA\BST.class
@@ -41,7 +42,6 @@ IU\HojaRespuestas.class
 LOGICA\DoubleLinkedList$node.class
 DATOS\Evaluacion.class
 IU\InterfazPrincipal$PanelBiblioteca$2.class
-IU\LoginUsuarios$4.class
 IU\LoginUsuarios$1.class
 IU\RegistroUsuarios$1.class
 PRUEBAS\GuardarUsuarios.class
