@@ -41,6 +41,7 @@ IU\HojaRespuestas.class
 LOGICA\DoubleLinkedList$node.class
 DATOS\Evaluacion.class
 IU\InterfazPrincipal$PanelBiblioteca$2.class
+IU\LoginUsuarios$4.class
 IU\LoginUsuarios$1.class
 IU\RegistroUsuarios$1.class
 PRUEBAS\GuardarUsuarios.class

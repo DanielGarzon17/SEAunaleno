@@ -13,6 +13,7 @@ public class LoginUsuarios extends JFrame {
     private JTextField usernameField;
     private JPasswordField passwordField;
     private JButton loginButton;
+    private JButton registrarseButton;
 
     public LoginUsuarios() {
         // Configurar la ventana
@@ -44,16 +45,21 @@ public class LoginUsuarios extends JFrame {
         // Crear los componentes
         JPanel contentPanel = new JPanel(new GridLayout(3, 2, 10, 10));
         contentPanel.setBorder(BorderFactory.createEmptyBorder(20, 20, 20, 20));
-        JLabel usernameLabel = new JLabel("Usuario:");
+        JLabel usernameLabel = new JLabel("Email:");
         JLabel passwordLabel = new JLabel("Contraseña:");
         usernameField = new JTextField();
         passwordField = new JPasswordField();
+
         loginButton = new JButton("Iniciar sesión");
         loginButton.setBackground(new Color(76, 175, 80)); // Color de fondo del botón personalizado
         loginButton.setForeground(Color.WHITE); // Color de texto del botón personalizado
+        registrarseButton =new JButton("Registrarme");
+        registrarseButton.setBackground(new Color(0, 0, 255));
+        registrarseButton.setForeground(Color.WHITE);   
+
 
         // Personalizar los componentes
-        Font labelFont = new Font("Arial", Font.BOLD, 14);
+        Font labelFont = new Font("Roboto", Font.BOLD, 14);
         usernameLabel.setFont(labelFont);
         passwordLabel.setFont(labelFont);
         usernameField.setFont(labelFont);
@@ -64,7 +70,7 @@ public class LoginUsuarios extends JFrame {
         contentPanel.add(usernameField);
         contentPanel.add(passwordLabel);
         contentPanel.add(passwordField);
-        contentPanel.add(new JLabel()); // Espacio en blanco
+        contentPanel.add(registrarseButton);
         contentPanel.add(loginButton);
 
         // Agregar los paneles al marco
@@ -80,6 +86,15 @@ public class LoginUsuarios extends JFrame {
                 // Verificar el usuario y la contraseña, etc.
                 // Si la autenticación es exitosa, puedes abrir la ventana principal del programa
                 // Si no, mostrar un mensaje de error o tomar alguna otra acción
+            }
+        });
+        //Agregar evento al botón de registrarse
+        registrarseButton.addActionListener(new ActionListener() {
+            public void actionPerformed(ActionEvent e) {
+                RegistroUsuarios registroFrame = new RegistroUsuarios();
+                registroFrame.setVisible(true);
+                setVisible(false);
+                
             }
         });
     }

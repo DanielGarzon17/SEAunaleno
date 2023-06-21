@@ -15,7 +15,7 @@
 
 
   <dependencies>
-  <!-- bBUSCAR DEPENDENCIAS EN: https://central.sonatype.com/search -->
+    <!-- bBUSCAR DEPENDENCIAS EN: https://central.sonatype.com/search -->
     <dependency>
       <groupId>org.imgscalr</groupId>
       <artifactId>imgscalr-lib</artifactId>
@@ -39,7 +39,17 @@
     </dependency>
   </dependencies>
 
+
+
   <build>
+    <resources>
+      <resource>
+        <directory>src/main/resources</directory>
+          <includes>
+              <include>**/*.ttf</include> <!-- Extensión del archivo de fuente -->
+          </includes>
+      </resource>
+    </resources>
     <sourceDirectory>src/main/java</sourceDirectory>
     <testSourceDirectory>src/main/java</testSourceDirectory>
     <plugins>

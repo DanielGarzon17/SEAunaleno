@@ -1,4 +1,5 @@
 package IU;
+
 import javax.imageio.ImageIO;
 import javax.swing.*;
 import javax.swing.filechooser.FileNameExtensionFilter;
@@ -15,9 +16,8 @@ import java.security.NoSuchAlgorithmException;
 import java.io.File;
 import java.io.IOException;
 
-import org.imgscalr.Scalr;
-
 public class RegistroUsuarios extends JFrame {
+    private JLabel titulo;
     private JTextField emailField;
     private JLabel idLabel;
     private JTextField nombresField;
@@ -28,9 +28,6 @@ public class RegistroUsuarios extends JFrame {
     private JLabel imageLabel;
     private JButton uploadButton;
     private JButton showPasswordButton;
-
-    private ImageIcon defaultImage;
-
     private boolean showPassword = false;
 
     public RegistroUsuarios() {
@@ -40,17 +37,14 @@ public class RegistroUsuarios extends JFrame {
         setLayout(new BorderLayout());
         setResizable(false);
         getContentPane().setBackground(Color.decode("#94B43B"));
-
-        defaultImage = new ImageIcon("src/main/java/RECURSOS/defaultuser1.jpg");
+        setLocationRelativeTo(null);
 
         JPanel mainPanel = new JPanel();
         mainPanel.setLayout(new BorderLayout());
         mainPanel.setBorder(BorderFactory.createEmptyBorder(20, 20, 20, 20));
-        mainPanel.setBackground(Color.WHITE);
 
         JPanel formPanel = new JPanel();
         formPanel.setLayout(new GridBagLayout());
-        formPanel.setBackground(Color.WHITE);
 
         GridBagConstraints constraints = new GridBagConstraints();
         constraints.gridx = 0;
@@ -61,63 +55,121 @@ public class RegistroUsuarios extends JFrame {
         formPanel.add(new JLabel("Correo Electrónico:"), constraints);
         emailField = new JTextField(20);
         emailField.setBorder(BorderFactory.createEmptyBorder());
-        emailField.setBorder(BorderFactory.createCompoundBorder(emailField.getBorder(), BorderFactory.createMatteBorder(0, 0, 1, 0, Color.BLUE)));
+        emailField.setBorder(BorderFactory.createCompoundBorder(emailField.getBorder(),
+                BorderFactory.createMatteBorder(0, 0, 1, 0, Color.BLUE)));
         formPanel.add(emailField, constraints);
 
         formPanel.add(new JLabel("ID:"), constraints);
         idLabel = new JLabel();
-        
+
         idLabel.setForeground(Color.BLUE);
         formPanel.add(idLabel, constraints);
 
         formPanel.add(new JLabel("Nombres:"), constraints);
         nombresField = new JTextField(20);
         nombresField.setBorder(BorderFactory.createEmptyBorder());
-        nombresField.setBorder(BorderFactory.createCompoundBorder(nombresField.getBorder(), BorderFactory.createMatteBorder(0, 0, 1, 0, Color.BLUE)));
-        
+        nombresField.setBorder(BorderFactory.createCompoundBorder(nombresField.getBorder(),
+                BorderFactory.createMatteBorder(0, 0, 1, 0, Color.BLUE)));
+
         formPanel.add(nombresField, constraints);
 
         formPanel.add(new JLabel("Apellidos:"), constraints);
         apellidosField = new JTextField(20);
         apellidosField.setBorder(BorderFactory.createEmptyBorder());
-        apellidosField.setBorder(BorderFactory.createCompoundBorder(apellidosField.getBorder(), BorderFactory.createMatteBorder(0, 0, 1, 0, Color.BLUE)));
-        
+        apellidosField.setBorder(BorderFactory.createCompoundBorder(apellidosField.getBorder(),
+                BorderFactory.createMatteBorder(0, 0, 1, 0, Color.BLUE)));
+
         formPanel.add(apellidosField, constraints);
 
-        formPanel.add(new JLabel("Teléfono:"), constraints);
-        telefonoField = new JTextField("+57",20);
+        formPanel.add(new JLabel("Teléfono (presiona enter al ingresarlo):"), constraints);
+        telefonoField = new JTextField("+57", 20);
         telefonoField.setBorder(BorderFactory.createEmptyBorder());
-        telefonoField.setBorder(BorderFactory.createCompoundBorder(telefonoField.getBorder(), BorderFactory.createMatteBorder(0, 0, 1, 0, Color.BLUE)));
-        
+        telefonoField.setBorder(BorderFactory.createCompoundBorder(telefonoField.getBorder(),
+                BorderFactory.createMatteBorder(0, 0, 1, 0, Color.BLUE)));
+
         formPanel.add(telefonoField, constraints);
 
         formPanel.add(new JLabel("Contraseña:"), constraints);
         passwordField = new JPasswordField(20);
         passwordField.setBorder(BorderFactory.createEmptyBorder());
-        passwordField.setBorder(BorderFactory.createCompoundBorder(passwordField.getBorder(), BorderFactory.createMatteBorder(0, 0, 1, 0, Color.BLUE)));
-        
+        passwordField.setBorder(BorderFactory.createCompoundBorder(passwordField.getBorder(),
+                BorderFactory.createMatteBorder(0, 0, 1, 0, Color.BLUE)));
+
         formPanel.add(passwordField, constraints);
         showPasswordButton = new JButton("Mostrar");
         formPanel.add(showPasswordButton, constraints);
 
         JPanel imagePanel = new JPanel();
         imagePanel.setLayout(new BorderLayout());
-        imagePanel.setBackground(Color.white);
         imageLabel = new JLabel();
-        imageLabel.setIcon(defaultImage);
+        try {
+            Image originalImage = ImageIO.read(new File("src/main/java/RECURSOS/defaultuser1.jpg"));
+            Image scaledImage = originalImage.getScaledInstance(250, 250, Image.SCALE_SMOOTH);
+            BufferedImage bufferedImage = new BufferedImage(scaledImage.getWidth(null),
+                    scaledImage.getHeight(null), BufferedImage.TYPE_INT_ARGB);
+            Graphics2D g2d = bufferedImage.createGraphics();
+            g2d.setRenderingHint(RenderingHints.KEY_ANTIALIASING, RenderingHints.VALUE_ANTIALIAS_ON);
+            g2d.setClip(new Ellipse2D.Float(0, 0, 250, 250));
+            g2d.drawImage(scaledImage, 0, 0, null);
+            g2d.dispose();
+
+            ImageIcon imageIcon = new ImageIcon(bufferedImage);
+            imageLabel.setIcon(imageIcon);
+        } catch (IOException ex) {
+            ex.printStackTrace();
+        }
+
         imagePanel.add(imageLabel, BorderLayout.CENTER);
         uploadButton = new JButton("Subir imagen");
         imagePanel.add(uploadButton, BorderLayout.SOUTH);
 
+        titulo = new JLabel("Registrarse");
+        titulo.setHorizontalAlignment(JLabel.CENTER);
+
+        mainPanel.add(titulo, BorderLayout.NORTH);
         mainPanel.add(imagePanel, BorderLayout.WEST);
         mainPanel.add(formPanel, BorderLayout.CENTER);
 
-        addButton = new JButton("Agregar");
-        mainPanel.add(addButton, BorderLayout.SOUTH);
-
-        
+        addButton = new JButton("REGISTRARSE");
+        addButton.setForeground(Color.WHITE);
+        addButton.setBackground(new Color(76, 175, 80));
 
         add(mainPanel, BorderLayout.CENTER);
+
+        // COLORES
+        mainPanel.setBackground(Color.WHITE);
+        setBackground(Color.WHITE);
+        formPanel.setBackground(Color.WHITE);
+        imagePanel.setBackground(Color.WHITE);
+
+        // FUENTES
+        try {
+            Font robotoBlackFont = Font.createFont(Font.TRUETYPE_FONT,
+                    new File("src/main/resources/fonts/Roboto-Black.ttf")).deriveFont(25f);
+            // Cargar la fuente desde el archivo en el directorio de recursos
+            titulo.setFont(robotoBlackFont);
+
+            Font robotoLightFont = Font.createFont(Font.TRUETYPE_FONT,
+                    new File("src/main/resources/fonts/Roboto-Light.ttf")).deriveFont(12f);
+            Font robotoBoldFont = Font.createFont(Font.TRUETYPE_FONT,
+                    new File("src/main/resources/fonts/Roboto-Bold.ttf")).deriveFont(12f);
+            for (Component component : formPanel.getComponents()) {
+                System.out.println("ntro");
+                if (component instanceof JButton || component instanceof JLabel) {
+                    component.setFont(robotoLightFont);
+                }
+                if (component instanceof JTextField){
+                    component.setFont(robotoBoldFont);
+                }
+            }
+            addButton.setFont(robotoLightFont.deriveFont(12f));
+            uploadButton.setFont(robotoLightFont);
+
+        } catch (FontFormatException e) {
+            e.printStackTrace();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
 
         addButton.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
@@ -129,7 +181,8 @@ public class RegistroUsuarios extends JFrame {
                 String password = new String(passwordField.getPassword());
 
                 // Aquí puedes agregar la lógica para guardar los datos del nuevo usuario
-                // Puedes utilizar las variables id, nombres, apellidos, telefono, email y password
+                // Puedes utilizar las variables id, nombres, apellidos, telefono, email y
+                // password
                 // para realizar las operaciones necesarias (guardar en una base de datos, etc.)
             }
         });
@@ -147,7 +200,8 @@ public class RegistroUsuarios extends JFrame {
                     try {
                         Image originalImage = ImageIO.read(selectedFile);
                         Image scaledImage = originalImage.getScaledInstance(250, 250, Image.SCALE_SMOOTH);
-                        BufferedImage bufferedImage = new BufferedImage(scaledImage.getWidth(null), scaledImage.getHeight(null), BufferedImage.TYPE_INT_ARGB);
+                        BufferedImage bufferedImage = new BufferedImage(scaledImage.getWidth(null),
+                                scaledImage.getHeight(null), BufferedImage.TYPE_INT_ARGB);
                         Graphics2D g2d = bufferedImage.createGraphics();
                         g2d.setRenderingHint(RenderingHints.KEY_ANTIALIASING, RenderingHints.VALUE_ANTIALIAS_ON);
                         g2d.setClip(new Ellipse2D.Float(0, 0, 250, 250));
@@ -176,11 +230,12 @@ public class RegistroUsuarios extends JFrame {
             }
         });
 
-        emailField.addActionListener(new ActionListener() {
+        telefonoField.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
-                String email = emailField.getText();
-                String uniqueID = generateUniqueID(email);
+                String tel = telefonoField.getText();
+                String uniqueID = generateUniqueID(tel);
                 idLabel.setText(uniqueID);
+                mainPanel.add(addButton, BorderLayout.SOUTH);
             }
         });
     }
@@ -210,16 +265,12 @@ public class RegistroUsuarios extends JFrame {
 
     public static void main(String[] args) {
         try {
+            RegistroUsuarios registroFrame = new RegistroUsuarios();
+            registroFrame.setVisible(true);
             UIManager.setLookAndFeel(UIManager.getSystemLookAndFeelClassName());
-        } catch (ClassNotFoundException | InstantiationException | IllegalAccessException | UnsupportedLookAndFeelException e) {
+        } catch (ClassNotFoundException | InstantiationException | IllegalAccessException
+                | UnsupportedLookAndFeelException e) {
             e.printStackTrace();
         }
-
-        SwingUtilities.invokeLater(new Runnable() {
-            public void run() {
-                RegistroUsuarios registroFrame = new RegistroUsuarios();
-                registroFrame.setVisible(true);
-            }
-        });
     }
 }
