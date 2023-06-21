@@ -2,6 +2,8 @@ package IU;
 
 import javax.imageio.ImageIO;
 import javax.swing.*;
+import javax.swing.border.Border;
+
 import java.awt.*;
 import java.awt.event.*;
 import java.awt.geom.*;
@@ -14,37 +16,36 @@ public class LoginUsuarios extends JFrame {
     private JPasswordField passwordField;
     private JButton loginButton;
     private JButton registrarseButton;
+    private JLabel imageLabel;
 
     public LoginUsuarios() {
         // Configurar la ventana
         setTitle("Sea unaleño - Iniciar sesión");
-        setSize(400, 400);
+        setSize(400, 500);
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         setLocationRelativeTo(null);
         setLayout(new BorderLayout());
         getContentPane().setBackground(new Color(48, 63, 159)); // Color de fondo personalizado
 
         // Crear el panel de encabezado con la imagen recortada circularmente
-        JPanel headerPanel = new JPanel() {
-            @Override
-            protected void paintComponent(Graphics g) {
-                super.paintComponent(g);
-                Graphics2D g2d = (Graphics2D) g.create();
-                int diameter = Math.min(getWidth(), getHeight()) - 20;
-                int x = (getWidth() - diameter) / 2;
-                int y = (getHeight() - diameter) / 2;
-                Ellipse2D.Double circle = new Ellipse2D.Double(x, y, diameter, diameter);
-                g2d.setClip(circle);
-                g2d.drawImage(getCircularImage(), x, y, diameter, diameter, null);
-                g2d.dispose();
-            }
-        };
-        headerPanel.setPreferredSize(new Dimension(getWidth(), 200));
-        headerPanel.setBackground(new Color(33, 150, 243)); // Color de encabezado personalizado
+        JPanel headerPanel = new JPanel();
+        headerPanel.setPreferredSize(new Dimension(getWidth(), 300));
+        headerPanel.setBackground(Color.WHITE); // Color de encabezado personalizado
 
+        ImageIcon originalIcon = new ImageIcon("src/main/java/RECURSOS/SEAUNALENOLOGO.jpg");
+        Image originalImage = originalIcon.getImage();
+        Image resizedImage = originalImage.getScaledInstance(-1, 300, Image.SCALE_SMOOTH);
+        ImageIcon resizedIcon = new ImageIcon(resizedImage);
+
+        // Panel superior con la imagen redimensionada
+        JLabel logoLabel = new JLabel(resizedIcon);
+        headerPanel.add(logoLabel,CENTER_ALIGNMENT);
+
+        
         // Crear los componentes
         JPanel contentPanel = new JPanel(new GridLayout(3, 2, 10, 10));
         contentPanel.setBorder(BorderFactory.createEmptyBorder(20, 20, 20, 20));
+        contentPanel.setBackground(Color.WHITE);
         JLabel usernameLabel = new JLabel("Email:");
         JLabel passwordLabel = new JLabel("Contraseña:");
         usernameField = new JTextField();
@@ -58,12 +59,19 @@ public class LoginUsuarios extends JFrame {
         registrarseButton.setForeground(Color.WHITE);   
 
 
+        //borders
+        usernameField.setBorder(BorderFactory.createCompoundBorder(usernameLabel.getBorder(),
+                BorderFactory.createMatteBorder(0, 0, 1, 0, Color.BLUE)));
+        passwordField.setBorder(BorderFactory.createCompoundBorder(passwordLabel.getBorder(),
+                BorderFactory.createMatteBorder(0, 0, 1, 0, Color.BLUE)));
+
         // Personalizar los componentes
         Font labelFont = new Font("Roboto", Font.BOLD, 14);
         usernameLabel.setFont(labelFont);
         passwordLabel.setFont(labelFont);
         usernameField.setFont(labelFont);
         passwordField.setFont(labelFont);
+        usernameField.setBackground(Color.WHITE);
 
         // Agregar los componentes al panel de contenido
         contentPanel.add(usernameLabel);

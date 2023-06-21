@@ -70,7 +70,7 @@ public class InterfazPrincipal extends javax.swing.JFrame {
 
         jLabel1.setBackground(new java.awt.Color(255, 255, 255));
         jLabel1.setForeground(new java.awt.Color(255, 255, 255));
-        jLabel1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/RECURSOS/SEAUNALENOLOGO.jpg"))); // NOI18N
+        jLabel1.setIcon(new javax.swing.ImageIcon(getClass().getResource("src/main/java/RECURSOS/SEAUNALENOLOGO.jpg"))); // NOI18N
         jPanel2.add(jLabel1, "card3");
 
         getContentPane().add(jPanel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(240, 0, 300, 310));
@@ -404,7 +404,7 @@ public class InterfazPrincipal extends javax.swing.JFrame {
             lblBiblioteca1.setFont(new java.awt.Font("Georgia", 0, 18)); // NOI18N
             lblBiblioteca1.setForeground(new java.awt.Color(255, 255, 255));
             lblBiblioteca1.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-            lblBiblioteca1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/RECURSOS/LIBRO.png"))); // NOI18N
+            lblBiblioteca1.setIcon(new javax.swing.ImageIcon(getClass().getResource("src/main/java/RECURSOS/LIBRO.png"))); // NOI18N
             lblBiblioteca1.setText("BIBLIOTECA");
 
             Bmaterial1.setBackground(new java.awt.Color(255, 255, 255));

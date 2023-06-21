@@ -41,7 +41,7 @@ public class RegistroUsuarios extends JFrame {
 
         JPanel mainPanel = new JPanel();
         mainPanel.setLayout(new BorderLayout());
-        mainPanel.setBorder(BorderFactory.createEmptyBorder(20, 20, 20, 20));
+        mainPanel.setBorder(BorderFactory.createEmptyBorder(20, 10, 20, 20));
 
         JPanel formPanel = new JPanel();
         formPanel.setLayout(new GridBagLayout());
@@ -61,7 +61,6 @@ public class RegistroUsuarios extends JFrame {
 
         formPanel.add(new JLabel("ID:"), constraints);
         idLabel = new JLabel();
-
         idLabel.setForeground(Color.BLUE);
         formPanel.add(idLabel, constraints);
 
@@ -102,6 +101,7 @@ public class RegistroUsuarios extends JFrame {
         JPanel imagePanel = new JPanel();
         imagePanel.setLayout(new BorderLayout());
         imageLabel = new JLabel();
+        imagePanel.setBorder(BorderFactory.createEmptyBorder(20, 10, 20, 20));
         try {
             Image originalImage = ImageIO.read(new File("src/main/java/RECURSOS/defaultuser1.jpg"));
             Image scaledImage = originalImage.getScaledInstance(250, 250, Image.SCALE_SMOOTH);
@@ -120,7 +120,7 @@ public class RegistroUsuarios extends JFrame {
         }
 
         imagePanel.add(imageLabel, BorderLayout.CENTER);
-        uploadButton = new JButton("Subir imagen");
+        uploadButton = new JButton("Seleccionar imagen");
         imagePanel.add(uploadButton, BorderLayout.SOUTH);
 
         titulo = new JLabel("Registrarse");
@@ -141,6 +141,9 @@ public class RegistroUsuarios extends JFrame {
         setBackground(Color.WHITE);
         formPanel.setBackground(Color.WHITE);
         imagePanel.setBackground(Color.WHITE);
+        uploadButton.setBackground(Color.BLUE);
+        uploadButton.setForeground(Color.WHITE);
+        showPasswordButton.setBackground(Color.WHITE);
 
         // FUENTES
         try {
@@ -154,7 +157,6 @@ public class RegistroUsuarios extends JFrame {
             Font robotoBoldFont = Font.createFont(Font.TRUETYPE_FONT,
                     new File("src/main/resources/fonts/Roboto-Bold.ttf")).deriveFont(12f);
             for (Component component : formPanel.getComponents()) {
-                System.out.println("ntro");
                 if (component instanceof JButton || component instanceof JLabel) {
                     component.setFont(robotoLightFont);
                 }
@@ -162,8 +164,9 @@ public class RegistroUsuarios extends JFrame {
                     component.setFont(robotoBoldFont);
                 }
             }
-            addButton.setFont(robotoLightFont.deriveFont(12f));
-            uploadButton.setFont(robotoLightFont);
+            addButton.setFont(robotoBoldFont.deriveFont(12f));
+            uploadButton.setFont(robotoBoldFont);
+            idLabel.setFont(robotoBoldFont);
 
         } catch (FontFormatException e) {
             e.printStackTrace();
