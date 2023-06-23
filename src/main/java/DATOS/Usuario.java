@@ -9,10 +9,11 @@ public class Usuario {
     private String telefono;
     private String email;
     private List<Evaluacion> historial;
+    private String pathImagen;
     private float[] notas;
-    
+
     public Usuario(String id, String nombres, String apellidos, String telefono, String email,
-            List<Evaluacion> historial, float[] notas) {
+            List<Evaluacion> historial, float[] notas, String pathImagen) {
         this.id = id;
         this.nombres = nombres;
         this.apellidos = apellidos;
@@ -20,6 +21,7 @@ public class Usuario {
         this.email = email;
         this.historial = historial;
         this.notas = notas;
+        this.pathImagen = pathImagen;
     }
 
     public String getId() {
@@ -76,6 +78,14 @@ public class Usuario {
 
     public void setNotas(float[] notas) {
         this.notas = notas;
+    }
+
+    public String getPathImagen() {
+        return pathImagen;
+    }
+
+    public void setPathImagen(String pathImagen) {
+        this.pathImagen = pathImagen;
     }
 
 }

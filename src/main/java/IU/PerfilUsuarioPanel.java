@@ -2,12 +2,16 @@ package IU;
 
 import javax.imageio.ImageIO;
 import javax.swing.*;
+import javax.swing.border.EmptyBorder;
+
+import PRUEBAS.PanelRound;
 
 import java.awt.*;
 import java.awt.geom.Ellipse2D;
 import java.awt.image.BufferedImage;
 import java.io.File;
 import java.io.IOException;
+import java.net.URL;
 
 public class PerfilUsuarioPanel extends JPanel {
     private String nombres;
@@ -16,21 +20,28 @@ public class PerfilUsuarioPanel extends JPanel {
     private String telefono;
     private String pathImagenPerfil;
 
-    public PerfilUsuarioPanel(String nombres, String apellidos, String correoElectronico, String telefono, String pathImagenPerfil) {
+    public PerfilUsuarioPanel(String nombres, String apellidos, String correoElectronico, String telefono,
+            String pathImagenPerfil) {
         this.nombres = nombres;
         this.apellidos = apellidos;
         this.correoElectronico = correoElectronico;
-        this.telefono = telefono;
+        this.telefono = "+57" + telefono;
         this.pathImagenPerfil = pathImagenPerfil;
-        setPreferredSize(new Dimension(300, 200));
         initComponents();
     }
 
-    public void initComponents(){
+    public void initComponents() {
         setLayout(new BorderLayout());
+        setBackground(Color.WHITE);
 
-        JPanel infoPanel = new JPanel();
+        PanelRound infoPanel = new PanelRound();
         infoPanel.setLayout(new GridLayout(4, 2));
+        infoPanel.setBackground(Color.WHITE);
+        infoPanel.setRoundBottomLeft(20);
+        infoPanel.setRoundBottomRight(20);
+        infoPanel.setBorder(BorderFactory.createCompoundBorder(
+                BorderFactory.createLineBorder(Color.LIGHT_GRAY, 1),
+                new EmptyBorder(20, 20, 20, 20)));
 
         JLabel lblNombres = new JLabel("Nombres:");
         JLabel lblApellidos = new JLabel("Apellidos:");
@@ -51,40 +62,68 @@ public class PerfilUsuarioPanel extends JPanel {
         infoPanel.add(lblCorreoValor);
         infoPanel.add(lblTelefono);
         infoPanel.add(lblTelefonoValor);
-
         add(infoPanel, BorderLayout.CENTER);
         
         try {
-            Image originalImage = ImageIO.read(new File(pathImagenPerfil));
-            Image scaledImage = originalImage.getScaledInstance(250, 250, Image.SCALE_SMOOTH);
-            BufferedImage bufferedImage = new BufferedImage(scaledImage.getWidth(null),
-                    scaledImage.getHeight(null), BufferedImage.TYPE_INT_ARGB);
-            Graphics2D g2d = bufferedImage.createGraphics();
-            g2d.setRenderingHint(RenderingHints.KEY_ANTIALIASING, RenderingHints.VALUE_ANTIALIAS_ON);
-            g2d.setClip(new Ellipse2D.Float(0, 0, 250, 250));
-            g2d.drawImage(scaledImage, 0, 0, null);
+            String imageUrl = pathImagenPerfil;
+
+            // Leer la imagen desde la URL
+            BufferedImage originalImage = ImageIO.read(new URL(imageUrl));
+
+            // Crear una imagen redimensionada de 250x250 píxeles
+            BufferedImage resizedImage = new BufferedImage(250, 250, BufferedImage.TYPE_INT_ARGB);
+            Graphics2D g2d = resizedImage.createGraphics();
+
+            // Crear una forma elíptica para recortar la imagen
+            Shape ellipse = new Ellipse2D.Float(0, 0, 250, 250);
+
+            // Recortar la imagen original en la forma elíptica y dibujarla en la imagen
+            // redimensionada
+            g2d.setClip(ellipse);
+            g2d.drawImage(originalImage, 0, 0, 250, 250, null);
             g2d.dispose();
 
-            ImageIcon imageIcon = new ImageIcon(bufferedImage);
+            ImageIcon imageIcon = new ImageIcon(resizedImage);
             imageLabel.setIcon(imageIcon);
-        } catch (IOException ex) {
-            ex.printStackTrace();
+
+            System.out.println("La imagen se ha recortado correctamente.");
+        } catch (IOException e) {
+            e.printStackTrace();
+            System.out.println("No se pudo recortar la imagen desde Internet.");
         }
-        add(imageLabel,BorderLayout.NORTH);
+        imageLabel.setHorizontalAlignment(JLabel.CENTER);
+
+        PanelRound imagePanel = new PanelRound();
+        // imagePanel.setRoundBottomLeft(20);
+        // imagePanel.setRoundBottomRight(20);
+        imagePanel.setRoundTopLeft(20);
+        imagePanel.setRoundTopRight(20);
+        imagePanel.setBackground(new Color(76, 175, 80));
+        imagePanel.add(imageLabel);
+
+        add(imagePanel, BorderLayout.NORTH);
+        imageLabel.setBorder(new EmptyBorder(20, 20, 20, 20));
+        for (Component element : infoPanel.getComponents()) {
+            element.setBackground(Color.WHITE);
+            try {
+                element.setFont(
+                        Font.createFont(Font.TRUETYPE_FONT, new File("src/main/resources/fonts/Roboto-Light.ttf"))
+                                .deriveFont(12f));
+            } catch (FontFormatException e) {
+                e.printStackTrace();
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
+        }
+
         setVisible(true);
     }
 
     public static void main(String[] args) {
-        // Ejemplo de uso: Crear una ventana y agregar el panel de perfil de usuario
-        String nombres = "John";
-        String apellidos = "Doe";
-        String correoElectronico = "john.doe@example.com";
-        String telefono = "1234567890";
-        String imagenPath = "src/main/java/RECURSOS/defaultuser1.jpg";
 
-        PerfilUsuarioPanel perfilPanel = new PerfilUsuarioPanel("NOMBRE", "apellido", "email@gmail.com", "3156165797", "src/main/java/RECURSOS/defaultuser1.jpg");
-    
-        
+        PerfilUsuarioPanel perfilPanel = new PerfilUsuarioPanel("NOMBRE", "apellido", "email@gmail.com", "3156165797",
+                "src/main/java/RECURSOS/defaultuser1.jpg");
+
         JFrame frame = new JFrame("Perfil de Usuario");
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         frame.setSize(300, 500);
