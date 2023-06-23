@@ -4,17 +4,12 @@ import javax.imageio.ImageIO;
 import javax.swing.*;
 import javax.swing.filechooser.FileNameExtensionFilter;
 import java.awt.*;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
-import java.awt.event.MouseAdapter;
-import java.awt.event.MouseEvent;
+import java.awt.event.*;
 import java.awt.geom.Ellipse2D;
 import java.awt.image.BufferedImage;
 import java.nio.charset.StandardCharsets;
-import java.security.MessageDigest;
-import java.security.NoSuchAlgorithmException;
-import java.io.File;
-import java.io.IOException;
+import java.security.*;
+import java.io.*;
 
 public class RegistroUsuarios extends JFrame {
     private JLabel titulo;
@@ -242,7 +237,8 @@ public class RegistroUsuarios extends JFrame {
             }
         });
     }
-
+    
+    //Metodo que genera ID's unicos Hashing 
     private String generateUniqueID(String input) {
         try {
             MessageDigest digest = MessageDigest.getInstance("SHA-256");

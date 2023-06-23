@@ -150,7 +150,7 @@ public class HojaRespuestas extends JFrame {
         CalificarExamen u = new CalificarExamen();
         u.setAleatorio(aleatorio);
         u.abrirArchivo(respuestasUsuario);
-        Hilo1.stop();
+        // Hilo1.stop();
         dispose();
     }
     

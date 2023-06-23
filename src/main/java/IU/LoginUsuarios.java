@@ -1,16 +1,8 @@
 package IU;
 
-import javax.imageio.ImageIO;
 import javax.swing.*;
-import javax.swing.border.Border;
-
 import java.awt.*;
 import java.awt.event.*;
-import java.awt.geom.*;
-import java.awt.image.BufferedImage;
-import java.io.File;
-import java.io.IOException;
-
 public class LoginUsuarios extends JFrame {
     private JTextField usernameField;
     private JPasswordField passwordField;
@@ -38,9 +30,8 @@ public class LoginUsuarios extends JFrame {
 
         // Panel superior con la imagen redimensionada
         JLabel logoLabel = new JLabel(resizedIcon);
-        headerPanel.add(logoLabel,CENTER_ALIGNMENT);
+        headerPanel.add(logoLabel, CENTER_ALIGNMENT);
 
-        
         // Crear los componentes
         JPanel contentPanel = new JPanel(new GridLayout(3, 2, 10, 10));
         contentPanel.setBorder(BorderFactory.createEmptyBorder(20, 20, 20, 20));
@@ -53,12 +44,11 @@ public class LoginUsuarios extends JFrame {
         loginButton = new JButton("Iniciar sesión");
         loginButton.setBackground(new Color(76, 175, 80)); // Color de fondo del botón personalizado
         loginButton.setForeground(Color.WHITE); // Color de texto del botón personalizado
-        registrarseButton =new JButton("Registrarme");
-        registrarseButton.setBackground(new Color(9,36,51));
-        registrarseButton.setForeground(Color.WHITE);   
+        registrarseButton = new JButton("Registrarme");
+        registrarseButton.setBackground(new Color(9, 36, 51));
+        registrarseButton.setForeground(Color.WHITE);
 
-
-        //borders
+        // borders
         usernameField.setBorder(BorderFactory.createCompoundBorder(usernameLabel.getBorder(),
                 BorderFactory.createMatteBorder(0, 0, 1, 0, Color.BLUE)));
         passwordField.setBorder(BorderFactory.createCompoundBorder(passwordLabel.getBorder(),
@@ -91,38 +81,28 @@ public class LoginUsuarios extends JFrame {
                 char[] password = passwordField.getPassword();
                 // Aquí puedes realizar la lógica de autenticación
                 // Verificar el usuario y la contraseña, etc.
-                // Si la autenticación es exitosa, puedes abrir la ventana principal del programa
+                // Si la autenticación es exitosa, puedes abrir la ventana principal del
+                // programa
                 // Si no, mostrar un mensaje de error o tomar alguna otra acción
             }
         });
-        //Agregar evento al botón de registrarse
+        // Agregar evento al botón de registrarse
         registrarseButton.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
-                RegistroUsuarios registroFrame = new RegistroUsuarios();
-                registroFrame.setVisible(true);
-                setVisible(false);
-                
+
+                try {
+                    RegistroUsuarios registroFrame = new RegistroUsuarios();
+                    registroFrame.setVisible(true);
+                    setVisible(false);
+                    UIManager.setLookAndFeel(UIManager.getSystemLookAndFeelClassName());
+                } catch (ClassNotFoundException | InstantiationException | IllegalAccessException
+                        | UnsupportedLookAndFeelException ex) {
+                    ex.printStackTrace();
+                }
             }
         });
     }
-
-    private BufferedImage getCircularImage() {
-        BufferedImage originalImage = null;
-        try {
-            originalImage = ImageIO.read(new File("src\\main\\java\\RECURSOS\\defaultuser1.jpg")); // Ruta de la imagen a cargar
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
-        int diameter = Math.min(originalImage.getWidth(), originalImage.getHeight());
-        BufferedImage resizedImage = new BufferedImage(diameter, diameter, BufferedImage.TYPE_INT_ARGB);
-        Graphics2D g2d = resizedImage.createGraphics();
-        g2d.setRenderingHint(RenderingHints.KEY_ANTIALIASING, RenderingHints.VALUE_ANTIALIAS_ON);
-        g2d.setClip(new Ellipse2D.Float(0, 0, diameter, diameter));
-        g2d.drawImage(originalImage, 0, 0, diameter, diameter, null);
-        g2d.dispose();
-        return resizedImage;
-    }
-
+    
     public static void main(String[] args) {
         SwingUtilities.invokeLater(new Runnable() {
             public void run() {
