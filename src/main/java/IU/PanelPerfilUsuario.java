@@ -25,7 +25,7 @@ public class PanelPerfilUsuario extends JPanel {
         this.nombres = nombres;
         this.apellidos = apellidos;
         this.correoElectronico = correoElectronico;
-        this.telefono = "+57" + telefono;
+        this.telefono = telefono;
         this.pathImagenPerfil = pathImagenPerfil;
         initComponents();
     }

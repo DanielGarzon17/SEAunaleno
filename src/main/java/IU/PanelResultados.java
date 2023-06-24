@@ -36,6 +36,7 @@ public class PanelResultados extends JPanel {
 
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
+        
 
         lblMA = new JLabel();
         resultadoMatematicas = new JButton();
@@ -64,6 +65,7 @@ public class PanelResultados extends JPanel {
         resultadoMatematicas.setForeground(new java.awt.Color(255, 255, 255));
         resultadoMatematicas.setText("0");
         resultadoMatematicas.setBorderPainted(false);
+        resultadoMatematicas.setContentAreaFilled(true);;
         resultadoMatematicas.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 resultadoMatematicasActionPerformed(evt);
@@ -80,6 +82,8 @@ public class PanelResultados extends JPanel {
         resultadoCiencias.setFont(new java.awt.Font("Times New Roman", 0, 12)); // NOI18N
         resultadoCiencias.setForeground(new java.awt.Color(255, 255, 255));
         resultadoCiencias.setText("0");
+        resultadoCiencias.setBorderPainted(false);
+        resultadoCiencias.setContentAreaFilled(true);;
         resultadoCiencias.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 resultadoCienciasActionPerformed(evt);
@@ -96,6 +100,8 @@ public class PanelResultados extends JPanel {
         resultadoSociales.setFont(new java.awt.Font("Times New Roman", 0, 12)); // NOI18N
         resultadoSociales.setForeground(new java.awt.Color(255, 255, 255));
         resultadoSociales.setText("0");
+        resultadoSociales.setBorderPainted(false);
+        resultadoSociales.setContentAreaFilled(true);;
         resultadoSociales.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 resultadoSocialesActionPerformed(evt);
@@ -112,6 +118,9 @@ public class PanelResultados extends JPanel {
         resultadoTextual.setFont(new java.awt.Font("Times New Roman", 0, 12)); // NOI18N
         resultadoTextual.setForeground(new java.awt.Color(255, 255, 255));
         resultadoTextual.setText("0");
+        resultadoTextual.setBorderPainted(false);
+        resultadoTextual.setContentAreaFilled(true);;
+
         resultadoTextual.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 resultadoTextualActionPerformed(evt);
@@ -128,6 +137,8 @@ public class PanelResultados extends JPanel {
         resultadoImagen.setFont(new java.awt.Font("Times New Roman", 0, 12)); // NOI18N
         resultadoImagen.setForeground(new java.awt.Color(255, 255, 255));
         resultadoImagen.setText("0");
+        resultadoImagen.setBorderPainted(false);
+        resultadoImagen.setContentAreaFilled(true);;
         resultadoImagen.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 resultadoImagenActionPerformed(evt);

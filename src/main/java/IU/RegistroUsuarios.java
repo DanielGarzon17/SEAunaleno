@@ -182,9 +182,8 @@ public class RegistroUsuarios extends JFrame {
                 String password = new String(passwordField.getPassword());
 
                 Usuario usuario= new Usuario(id, nombres, apellidos, telefono, email, null, null, "https://fotografiamejorparavendermas.com/wp-content/uploads/2017/06/La-importancia-de-la-imagen.jpg",password);
-
-
-                MenuInterfaz Appplet =new MenuInterfaz(usuario);
+                new MenuInterfaz(usuario);
+                setVisible(false);
                 // Aquí puedes agregar la lógica para guardar los datos del nuevo usuario
                 // Puedes utilizar las variables id, nombres, apellidos, telefono, email y
                 // password
