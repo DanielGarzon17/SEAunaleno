@@ -104,17 +104,4 @@ public class ArrayList<T> {
             throw new Exception("ERROR, posicion invalida");
         }
     }
-/*
-    public T[] getAll() throws Exception {
-        if (!vacio()) {
-            T[] todos = (T[]) new Object[size];
-            for (int i = 0; i < size; i++) {
-                todos[i] = get(i);
-            }
-            return todos;
-        } else {
-            throw new Exception("ERROR, la lista esta vacia");
-        }
-    }
-*/
 }
