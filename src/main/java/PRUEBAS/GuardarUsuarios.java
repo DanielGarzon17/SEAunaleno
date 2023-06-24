@@ -5,7 +5,7 @@ import java.util.Random;
 import LOGICA.*;
 
 public class GuardarUsuarios {
-    final String[] fragmentos1 = {"Alejandro", "Sofía", "Juan", "Valentina", "Carlos", "Isabella", "Miguel", "Camila", "José", "Mariana",
+    final String[] fragmentos1 = { "Sofía", "Juan", "Valentina", "Carlos", "Isabella", "Miguel", "Camila", "José", "Mariana",
         "Luis", "Lucía", "Andrés", "Emma", "Diego", "Valeria", "Pedro", "Martina", "Javier", "Renata",
         "Manuel", "Ana", "Fernando", "Sara", "Pablo", "Elena", "Ricardo", "Julia", "Gabriel", "Paula",
         "Sebastián", "Victoria", "Daniel", "Carolina", "Fabián", "Laura", "Simón", "Daniela", "Tomás", "Catalina",

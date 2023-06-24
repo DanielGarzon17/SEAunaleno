@@ -57,7 +57,7 @@ public class EstadisticasPanel extends JPanel {
             "Estadística 1: 100",
             "Estadística 2: 200",
             "Estadística 3: 300",
-            "Estadística 4: 400"
+            "Estadística 4: 460000"
         };
         
         // Crear un nuevo JFrame y agregar el panel de estadísticas
