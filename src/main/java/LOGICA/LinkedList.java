@@ -1,5 +1,7 @@
 package LOGICA;
 
+import java.lang.reflect.Array;
+
 public class LinkedList<T> {
 
     private node head;
@@ -138,10 +140,10 @@ public class LinkedList<T> {
             throw new Exception("La lista esta vacia");
         }
     }
-   
+
     public T[] getAll() throws Exception {
         if (!empty()) {
-            T[] todos = (T[]) new Object[size];
+            T[] todos = (T[]) Array.newInstance(head.key.getClass(), size);
             node iterador = head;
             for (int i = 0; i < size; i++) {
                 todos[i] = iterador.key;
@@ -149,7 +151,7 @@ public class LinkedList<T> {
             }
             return todos;
         } else {
-            throw new Exception("ERROR, la lista esta vacia");
+            throw new Exception("ERROR, la lista está vacía");
         }
     }
 
