@@ -85,7 +85,7 @@ public class LoginUsuarios extends JFrame {
                 String password = new String(passwordField.getPassword());
                 Usuario objeto_de_prueba = new Usuario(username, username, username, username, username, null, null, username, password);
                 
-                //System.out.println(objeto_de_prueba.getPassword());
+                System.out.println(objeto_de_prueba.getPassword());
                 
                 /*
                 * Realizar la lógica de autenticación
