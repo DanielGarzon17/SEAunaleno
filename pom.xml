@@ -54,7 +54,7 @@
             <manifest>
               <addClasspath>true</addClasspath>
               <classpathPrefix>lib/</classpathPrefix>
-              <mainClass>InterfazPrincipal.java</mainClass>
+              <mainClass>IU.LoginUsuarios</mainClass>
             </manifest>
           </archive>
         </configuration>

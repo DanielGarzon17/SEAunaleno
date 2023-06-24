@@ -8,18 +8,15 @@ IU\RegistroUsuarios$4.class
 LOGICA\PanelRound.class
 IU\PanelBiblioteca$3.class
 LOGICA\Queue.class
-IU\BibliotecaInterfaz$1.class
 IU\MenuInterfaz$5.class
 LOGICA\CalificarExamen.class
 IU\PanelResultados$6.class
-IU\BibliotecaInterfaz$2.class
 IU\MenuInterfaz$4.class
 PRUEBAS\WebPageViewer.class
 IU\HojaRespuestas$1.class
 IU\PanelBiblioteca.class
 PRUEBAS\GuardarNotas_Imp1.class
 IU\PanelResultados$4.class
-IU\BibliotecaInterfaz.class
 IU\MenuInterfaz$1.class
 LOGICA\AVLTree.class
 PRUEBAS\EliminarNota_Imp3.class
@@ -31,7 +28,6 @@ PRUEBAS\BuscarUsuarios.class
 LOGICA\LinkedList.class
 IU\PanelResultados$1.class
 IU\MenuInterfaz.class
-IU\BibliotecaInterfaz$3.class
 IU\RegistroUsuarios$2.class
 DATOS\Usuario.class
 IU\HojaRespuestas$Cronometro.class
@@ -51,7 +47,6 @@ PRUEBAS\Conexion.class
 IU\PanelBiblioteca$1.class
 IU\PanelResultados.class
 IU\PanelPerfilUsuario.class
-IU\BibliotecaInterfaz$4.class
 LOGICA\Stack.class
 LOGICA\LinkedList$node.class
 IU\PanelResultados$5.class
