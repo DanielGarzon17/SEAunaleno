@@ -1,19 +1,33 @@
 package LOGICA;
 
-import DATOS.*;
 import IU.*;
 import java.util.Scanner;
+
+import DATOS.Usuario;
+
 import java.io.*;
 
 public class CalificarExamen {
     private int numLC = 0, numMA = 0, numCI = 0, numSO = 0, numIM = 0,
                 contLC = 0, contMA = 0, contCI = 0, contSO = 0, contIM = 0,corLC=0,corMA=0,corCI=0,corSO=0,corIM=0;;
-    private static int aleatorio = 0;
+    private int aleatorio = 0;
     private final String[] vectorRespuestas = {"respuestas20092", "respuestas20102"};
     private String[] respuestasExamen, caracterExamen, respuestasUsuario;
     private int[] posicionesLC, posicionesMA, posicionesCI, posicionesSO, posicionesIM;
     private final double desv = 3.38;
+    Usuario usuarioActivo;
 
+    
+    public CalificarExamen(Usuario usuario){
+        setUsuarioActivo(usuario);
+    }
+
+    public Usuario getUsuarioActivo() {
+        return usuarioActivo;
+    }
+    public void setUsuarioActivo(Usuario usuarioActivo) {
+        this.usuarioActivo = usuarioActivo;
+    }
     public int getCorLC() {
         return corLC;
     }
@@ -137,10 +151,10 @@ public class CalificarExamen {
         double puntajeImagen = puntajePorComponente(corIM, 7);
         double Global = puntajeGlobal(puntajeLectura, puntajeMatematicas, puntajeCiencias, puntajeSociales, puntajeImagen);
 
-        PanelResultados n = new PanelResultados();
-        InterfazPrincipal interfazPrincipal = new InterfazPrincipal();
+        PanelResultados n = new PanelResultados(getUsuarioActivo());
+        MenuInterfaz interfazPrincipal = new MenuInterfaz(getUsuarioActivo());
         n.setResultados(Global, puntajeLectura, puntajeMatematicas, puntajeCiencias, puntajeSociales, puntajeImagen);
-        interfazPrincipal.nuevoPanel2(n);
+        interfazPrincipal.repintarPanel(n);
         interfazPrincipal.setVisible(true);
     }
 

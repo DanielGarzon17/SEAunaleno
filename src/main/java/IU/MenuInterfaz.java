@@ -23,7 +23,25 @@ public class MenuInterfaz extends JFrame {
     private JButton lastPressedButton;
     Usuario usuarioActivo;
 
+    public Usuario getUsuarioActivo() {
+        return usuarioActivo;
+    }
+
+    public void setUsuarioActivo(Usuario usuarioActivo) {
+        this.usuarioActivo = usuarioActivo;
+    }
+
     public MenuInterfaz(Usuario usuario) {
+        setUsuarioActivo(usuario);
+        initComponents(usuario);
+    }
+
+    public MenuInterfaz() {
+        System.out.println(getUsuarioActivo().getNombres());
+        new MenuInterfaz(getUsuarioActivo());
+    }
+
+    public void initComponents(Usuario usuario) {
         // Crear el panel del menú lateral
         sideMenuPanel = new JPanel();
         sideMenuPanel.setLayout(new GridBagLayout());
@@ -76,7 +94,8 @@ public class MenuInterfaz extends JFrame {
             element.setBackground(Color.WHITE);
             try {
                 element.setFont(
-                        Font.createFont(Font.TRUETYPE_FONT, new File("src/main/resources/fonts/Roboto-Light.ttf"))
+                        Font.createFont(Font.TRUETYPE_FONT,
+                                new File("src/main/resources/fonts/Roboto-Light.ttf"))
                                 .deriveFont(12f));
             } catch (FontFormatException e) {
                 e.printStackTrace();
@@ -89,6 +108,7 @@ public class MenuInterfaz extends JFrame {
 
         // Crear el panel de contenido desplegable
         contentPanel = new JPanel();
+        contentPanel.setLayout(new BorderLayout());
         contentPanel.setBackground(Color.WHITE);
         contentPanel.setVisible(true);
 
@@ -96,10 +116,11 @@ public class MenuInterfaz extends JFrame {
         JLabel contentLogoLabel = new JLabel();
         contentLogoLabel.setIcon(new ImageIcon("src/main/java/RECURSOS/SEAUNALENOLOGO.jpg"));
         contentLogoLabel.setVerticalAlignment(JLabel.CENTER);
+        contentLogoLabel.setHorizontalAlignment(JLabel.CENTER);
         contentLogoLabel.setFont(new Font("Arial", Font.BOLD, 18));
 
         // Agregar el label del logo al panel de contenido desplegable
-        contentPanel.add(contentLogoLabel);
+        contentPanel.add(contentLogoLabel, BorderLayout.NORTH);
 
         // Crear un layout de tipo BorderLayout para la ventana principal
         setLayout(new BorderLayout());
@@ -135,11 +156,12 @@ public class MenuInterfaz extends JFrame {
         setExtendedState(JFrame.MAXIMIZED_BOTH);
         menuButton.setBounds((appLogoLabel.getBounds().x) + (appLogoLabel.getBounds().width), 0, 50, 50);
 
-        //ESCUCHADORES
+        // ESCUCHADORES
         profileButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                PerfilUsuarioPanel panelUsuario = new PerfilUsuarioPanel(usuario.getNombres(), usuario.getApellidos(), usuario.getEmail(),
+                PanelPerfilUsuario panelUsuario = new PanelPerfilUsuario(usuario.getNombres(), usuario.getApellidos(),
+                        usuario.getEmail(),
                         usuario.getTelefono(), usuario.getPathImagen());
                 panelUsuario.setPreferredSize(contentPanel.getSize());
                 repintarPanel(contentPanel, panelUsuario);
@@ -157,21 +179,49 @@ public class MenuInterfaz extends JFrame {
         testButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                HojaRespuestas prueba = new HojaRespuestas();
+                HojaRespuestas prueba = new HojaRespuestas(getUsuarioActivo());
                 prueba.setVisible(true);
                 dispose();
+
             }
         });
 
+        testInfoButton.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                AbrirLinks("https://admisiones.unal.edu.co/pregrado/");
+
+            }
+        });
     }
 
-    private void repintarPanel(JPanel panelAnterior,JPanel panelNuevo){
+    public void AbrirLinks(String str) {
+        if (java.awt.Desktop.isDesktopSupported()) {
+            Desktop desktop = java.awt.Desktop.getDesktop();
+            if (desktop.isSupported(Desktop.Action.BROWSE)) {
+                try {
+                    java.net.URI url = new java.net.URI(str);
+                    desktop.browse(url);
+                } catch (Exception e) {
+                }
+            }
+        }
+    }
+
+    private void repintarPanel(JPanel panelAnterior, JPanel panelNuevo) {
         panelAnterior.removeAll();
         panelAnterior.add(panelNuevo);
-        
+
         // panelAnterior.add(panelNuevo);
         panelAnterior.repaint();
         panelAnterior.revalidate();
+    }
+
+    public void repintarPanel(PanelResultados panelNuevo) {
+        // contentPanel.removeAll();
+        contentPanel.add(panelNuevo, BorderLayout.CENTER);
+        contentPanel.repaint();
+        contentPanel.revalidate();
     }
 
     private JButton createMenuButton(String text) {
@@ -186,7 +236,7 @@ public class MenuInterfaz extends JFrame {
                     lastPressedButton.setBackground(null); // Restaurar el color de fondo del último botón presionado
                 }
                 boton.setBackground(new Color(76, 175, 80)); // Cambiar el color de fondo del botón presionado
-                lastPressedButton = boton; 
+                lastPressedButton = boton;
             }
         });
         return boton;
@@ -196,10 +246,11 @@ public class MenuInterfaz extends JFrame {
         SwingUtilities.invokeLater(new Runnable() {
             @Override
             public void run() {
-                //HACER LA CONEXION AL DATABASE Y TRAER DATOS DE USUARIO
+                // HACER LA CONEXION AL DATABASE Y TRAER DATOS DE USUARIO
 
-                //CREACION DE Usuario
-                new MenuInterfaz(new Usuario("231EDEEA1", "DANIEL", "GARZON", "38784631849", "JWBBCW@email,com", null, null,"https://fotografiamejorparavendermas.com/wp-content/uploads/2017/06/La-importancia-de-la-imagen.jpg"));
+                // CREACION DE Usuario
+                new MenuInterfaz(new Usuario("231EDEEA1", "DANIEL", "GARZON", "38784631849", "JWBBCW@email,com", null,
+                        null,"https://fotografiamejorparavendermas.com/wp-content/uploads/2017/06/La-importancia-de-la-imagen.jpg","cualquiera"));
             }
         });
     }

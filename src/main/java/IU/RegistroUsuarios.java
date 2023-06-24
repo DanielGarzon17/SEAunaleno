@@ -3,6 +3,9 @@ package IU;
 import javax.imageio.ImageIO;
 import javax.swing.*;
 import javax.swing.filechooser.FileNameExtensionFilter;
+
+import DATOS.Usuario;
+
 import java.awt.*;
 import java.awt.event.*;
 import java.awt.geom.Ellipse2D;
@@ -178,6 +181,10 @@ public class RegistroUsuarios extends JFrame {
                 String email = emailField.getText();
                 String password = new String(passwordField.getPassword());
 
+                Usuario usuario= new Usuario(id, nombres, apellidos, telefono, email, null, null, "https://fotografiamejorparavendermas.com/wp-content/uploads/2017/06/La-importancia-de-la-imagen.jpg",password);
+
+
+                MenuInterfaz Appplet =new MenuInterfaz(usuario);
                 // Aquí puedes agregar la lógica para guardar los datos del nuevo usuario
                 // Puedes utilizar las variables id, nombres, apellidos, telefono, email y
                 // password

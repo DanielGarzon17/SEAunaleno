@@ -1,14 +1,24 @@
 package IU;
-
+//INVESTIGAR LIBRERIA JFREE CHART
+import javax.imageio.ImageIO;
 import javax.swing.*;
 import java.awt.*;
+import java.awt.image.BufferedImage;
+import java.io.File;
+import java.io.IOException;
 
 public class EstadisticasPanel extends JPanel {
-    
+    JLabel Imagen1 = new JLabel();
     private String[] estadisticas;
     
     public EstadisticasPanel(String[] estadisticas) {
+        initComponents();
         this.estadisticas = estadisticas;
+    }
+
+    private void initComponents(){
+        Imagen1.setIcon(resizeIcon("src/main/java/RECURSOS/pareto-graphic.jpg",700,500));
+        add(Imagen1);
     }
     
     @Override
@@ -29,6 +39,16 @@ public class EstadisticasPanel extends JPanel {
             g.drawString(estadistica, x, y);
             y += 20; // Incrementar la posición Y para la siguiente estadística
         }
+    }
+    private ImageIcon resizeIcon(String imagePath, int width, int height) {
+        try {
+            BufferedImage image = ImageIO.read(new File(imagePath));
+            Image resizedImage = image.getScaledInstance(width, height, Image.SCALE_SMOOTH);
+            return new ImageIcon(resizedImage);
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+        return null;
     }
     
     public static void main(String[] args) {

@@ -5,13 +5,19 @@ import java.awt.Color;
 import java.awt.Desktop;
 import java.awt.Dimension;
 import java.awt.Font;
+import java.awt.FontFormatException;
 import java.awt.Toolkit;
+import java.io.File;
+
 import javax.swing.*;
 
+import DATOS.Usuario;
+
 public class HojaRespuestas extends JFrame {
-    
-    private static String[] vectorLinks={"https://drive.google.com/file/d/1MErkL66cQhvA56vFidzEXhhd6PCr0Mky/view?usp=share_link",
-        "https://drive.google.com/file/d/1tpt6hqmxW40xtoYmD_qmpw-lbJjh58Pj/view"};
+
+    private static String[] vectorLinks = {
+            "https://drive.google.com/file/d/1MErkL66cQhvA56vFidzEXhhd6PCr0Mky/view?usp=share_link",
+            "https://drive.google.com/file/d/1tpt6hqmxW40xtoYmD_qmpw-lbJjh58Pj/view" };
     private final int frecuencia = 1000;
     private int segundos = 0, minutos = 30, horas = 3;
     private static int aleatorio;
@@ -21,7 +27,17 @@ public class HojaRespuestas extends JFrame {
     private JLabel labelCronometro;
     Cronometro cronometro = new Cronometro();
     Thread Hilo1 = new Thread(cronometro);
+    Usuario usuarioActivo;
+
     
+    public Usuario getUsuarioActivo() {
+        return usuarioActivo;
+    }
+
+    public void setUsuarioActivo(Usuario usuarioActivo) {
+        this.usuarioActivo = usuarioActivo;
+    }
+
     public String[] getRespuestasUsuario() {
         return respuestasUsuario;
     }
@@ -30,18 +46,19 @@ public class HojaRespuestas extends JFrame {
         this.respuestasUsuario = respuestasUsuario;
     }
 
-    public HojaRespuestas(int numeroPreguntas) {
+    public HojaRespuestas(int numeroPreguntas,Usuario usuario) {
+        setUsuarioActivo(usuario);
         this.numeroPreguntas = numeroPreguntas;
         initComponents();
     }
 
-    public HojaRespuestas() {
-        this(120);
+    public HojaRespuestas(Usuario usuario) {
+        this(120,usuario);
     }
 
     public void initComponents() {
 
-        //instanciacion de objetos
+        // instanciacion de objetos
         Color fondo = new Color(223, 246, 255);
         JPanel jPanel = new JPanel();
         JButton Finalizarprueba = new JButton("CALIFICAR PRUEBA");
@@ -52,38 +69,40 @@ public class HojaRespuestas extends JFrame {
         JScrollPane jScrollPane = new JScrollPane();
         JLabel titulo = new JLabel("HOJA DE RESPUESTAS");
         Dimension screenSize = Toolkit.getDefaultToolkit().getScreenSize();
-        //CONFIGURACION DE OBJETOS:
+        // CONFIGURACION DE OBJETOS:
 
-        //ventana
+        // ventana
         // setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setBounds(0, 0, 270, screenSize.height - 50);
-        setTitle("Hoja de respuestas");//titulo de la ventana
+        setTitle("Hoja de respuestas");// titulo de la ventana
         setResizable(false);
-        aleatorio = (int)(Math.random()*2); 
-        //Panel
+        aleatorio = (int) (Math.random() * 2);
+        // Panel
         jPanel.setLayout(null);
         jPanel.setBackground(fondo);
 
-        //Jlabel Titulo
+        Finalizarprueba.setBackground(Color.WHITE);
+
+        // Jlabel Titulo
         titulo.setFont(new Font("Georgia", 1, 18));
         titulo.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         titulo.setBounds(0, 0, 240, 40);
         jPanel.add(titulo);
 
-        //Jlabel Cronometro
+        // Jlabel Cronometro
         labelCronometro.setFont(new Font("Georgia", 1, 18));
         labelCronometro.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         labelCronometro.setBounds(0, 40, 240, 40);
         jPanel.add(labelCronometro);
 
-        //boton
+        // boton
         Finalizarprueba.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                FinalizarpruebaActionPerformed(evt);
+                Finalizarpruebaoyente(evt);
             }
         });
         for (int i = 0; i < numeroPreguntas; i++) {
-            //intanciacion de objetos d ela matriz
+            // intanciacion de objetos d ela matriz
             buttonGroup[i] = new ButtonGroup();
 
             jLabel[i] = new JLabel((i + 1) + ".");
@@ -107,10 +126,10 @@ public class HojaRespuestas extends JFrame {
                         break;
                     default:
                         textoRadioButton = "";
-                        break; //te amo
+                        break;
                 }
                 jRadioButton[i][j] = new JRadioButton(textoRadioButton);
-                jRadioButton[i][j].setBackground(fondo);
+                jRadioButton[i][j].setBackground(Color.WHITE);
                 jRadioButton[i][j].setBounds(40 + 50 * j, 100 + 30 * i, 40, 30);
                 jRadioButton[i][j].setFont(new Font("Times new roman", 1, 12));
                 jPanel.add(jRadioButton[i][j]);
@@ -122,21 +141,42 @@ public class HojaRespuestas extends JFrame {
                 if (i == numeroPreguntas - 1) {
                     Finalizarprueba.setBounds(5, 100 + 30 * (i + 1), 225, 30);
                 }
+                try {
+                    Finalizarprueba.setFont(
+                            Font.createFont(Font.TRUETYPE_FONT,
+                                    new File("src/main/resources/fonts/Roboto-Light.ttf"))
+                                    .deriveFont(12f));
+                    titulo.setFont(
+                            Font.createFont(Font.TRUETYPE_FONT,
+                                    new File("src/main/resources/fonts/Roboto-LightItalic.ttf"))
+                                    .deriveFont(20f));
+                    jLabel[i].setFont(
+                            Font.createFont(Font.TRUETYPE_FONT,
+                                    new File("src/main/resources/fonts/Roboto-Bold.ttf"))
+                                    .deriveFont(12f));
+                    jRadioButton[i][j].setFont(
+                            Font.createFont(Font.TRUETYPE_FONT,
+                                    new File("src/main/resources/fonts/Roboto-Bold.ttf"))
+                                    .deriveFont(12f));
+                } catch (FontFormatException e) {
+                    e.printStackTrace();
+                } catch (Exception e) {
+                    e.printStackTrace();
+                }
+
             }
+            
         }
         jPanel.add(Finalizarprueba);
+        jPanel.setBackground(Color.WHITE);
         add(jScrollPane);
-        
-        System.out.println("aleatorio en interfaz:"+aleatorio);
+
+        System.out.println("aleatorio en interfaz:" + aleatorio);
         AbrirLinks(vectorLinks[aleatorio]);
-        
+
         Hilo1.start();
     }
-
-    public void FinalizarpruebaActionPerformed(java.awt.event.ActionEvent evt) {
-        Finalizarpruebaoyente(evt);
-    }
-
+    
     public void Finalizarpruebaoyente(java.awt.event.ActionEvent evt) {
         respuestasUsuario = new String[numeroPreguntas];
         for (int i = 0; i < numeroPreguntas; i++) {
@@ -147,13 +187,13 @@ public class HojaRespuestas extends JFrame {
                 }
             }
         }
-        CalificarExamen u = new CalificarExamen();
+        CalificarExamen u = new CalificarExamen(getUsuarioActivo());
         u.setAleatorio(aleatorio);
         u.abrirArchivo(respuestasUsuario);
         // Hilo1.stop();
         dispose();
     }
-    
+
     public void AbrirLinks(String str) {
         if (java.awt.Desktop.isDesktopSupported()) {
             Desktop desktop = java.awt.Desktop.getDesktop();
@@ -166,10 +206,10 @@ public class HojaRespuestas extends JFrame {
             }
         }
     }
-    
+
     public static void main(String args[]) {
-        HojaRespuestas hojaDeRespuestas = new HojaRespuestas();
-        hojaDeRespuestas.setVisible(true);
+        // HojaRespuestas hojaDeRespuestas = new HojaRespuestas();
+        // hojaDeRespuestas.setVisible(true);
     }
 
     public class Cronometro extends Thread {
@@ -211,9 +251,9 @@ public class HojaRespuestas extends JFrame {
                         textoCronometro += ":" + segundos;
                     }
 
-                  if (horas == 0 && minutos == 5 && segundos == 0) {
-                      JOptionPane.showMessageDialog(rootPane, "TE QUEDAN 5 MINUTOS");
-                  }
+                    if (horas == 0 && minutos == 5 && segundos == 0) {
+                        JOptionPane.showMessageDialog(rootPane, "TE QUEDAN 5 MINUTOS");
+                    }
                     if (horas == 0 && minutos == 0 && segundos == 0) {
                         dispose();
                         break;

@@ -6,50 +6,58 @@
 package IU;
 
 import LOGICA.CalificarExamen;
-import javax.swing.JButton;
-import javax.swing.JLabel;
-import javax.swing.JOptionPane;
-import javax.swing.JTextField;
+import javax.swing.*;
+
+import DATOS.Usuario;
 
 /**
  *
  * @author Cristian
  */
-public class PanelResultados extends javax.swing.JPanel {
-    CalificarExamen u = new CalificarExamen();
+public class PanelResultados extends JPanel {
+    Usuario usuarioActivo;
+    CalificarExamen u = new CalificarExamen(getUsuarioActivo());
     /**
      * Creates new form PanelLogo
      */
-    public PanelResultados() {
+    public PanelResultados(Usuario usuario) {
+        setUsuarioActivo(usuario);
         initComponents();
         
     }
 
-    @SuppressWarnings("unchecked")
+    public Usuario getUsuarioActivo() {
+        return usuarioActivo;
+    }
+
+    public void setUsuarioActivo(Usuario usuarioActivo) {
+        this.usuarioActivo = usuarioActivo;
+    }
+
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        lblMA = new javax.swing.JLabel();
-        resultadoMatematicas = new javax.swing.JButton();
-        lblCI = new javax.swing.JLabel();
-        resultadoCiencias = new javax.swing.JButton();
-        lblSO = new javax.swing.JLabel();
-        resultadoSociales = new javax.swing.JButton();
-        lblLC = new javax.swing.JLabel();
-        resultadoTextual = new javax.swing.JButton();
-        lblIM = new javax.swing.JLabel();
-        resultadoImagen = new javax.swing.JButton();
-        jLabel1 = new javax.swing.JLabel();
-        resultadoGlobal = new javax.swing.JTextField();
+        lblMA = new JLabel();
+        resultadoMatematicas = new JButton();
+        lblCI = new JLabel();
+        resultadoCiencias = new JButton();
+        lblSO = new JLabel();
+        resultadoSociales = new JButton();
+        lblLC = new JLabel();
+        resultadoTextual = new JButton();
+        lblIM = new JLabel();
+        resultadoImagen = new JButton();
+        jLabel1 = new JLabel();
+        resultadoGlobal = new JTextField();
 
         setBackground(new java.awt.Color(255, 255, 255));
         setForeground(new java.awt.Color(255, 255, 255));
 
         lblMA.setFont(new java.awt.Font("Times New Roman", 0, 11)); // NOI18N
-        lblMA.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        lblMA.setHorizontalAlignment(SwingConstants.CENTER);
         lblMA.setText("MATEMATICAS:");
         lblMA.setToolTipText("");
-        lblMA.setVerticalAlignment(javax.swing.SwingConstants.TOP);
+        lblMA.setVerticalAlignment(SwingConstants.TOP);
 
         resultadoMatematicas.setBackground(new java.awt.Color(92, 184, 92));
         resultadoMatematicas.setFont(new java.awt.Font("Times New Roman", 0, 12)); // NOI18N
@@ -63,10 +71,10 @@ public class PanelResultados extends javax.swing.JPanel {
         });
 
         lblCI.setFont(new java.awt.Font("Times New Roman", 0, 11)); // NOI18N
-        lblCI.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        lblCI.setHorizontalAlignment(SwingConstants.CENTER);
         lblCI.setText("CIENCIAS:");
         lblCI.setToolTipText("");
-        lblCI.setVerticalAlignment(javax.swing.SwingConstants.TOP);
+        lblCI.setVerticalAlignment(SwingConstants.TOP);
 
         resultadoCiencias.setBackground(new java.awt.Color(92, 184, 92));
         resultadoCiencias.setFont(new java.awt.Font("Times New Roman", 0, 12)); // NOI18N
@@ -79,10 +87,10 @@ public class PanelResultados extends javax.swing.JPanel {
         });
 
         lblSO.setFont(new java.awt.Font("Times New Roman", 0, 11)); // NOI18N
-        lblSO.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        lblSO.setHorizontalAlignment(SwingConstants.CENTER);
         lblSO.setText("SOCIALES:");
         lblSO.setToolTipText("");
-        lblSO.setVerticalAlignment(javax.swing.SwingConstants.TOP);
+        lblSO.setVerticalAlignment(SwingConstants.TOP);
 
         resultadoSociales.setBackground(new java.awt.Color(92, 184, 92));
         resultadoSociales.setFont(new java.awt.Font("Times New Roman", 0, 12)); // NOI18N
@@ -95,10 +103,10 @@ public class PanelResultados extends javax.swing.JPanel {
         });
 
         lblLC.setFont(new java.awt.Font("Times New Roman", 0, 11)); // NOI18N
-        lblLC.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        lblLC.setHorizontalAlignment(SwingConstants.CENTER);
         lblLC.setText("ANALISIS TEXTUAL:");
         lblLC.setToolTipText("");
-        lblLC.setVerticalAlignment(javax.swing.SwingConstants.TOP);
+        lblLC.setVerticalAlignment(SwingConstants.TOP);
 
         resultadoTextual.setBackground(new java.awt.Color(92, 184, 92));
         resultadoTextual.setFont(new java.awt.Font("Times New Roman", 0, 12)); // NOI18N
@@ -111,10 +119,10 @@ public class PanelResultados extends javax.swing.JPanel {
         });
 
         lblIM.setFont(new java.awt.Font("Times New Roman", 0, 11)); // NOI18N
-        lblIM.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        lblIM.setHorizontalAlignment(SwingConstants.CENTER);
         lblIM.setText("ANALISIS DE IMAGEN:");
         lblIM.setToolTipText("");
-        lblIM.setVerticalAlignment(javax.swing.SwingConstants.TOP);
+        lblIM.setVerticalAlignment(SwingConstants.TOP);
 
         resultadoImagen.setBackground(new java.awt.Color(92, 184, 92));
         resultadoImagen.setFont(new java.awt.Font("Times New Roman", 0, 12)); // NOI18N
@@ -127,14 +135,14 @@ public class PanelResultados extends javax.swing.JPanel {
         });
 
         jLabel1.setFont(new java.awt.Font("Times New Roman", 1, 13)); // NOI18N
-        jLabel1.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        jLabel1.setHorizontalAlignment(SwingConstants.CENTER);
         jLabel1.setText("PUNTAJE TOTAL ESTANDARIZADO:");
-        jLabel1.setVerticalAlignment(javax.swing.SwingConstants.BOTTOM);
+        jLabel1.setVerticalAlignment(SwingConstants.BOTTOM);
 
         resultadoGlobal.setFont(new java.awt.Font("Times New Roman", 1, 14)); // NOI18N
-        resultadoGlobal.setHorizontalAlignment(javax.swing.JTextField.CENTER);
+        resultadoGlobal.setHorizontalAlignment(JTextField.CENTER);
         resultadoGlobal.setText("0");
-        resultadoGlobal.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
+        resultadoGlobal.setBorder(BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
         resultadoGlobal.setDisabledTextColor(new java.awt.Color(0, 0, 0));
         resultadoGlobal.setEnabled(false);
         resultadoGlobal.addActionListener(new java.awt.event.ActionListener() {
@@ -143,51 +151,51 @@ public class PanelResultados extends javax.swing.JPanel {
             }
         });
 
-        javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
+        GroupLayout layout = new GroupLayout(this);
         this.setLayout(layout);
         layout.setHorizontalGroup(
-            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            layout.createParallelGroup(GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addGroup(layout.createParallelGroup(GroupLayout.Alignment.LEADING)
                     .addComponent(resultadoGlobal)
-                    .addComponent(jLabel1, javax.swing.GroupLayout.DEFAULT_SIZE, 301, Short.MAX_VALUE)
-                    .addComponent(lblMA, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(resultadoMatematicas, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(lblCI, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(resultadoCiencias, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(lblSO, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(resultadoSociales, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(lblLC, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(resultadoTextual, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(resultadoImagen, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(lblIM, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                    .addComponent(jLabel1, GroupLayout.DEFAULT_SIZE, 301, Short.MAX_VALUE)
+                    .addComponent(lblMA, GroupLayout.DEFAULT_SIZE, GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(resultadoMatematicas, GroupLayout.DEFAULT_SIZE, GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(lblCI, GroupLayout.DEFAULT_SIZE, GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(resultadoCiencias, GroupLayout.DEFAULT_SIZE, GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(lblSO, GroupLayout.DEFAULT_SIZE, GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(resultadoSociales, GroupLayout.DEFAULT_SIZE, GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(lblLC, GroupLayout.DEFAULT_SIZE, GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(resultadoTextual, GroupLayout.DEFAULT_SIZE, GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(resultadoImagen, GroupLayout.Alignment.TRAILING, GroupLayout.DEFAULT_SIZE, GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(lblIM, GroupLayout.DEFAULT_SIZE, GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addContainerGap())
         );
         layout.setVerticalGroup(
-            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            layout.createParallelGroup(GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 31, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(jLabel1, GroupLayout.PREFERRED_SIZE, 31, GroupLayout.PREFERRED_SIZE)
                 .addGap(0, 0, Short.MAX_VALUE)
-                .addComponent(resultadoGlobal, javax.swing.GroupLayout.PREFERRED_SIZE, 34, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(resultadoGlobal, GroupLayout.PREFERRED_SIZE, 34, GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(lblMA)
                 .addGap(0, 0, Short.MAX_VALUE)
                 .addComponent(resultadoMatematicas)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addPreferredGap(LayoutStyle.ComponentPlacement.RELATED, GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addComponent(lblCI)
                 .addGap(0, 0, Short.MAX_VALUE)
                 .addComponent(resultadoCiencias)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addPreferredGap(LayoutStyle.ComponentPlacement.RELATED, GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addComponent(lblSO)
                 .addGap(0, 0, Short.MAX_VALUE)
                 .addComponent(resultadoSociales)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addPreferredGap(LayoutStyle.ComponentPlacement.RELATED, GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addComponent(lblLC)
                 .addGap(0, 0, Short.MAX_VALUE)
                 .addComponent(resultadoTextual)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addPreferredGap(LayoutStyle.ComponentPlacement.RELATED, GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addComponent(lblIM)
                 .addGap(0, 0, Short.MAX_VALUE)
                 .addComponent(resultadoImagen)
@@ -233,18 +241,18 @@ public class PanelResultados extends javax.swing.JPanel {
         resultadoGlobal.setText(String.format("%.5f",Global));  
     }
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JLabel jLabel1;
-    private javax.swing.JLabel lblCI;
-    private javax.swing.JLabel lblIM;
-    private javax.swing.JLabel lblLC;
-    private javax.swing.JLabel lblMA;
-    private javax.swing.JLabel lblSO;
-    private javax.swing.JButton resultadoCiencias;
-    private javax.swing.JTextField resultadoGlobal;
-    private javax.swing.JButton resultadoImagen;
-    private javax.swing.JButton resultadoMatematicas;
-    private javax.swing.JButton resultadoSociales;
-    private javax.swing.JButton resultadoTextual;
+    private JLabel jLabel1;
+    private JLabel lblCI;
+    private JLabel lblIM;
+    private JLabel lblLC;
+    private JLabel lblMA;
+    private JLabel lblSO;
+    private JButton resultadoCiencias;
+    private JTextField resultadoGlobal;
+    private JButton resultadoImagen;
+    private JButton resultadoMatematicas;
+    private JButton resultadoSociales;
+    private JButton resultadoTextual;
     // End of variables declaration//GEN-END:variables
 
     public JLabel getjLabel1() {

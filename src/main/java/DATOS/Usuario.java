@@ -11,9 +11,10 @@ public class Usuario {
     private List<Evaluacion> historial;
     private String pathImagen;
     private float[] notas;
+    private String password;
 
     public Usuario(String id, String nombres, String apellidos, String telefono, String email,
-            List<Evaluacion> historial, float[] notas, String pathImagen) {
+            List<Evaluacion> historial, float[] notas, String pathImagen, String password) {
         this.id = id;
         this.nombres = nombres;
         this.apellidos = apellidos;
@@ -22,6 +23,15 @@ public class Usuario {
         this.historial = historial;
         this.notas = notas;
         this.pathImagen = pathImagen;
+        this.password = password;
+    }
+
+    public String getPassword() {
+        return password;
+    }
+
+    public void setPassword(String password) {
+        this.password = password;
     }
 
     public String getId() {
