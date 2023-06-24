@@ -6,7 +6,7 @@ public class Grafo<T> {
     private Map<T, LinkedList<T>> adyacencia;
 
     public Grafo() {
-        adyacencia = new HashMap<>();
+        adyacencia = new Map<>();
     }
 
     public void agregarVertice(T vertice) {
@@ -21,9 +21,7 @@ public class Grafo<T> {
             agregarVertice(destino);
 
         adyacencia.get(origen).pushBack(destino);
-        ;
         adyacencia.get(destino).pushBack(origen);
-        ; // Si el grafo es no dirigido
     }
 
     public Set<T> obtenerVertices() {
