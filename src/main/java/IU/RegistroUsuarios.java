@@ -4,6 +4,16 @@ import javax.imageio.ImageIO;
 import javax.swing.*;
 import javax.swing.filechooser.FileNameExtensionFilter;
 
+import org.bson.Document;
+
+import com.mongodb.MongoClient;
+import com.mongodb.MongoClientURI;
+import com.mongodb.client.MongoCollection;
+import com.mongodb.client.MongoDatabase;
+import com.mongodb.client.model.IndexOptions;
+import com.mongodb.client.model.Indexes;
+
+import DATOS.Evaluacion;
 import DATOS.Usuario;
 
 import java.awt.*;
@@ -12,6 +22,7 @@ import java.awt.geom.Ellipse2D;
 import java.awt.image.BufferedImage;
 import java.nio.charset.StandardCharsets;
 import java.security.*;
+import java.util.Arrays;
 import java.io.*;
 
 public class RegistroUsuarios extends JFrame {
@@ -27,8 +38,13 @@ public class RegistroUsuarios extends JFrame {
     private JButton uploadButton;
     private JButton showPasswordButton;
     private boolean showPassword = false;
+    private MongoClientURI uri = new MongoClientURI("mongodb+srv://Admin:passwordAdmin@cluster0.fe0chr9.mongodb.net");
 
     public RegistroUsuarios() {
+        initComponets();        
+    }
+
+    private void initComponets(){
         setTitle("Sea unaleño - Registro de Usuarios");
         setSize(600, 500);
         setDefaultCloseOperation(EXIT_ON_CLOSE);
@@ -139,7 +155,7 @@ public class RegistroUsuarios extends JFrame {
         setBackground(Color.WHITE);
         formPanel.setBackground(Color.WHITE);
         imagePanel.setBackground(Color.WHITE);
-        uploadButton.setBackground(new Color(9,36,51));
+        uploadButton.setBackground(new Color(9, 36, 51));
         uploadButton.setForeground(Color.WHITE);
         showPasswordButton.setBackground(Color.WHITE);
 
@@ -158,7 +174,7 @@ public class RegistroUsuarios extends JFrame {
                 if (component instanceof JButton || component instanceof JLabel) {
                     component.setFont(robotoLightFont);
                 }
-                if (component instanceof JTextField){
+                if (component instanceof JTextField) {
                     component.setFont(robotoBoldFont);
                 }
             }
@@ -181,11 +197,16 @@ public class RegistroUsuarios extends JFrame {
                 String email = emailField.getText();
                 String password = new String(passwordField.getPassword());
 
-                Usuario usuario= new Usuario(id, nombres, apellidos, telefono, email, null, null, "https://fotografiamejorparavendermas.com/wp-content/uploads/2017/06/La-importancia-de-la-imagen.jpg",password);
+                Usuario usuario = new Usuario(id, nombres, apellidos, telefono, email, null, null,
+                        "https://fotografiamejorparavendermas.com/wp-content/uploads/2017/06/La-importancia-de-la-imagen.jpg",
+                        password);
                 new MenuInterfaz(usuario);
                 setVisible(false);
                 // CREAR BASE DE DATOS Y ENVIAR INFO DE USUARIOS
-                //conexion a la BD: mongodb+srv://Admin:passwordAdmin@cluster0.fe0chr9.mongodb.net/
+                // conexion a la BD:
+                // mongodb+srv://Admin:passwordAdmin@cluster0.fe0chr9.mongodb.net/
+                BDconection(usuario);
+
             }
         });
 
@@ -240,9 +261,36 @@ public class RegistroUsuarios extends JFrame {
                 mainPanel.add(addButton, BorderLayout.SOUTH);
             }
         });
+
     }
-    
-    //Metodo que genera ID's unicos Hashing 
+    private void BDconection(Usuario usuario) {
+        try (MongoClient mongoClient = new MongoClient(uri)) {
+            MongoDatabase database = mongoClient.getDatabase("SeaUnalenoDB");
+            System.out.println("Conectado a la base de datos: " + database.getName());
+            MongoCollection<Document> collection = database.getCollection("usuarios");
+
+            collection.createIndex(Indexes.ascending("email"), new IndexOptions().unique(true));
+            Document userDocument = new Document()
+                    .append("id", usuario.getId())
+                    .append("nombres", usuario.getNombres())
+                    .append("apellidos", usuario.getApellidos())
+                    .append("telefono", usuario.getTelefono())
+                    .append("email", usuario.getEmail())
+                    .append("historial", usuario.getHistorial())
+                    .append("notas", usuario.getNotas())
+                    .append("pathImagen", usuario.getPathImagen())
+                    .append("password", usuario.getPassword());
+
+            collection.insertOne(userDocument);
+            // Document command = new Document("createUser", "myUser")
+            //         .append("pwd", "myPassword")
+            //         .append("roles", Arrays.asList(new Document("role", "readWrite"), new Document("role", "dbAdmin")));
+
+            // database.runCommand(command);
+        }
+    }
+
+    // Metodo que genera ID's unicos Hashing
     private String generateUniqueID(String input) {
         try {
             MessageDigest digest = MessageDigest.getInstance("SHA-256");

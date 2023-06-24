@@ -80,7 +80,6 @@ public class MenuInterfaz extends JFrame {
         appLogoLabel.setAlignmentX(Component.LEFT_ALIGNMENT);
 
         // Agregar los botones al panel del menú
-        // sideMenuPanel.add(menuButton);
         sideMenuPanel.add(appLogoLabel, gbc);
         sideMenuPanel.add(profileButton, gbc);
         sideMenuPanel.add(searchButton, gbc);
