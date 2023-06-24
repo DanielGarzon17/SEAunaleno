@@ -95,6 +95,7 @@ public class ArrayList<T> {
         } else {
             System.out.println("ERROR, lista vacia");
         }
+        System.out.println("popback");
     }
 
     public T get(int posicion) throws Exception {
