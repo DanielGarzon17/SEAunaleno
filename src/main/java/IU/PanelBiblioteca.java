@@ -2,6 +2,8 @@ package IU;
 
 import javax.imageio.ImageIO;
 import javax.swing.*;
+import javax.swing.border.EmptyBorder;
+
 import java.awt.*;
 import java.awt.event.*;
 import java.awt.image.BufferedImage;
@@ -10,8 +12,9 @@ import java.io.*;
 public class PanelBiblioteca extends JPanel {
 
     public PanelBiblioteca() {
+        setBackground(Color.WHITE);
         setLayout(new BorderLayout());
-        ImageIcon imagen = resizeIcon("src/main/java/RECURSOS/Google-Drive-logo.png", 200, 200);
+        ImageIcon imagen = resizeIcon("src/main/java/RECURSOS/Google-Drive-logo.png", 250, 150);
         // Crear los botones
         JButton button1 = new JButton("Material Organizado");
         button1.setIcon(imagen); // Reemplaza "ruta/imagen1.png" con la ruta de tu imagen
@@ -22,15 +25,40 @@ public class PanelBiblioteca extends JPanel {
         JButton button3 = new JButton("Solucionarios");
         button3.setIcon(imagen); // Reemplaza "ruta/imagen3.png" con la ruta de tu imagen
 
+
         // Agregar los botones al JPanel
         JPanel topPanel = new JPanel();
         topPanel.setLayout(new FlowLayout());
         topPanel.add(button1);
         topPanel.add(button2);
+        topPanel.setBackground(Color.WHITE);
 
         JPanel bottomPanel = new JPanel();
         bottomPanel.setLayout(new GridLayout(1, 2));
         bottomPanel.add(button3);
+
+        button3.setBackground(Color.WHITE);
+
+        for (Component element : topPanel.getComponents()) {
+            element.setBackground(Color.WHITE);
+            try {
+                element.setFont(
+                        Font.createFont(Font.TRUETYPE_FONT, new File("src/main/resources/fonts/Roboto-Light.ttf"))
+                                .deriveFont(12f));
+                button3.setFont(
+                        Font.createFont(Font.TRUETYPE_FONT, new File("src/main/resources/fonts/Roboto-Light.ttf"))
+                                .deriveFont(12f));
+            } catch (FontFormatException e) {
+                e.printStackTrace();
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
+
+        }
+
+        // button1.setBorderPainted(false);
+        // button2.setBorderPainted(false);
+        // button3.setBorderPainted(false);
 
         add(topPanel, BorderLayout.NORTH);
         add(bottomPanel, BorderLayout.SOUTH);
@@ -54,6 +82,7 @@ public class PanelBiblioteca extends JPanel {
             }
         });
     }
+
     public void AbrirLinks(String str) {
         if (java.awt.Desktop.isDesktopSupported()) {
             Desktop desktop = java.awt.Desktop.getDesktop();

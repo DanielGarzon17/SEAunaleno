@@ -53,7 +53,6 @@ public class MenuInterfaz extends JFrame {
         menuButton.setFont(new Font("Arial", Font.PLAIN, 20));
         menuButton.setAlignmentX(Component.LEFT_ALIGNMENT);
         menuButton.setBackground(Color.WHITE);
-        sideMenuPanel.setBorder(BorderFactory.createLineBorder(Color.BLACK, 1));
         menuButton.setIcon(new ImageIcon("src/main/java/RECURSOS/menu-regular-24.png"));
 
         // Crear el label del logo del aplicativo en el menú
@@ -155,11 +154,22 @@ public class MenuInterfaz extends JFrame {
             }
         });
 
+        testButton.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                HojaRespuestas prueba = new HojaRespuestas();
+                prueba.setVisible(true);
+                dispose();
+            }
+        });
+
     }
 
     private void repintarPanel(JPanel panelAnterior,JPanel panelNuevo){
         panelAnterior.removeAll();
         panelAnterior.add(panelNuevo);
+        
+        // panelAnterior.add(panelNuevo);
         panelAnterior.repaint();
         panelAnterior.revalidate();
     }

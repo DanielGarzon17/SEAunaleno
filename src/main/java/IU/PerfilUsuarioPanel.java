@@ -4,7 +4,7 @@ import javax.imageio.ImageIO;
 import javax.swing.*;
 import javax.swing.border.EmptyBorder;
 
-import PRUEBAS.PanelRound;
+import LOGICA.PanelRound;
 
 import java.awt.*;
 import java.awt.geom.Ellipse2D;

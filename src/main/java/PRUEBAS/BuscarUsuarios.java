@@ -90,10 +90,10 @@ public class BuscarUsuarios {
         BST usuarios = new BST();
         for (int i = 0; i < x; i++) {
             String name=generarNombreAleatorio();
-            usuarios.insert(new Usuario("id1",""+name,null,"+5768983464","email@guggw",null,null));
+            usuarios.insert(new Usuario("id1",""+name,null,"+5768983464","email@guggw",null,null,null));
             // System.out.println(name);
         }
-        usuarios.insert(new Usuario("id1","DGGG",null,"+5768983464","email@guggw",null,null));
+        usuarios.insert(new Usuario("id1","DGGG",null,"+5768983464","email@guggw",null,null,null));
         long tiempoInicial = System.nanoTime();
         usuarios.get("Alejandro García García");
         System.out.println("s"+x + "=" + (System.nanoTime() - tiempoInicial));
