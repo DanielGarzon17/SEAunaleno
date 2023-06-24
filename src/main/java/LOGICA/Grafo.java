@@ -1,6 +1,5 @@
 package LOGICA;
 
-import java.util.*;
 
 public class Grafo<T> {
     private Map<T, LinkedList<T>> adyacencia;

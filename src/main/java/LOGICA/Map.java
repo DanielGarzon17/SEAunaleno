@@ -1,62 +1,127 @@
 package LOGICA;
 
-
 public class Map<K, V> {
-    private ArrayList<K> llaves;
-    private ArrayList<V> valores;
+    private Node<K, V> head;
 
-    public Map() {
-        llaves = new ArrayList<>();
-        valores = new ArrayList<>();
-    }
-
-    public void agregar(K llave, V valor) {
-        int indice = llaves.indexOf(llave);
-
-        if (indice != -1) {
-            valores.set(indice, valor);
+    public void put(K key, V value) {
+        if (head == null) {
+            head = new Node<>(key, value);
         } else {
-            llaves.add(llave);
-            valores.add(valor);
+            Node<K, V> currentNode = head;
+            while (currentNode.getNext() != null) {
+                currentNode = currentNode.getNext();
+            }
+            currentNode.setNext(new Node<>(key, value));
         }
     }
 
-    public V obtener(K llave) {
-        int indice = llaves.indexOf(llave);
-
-        if (indice != -1) {
-            return valores.get(indice);
+    public V get(K key) {
+        Node<K, V> currentNode = head;
+        while (currentNode != null) {
+            if (currentNode.getKey().equals(key)) {
+                return currentNode.getValue();
+            }
+            currentNode = currentNode.getNext();
         }
-
         return null;
     }
 
-    public void eliminar(K llave) {
-        int indice = llaves.indexOf(llave);
+    public boolean containsKey(K key) {
+        Node<K, V> currentNode = head;
+        while (currentNode != null) {
+            if (currentNode.getKey().equals(key)) {
+                return true;
+            }
+            currentNode = currentNode.getNext();
+        }
+        return false;
+    }
 
-        if (indice != -1) {
-            llaves.remove(indice);
-            valores.remove(indice);
+    public boolean containsValue(V value) {
+        Node<K, V> currentNode = head;
+        while (currentNode != null) {
+            if (currentNode.getValue().equals(value)) {
+                return true;
+            }
+            currentNode = currentNode.getNext();
+        }
+        return false;
+    }
+
+    public void remove(K key) {
+        if (head == null) {
+            return;
+        }
+
+        if (head.getKey().equals(key)) {
+            head = head.getNext();
+            return;
+        }
+
+        Node<K, V> previousNode = head;
+        Node<K, V> currentNode = head.getNext();
+        while (currentNode != null) {
+            if (currentNode.getKey().equals(key)) {
+                previousNode.setNext(currentNode.getNext());
+                return;
+            }
+            previousNode = currentNode;
+            currentNode = currentNode.getNext();
         }
     }
 
-    public List<K> obtenerLlaves() {
-        return new ArrayList<>(llaves);
+    public void clear() {
+        head = null;
     }
 
-    public List<V> obtenerValores() {
-        return new ArrayList<>(valores);
+    public int size() {
+        int count = 0;
+        Node<K, V> currentNode = head;
+        while (currentNode != null) {
+            count++;
+            currentNode = currentNode.getNext();
+        }
+        return count;
     }
 
-    public boolean contieneLlave(K llave) {
-        return llaves.contains(llave);
+    public boolean isEmpty() {
+        return head == null;
     }
 
-    public boolean contieneValor(V valor) {
-        return valores.contains(valor);
+    public Set<K> keySet(){
+        Set<K> llaves = new Set<>();
+        Node<K, V> currNode = head;
+        while(currNode.next != null){
+            llaves.add(currNode.key);
+            currNode = currNode.next;
+        }
+        return llaves;
     }
 
-    public int tamaño() {
-        return llaves.size();
+    private static class Node<K, V> {
+        private K key;
+        private V value;
+        private Node<K, V> next;
+
+        public Node(K key, V value) {
+            this.key = key;
+            this.value = value;
+        }
+
+        public K getKey() {
+            return key;
+        }
+
+        public V getValue() {
+            return value;
+        }
+
+        public Node<K, V> getNext() {
+            return next;
+        }
+
+        public void setNext(Node<K, V> next) {
+            this.next = next;
+        }
     }
 }
