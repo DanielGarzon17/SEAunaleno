@@ -3,6 +3,7 @@ package IU;
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.*;
+
 public class LoginUsuarios extends JFrame {
     private JTextField usernameField;
     private JPasswordField passwordField;
@@ -79,13 +80,14 @@ public class LoginUsuarios extends JFrame {
             public void actionPerformed(ActionEvent e) {
                 String username = usernameField.getText();
                 char[] password = passwordField.getPassword();
-                // Aquí puedes realizar la lógica de autenticación
-                // Verificar el usuario y la contraseña, etc.
-                // Si la autenticación es exitosa, puedes abrir la ventana principal del
-                // programa
-                // Si no, mostrar un mensaje de error o tomar alguna otra acción
+            /*
+                * Realizar la lógica de autenticación
+                * Verificar el email y la contraseña, etc.
+                * Si la autenticación es exitosa, abrir MnuInterfaz Si no, mostrar un mensaje de error
+                */
             }
         });
+
         // Agregar evento al botón de registrarse
         registrarseButton.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
@@ -102,7 +104,7 @@ public class LoginUsuarios extends JFrame {
             }
         });
     }
-    
+
     public static void main(String[] args) {
         SwingUtilities.invokeLater(new Runnable() {
             public void run() {

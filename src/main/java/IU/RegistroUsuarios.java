@@ -184,10 +184,7 @@ public class RegistroUsuarios extends JFrame {
                 Usuario usuario= new Usuario(id, nombres, apellidos, telefono, email, null, null, "https://fotografiamejorparavendermas.com/wp-content/uploads/2017/06/La-importancia-de-la-imagen.jpg",password);
                 new MenuInterfaz(usuario);
                 setVisible(false);
-                // Aquí puedes agregar la lógica para guardar los datos del nuevo usuario
-                // Puedes utilizar las variables id, nombres, apellidos, telefono, email y
-                // password
-                // para realizar las operaciones necesarias (guardar en una base de datos, etc.)
+                // CREAR BASE DE DATOS Y ENVIAR INFO DE USUARIOS
             }
         });
 

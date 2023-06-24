@@ -211,14 +211,11 @@ public class MenuInterfaz extends JFrame {
     private void repintarPanel(JPanel panelAnterior, JPanel panelNuevo) {
         panelAnterior.removeAll();
         panelAnterior.add(panelNuevo);
-
-        // panelAnterior.add(panelNuevo);
         panelAnterior.repaint();
         panelAnterior.revalidate();
     }
 
     public void repintarPanel(PanelResultados panelNuevo) {
-        // contentPanel.removeAll();
         contentPanel.add(panelNuevo, BorderLayout.CENTER);
         contentPanel.repaint();
         contentPanel.revalidate();
@@ -246,7 +243,7 @@ public class MenuInterfaz extends JFrame {
         SwingUtilities.invokeLater(new Runnable() {
             @Override
             public void run() {
-                // HACER LA CONEXION AL DATABASE Y TRAER DATOS DE USUARIO
+                
 
                 // CREACION DE Usuario
                 new MenuInterfaz(new Usuario("231EDEEA1", "DANIEL", "GARZON", "38784631849", "JWBBCW@email,com", null,
