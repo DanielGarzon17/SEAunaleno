@@ -185,7 +185,7 @@ public class RegistroUsuarios extends JFrame {
                 new MenuInterfaz(usuario);
                 setVisible(false);
                 // CREAR BASE DE DATOS Y ENVIAR INFO DE USUARIOS
-                //conexion a la BD: mongodb+srv://Admin:<password>@cluster0.fe0chr9.mongodb.net/
+                //conexion a la BD: mongodb+srv://Admin:passwordAdmin@cluster0.fe0chr9.mongodb.net/
             }
         });
 

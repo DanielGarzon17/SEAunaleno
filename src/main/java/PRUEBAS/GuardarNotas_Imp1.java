@@ -20,7 +20,7 @@ public GuardarNotas_Imp1() {
     }
 
     public static void main(String[] args) {
-        GuardarNotas_Imp1 a = new GuardarNotas_Imp1();
+        new GuardarNotas_Imp1();
         
     }
 
