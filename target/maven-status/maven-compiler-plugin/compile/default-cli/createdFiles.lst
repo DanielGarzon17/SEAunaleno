@@ -2,16 +2,19 @@ LOGICA\DoubleLinkedList.class
 IU\EstadisticasPanel.class
 IU\RegistroUsuarios.class
 IU\PanelResultados$3.class
+LOGICA\Map$Node.class
 IU\LoginUsuarios$3.class
 IU\MenuInterfaz$2.class
 IU\RegistroUsuarios$4.class
 LOGICA\PanelRound.class
 IU\PanelBiblioteca$3.class
+LOGICA\Grafo.class
 LOGICA\Queue.class
 IU\MenuInterfaz$5.class
 LOGICA\CalificarExamen.class
 IU\PanelResultados$6.class
 IU\MenuInterfaz$4.class
+LOGICA\Set.class
 PRUEBAS\WebPageViewer.class
 IU\HojaRespuestas$1.class
 IU\PanelBiblioteca.class
@@ -28,6 +31,7 @@ LOGICA\LinkedList.class
 IU\PanelResultados$1.class
 IU\MenuInterfaz.class
 IU\RegistroUsuarios$2.class
+LOGICA\Set$Node.class
 DATOS\Usuario.class
 IU\HojaRespuestas$Cronometro.class
 IU\MenuInterfaz$3.class
@@ -50,6 +54,7 @@ LOGICA\Stack.class
 LOGICA\LinkedList$node.class
 IU\PanelResultados$5.class
 IU\RegistroUsuarios$3.class
+LOGICA\Map.class
 PRUEBAS\Conexion$1.class
 IU\LoginUsuarios.class
 IU\MenuInterfaz$6.class
