@@ -22,7 +22,6 @@ import java.awt.geom.Ellipse2D;
 import java.awt.image.BufferedImage;
 import java.nio.charset.StandardCharsets;
 import java.security.*;
-import java.util.Arrays;
 import java.io.*;
 
 public class RegistroUsuarios extends JFrame {
