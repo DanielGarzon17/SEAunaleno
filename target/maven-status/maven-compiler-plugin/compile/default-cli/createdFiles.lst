@@ -21,7 +21,6 @@ IU\MenuInterfaz$1.class
 LOGICA\AVLTree.class
 PRUEBAS\EliminarNota_Imp3.class
 LOGICA\BST$node.class
-IU\PanelLogo.class
 LOGICA\BST.class
 LOGICA\AVLNode.class
 PRUEBAS\BuscarUsuarios.class

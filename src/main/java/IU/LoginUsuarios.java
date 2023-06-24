@@ -1,6 +1,9 @@
 package IU;
 
 import javax.swing.*;
+
+import DATOS.Usuario;
+
 import java.awt.*;
 import java.awt.event.*;
 
@@ -79,8 +82,10 @@ public class LoginUsuarios extends JFrame {
         loginButton.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
                 String username = usernameField.getText();
-                char[] password = passwordField.getPassword();
-            /*
+                String password = new String(passwordField.getPassword());
+                Usuario objeto_de_prueba = new Usuario(username, username, username, username, username, null, null, username, password);
+                System.out.println(objeto_de_prueba.getPassword());
+                /*
                 * Realizar la lógica de autenticación
                 * Verificar el email y la contraseña, etc.
                 * Si la autenticación es exitosa, abrir MnuInterfaz Si no, mostrar un mensaje de error

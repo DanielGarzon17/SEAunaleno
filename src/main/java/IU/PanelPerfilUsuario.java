@@ -11,7 +11,8 @@ import java.awt.geom.Ellipse2D;
 import java.awt.image.BufferedImage;
 import java.io.File;
 import java.io.IOException;
-import java.net.URL;
+import java.net.URI;
+import java.net.URISyntaxException;
 
 public class PanelPerfilUsuario extends JPanel {
     private String nombres;
@@ -68,7 +69,7 @@ public class PanelPerfilUsuario extends JPanel {
             String imageUrl = pathImagenPerfil;
 
             // Leer la imagen desde la URL
-            BufferedImage originalImage = ImageIO.read(new URL(imageUrl));
+            BufferedImage originalImage = ImageIO.read(new URI(imageUrl).toURL());
 
             // Crear una imagen redimensionada de 250x250 píxeles
             BufferedImage resizedImage = new BufferedImage(250, 250, BufferedImage.TYPE_INT_ARGB);
@@ -87,7 +88,7 @@ public class PanelPerfilUsuario extends JPanel {
             imageLabel.setIcon(imageIcon);
 
             System.out.println("La imagen se ha recortado correctamente.");
-        } catch (IOException e) {
+        } catch (URISyntaxException | IOException e) {
             e.printStackTrace();
             System.out.println("No se pudo recortar la imagen desde Internet.");
         }
