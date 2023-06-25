@@ -4,12 +4,17 @@ import javax.swing.*;
 import javax.swing.table.DefaultTableModel;
 
 import DATOS.Usuario;
+import LOGICA.BST;
 import LOGICA.LinkedList;
 import LOGICA.Set;
+import LOGICA.conexionBD;
 
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.io.File;
+import java.io.IOException;
+import java.io.InputStream;
 
 public class BusquedaUsuariosPanel extends JPanel {
     private JTextField searchField;
@@ -33,17 +38,33 @@ public class BusquedaUsuariosPanel extends JPanel {
         tableModel.addColumn("Apellidos");
         tableModel.addColumn("Teléfono");
         tableModel.addColumn("Email");
-        tableModel.addColumn("Notas");
+        tableModel.addColumn("Contraseña");
         
         // AVLTree<Usuario> usuarios = new AVLTree<Usuario>();
         
 
         // Crear la tabla con el modelo
         table = new JTable(tableModel);
-        table.setBackground(Color.WHITE);
+        Color azulBonito = new Color(8, 52, 76);
+        Color azulChimba = new Color(185, 228, 228);
+
+        table.setBackground(azulBonito);
+        try {
+            Font nunitoSansFont = Font.createFont(Font.TRUETYPE_FONT,
+                    new File("src/main/resources/fonts/NunitoSans-Regular.ttf")).deriveFont(15f);
+            // Cargar la fuente desde el archivo en el directorio de recursos
+            table.setFont(nunitoSansFont);
+            table.setForeground(azulChimba);
+        } catch (FontFormatException e) {
+            e.printStackTrace();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+
+
         // Crear el JScrollPane para la tabla
         JScrollPane scrollPane = new JScrollPane(table);
-        scrollPane.setBackground(Color.WHITE);
+        scrollPane.setBackground(azulChimba);
         // Agregar el campo de búsqueda y el botón al panel superior
         JPanel searchPanel = new JPanel(new BorderLayout());
         searchPanel.add(searchField, BorderLayout.CENTER);
@@ -54,7 +75,20 @@ public class BusquedaUsuariosPanel extends JPanel {
         add(scrollPane, BorderLayout.CENTER);
 
         // Configurar la acción del botón de búsqueda
+       
         searchButton.setBackground(Color.white);
+        try {
+            searchButton.setFont(
+                    Font.createFont(Font.TRUETYPE_FONT,
+                            new File("src/main/resources/fonts/NunitoSans-Regular.ttf"))
+                            .deriveFont(12f));
+        } catch (FontFormatException e) {
+            e.printStackTrace();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        
+  
         Set<Usuario> setUsuarios = new Set<Usuario>();
         for (int j = 0; j < usuarios.size; j++) {
             try {
@@ -71,15 +105,26 @@ public class BusquedaUsuariosPanel extends JPanel {
             @Override
             public void actionPerformed(ActionEvent e) {
                 String searchTerm = searchField.getText();
-                // Aquí puedes realizar la búsqueda en la base de datos con el término de
-                // búsqueda proporcionado
-                // y actualizar los datos en la tabla
-                // Ejemplo:
+                    actualizarTabla(buscarUsuarios(usuarios, searchTerm));
                 
             }
         });
     }
+    private Set<Usuario> buscarUsuarios(LinkedList<Usuario> usuarios, String searchTerm) {
+        BST arbolUsuarios = new BST();
+        for (int i = 0; i < usuarios.size; i++) {
+            Usuario n;
+            try {
+                n = usuarios.get(i);
+                arbolUsuarios.insert(n);
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
+        }
 
+        Set<Usuario> querySet = arbolUsuarios.findAll(searchTerm, arbolUsuarios.root);
+        return querySet;
+    }
     // Método para actualizar los datos en la tabla
     private void actualizarTabla(Set<Usuario> usuarios) {
         // Borrar filas existentes
@@ -134,15 +179,17 @@ public class BusquedaUsuariosPanel extends JPanel {
         SwingUtilities.invokeLater(new Runnable() {
             @Override
             public void run() {
-                // JFrame frame = new JFrame("Búsqueda de Usuarios");
-                // frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-                // frame.setSize(800, 600);
+                JFrame frame = new JFrame("Búsqueda de Usuarios");
+                frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+                frame.setSize(800, 600);
 
-                // BusquedaUsuariosPanel panel = new BusquedaUsuariosPanel();
-                // frame.add(panel);
+                BusquedaUsuariosPanel panel = new BusquedaUsuariosPanel(new conexionBD("usuarios").getUsuarios());
+                frame.add(panel);
 
-                // frame.setVisible(true);
+                frame.setVisible(true);
             }
         });
     }
+    
 }
+
