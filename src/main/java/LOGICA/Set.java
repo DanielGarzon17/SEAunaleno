@@ -2,13 +2,31 @@ package LOGICA;
 
 public class Set<T> {
     private Node<T> head;
+    public int size;
+
+    public Set(){
+        this.head = null;
+        this.size = 0;
+    }
 
     public void add(T element) {
         if (!contains(element)) {
             Node<T> newNode = new Node<>(element);
             newNode.setNext(head);
             head = newNode;
+            size++;
         }
+    }
+
+    public T get(int posicion){
+        if (posicion < size && posicion >= 0) {
+            Node<T> iterador = head;
+            for (int i = 0; i < posicion; i++) {
+                iterador = iterador.next;
+            }
+            return iterador.getData();
+        }
+        return null;
     }
 
     public void remove(T element) {
@@ -18,6 +36,7 @@ public class Set<T> {
 
         if (head.getData().equals(element)) {
             head = head.getNext();
+            size--;
             return;
         }
 
@@ -33,6 +52,7 @@ public class Set<T> {
             prevNode = currNode;
             currNode = currNode.getNext();
         }
+        size--;
     }
 
     public boolean contains(T element) {
@@ -44,16 +64,6 @@ public class Set<T> {
             currNode = currNode.getNext();
         }
         return false;
-    }
-
-    public int size() {
-        int count = 0;
-        Node<T> currNode = head;
-        while (currNode != null) {
-            count++;
-            currNode = currNode.getNext();
-        }
-        return count;
     }
 
     public boolean isEmpty() {

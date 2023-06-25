@@ -3,7 +3,7 @@ package LOGICA;
 import DATOS.Usuario;
 
 public class BST {
-    node root;
+    public node root;
 
     public BST() {
         this.root = null;
@@ -131,11 +131,39 @@ public class BST {
         }
     }
 
-    // public static void main(String[] args) {
-    //     BST bst = new BST();
-    //     for (int i = 0; i < 50; i++) {
-    //         bst.insert(new Usuario());
-    //     }
-    //     bst.imprimir();
-    // }
+    public Set<Usuario> findAll(String cualquiera, node nodito){
+        Set<Usuario> Encontrados = new Set<>();
+        // datos a izquierda
+        if(nodito.izquierda != null){
+            Set<Usuario> EncontradosIzquierda = findAll(cualquiera, nodito.izquierda);
+            for(int i = 0; i< EncontradosIzquierda.size; i++){
+                try {
+                    Encontrados.add(EncontradosIzquierda.get(i));
+                } catch (Exception e) {
+                }
+            }
+        }
+        // dato en el nodo
+        if (nodito.key.getId().contains(cualquiera) || 
+            nodito.key.getEmail().contains(cualquiera) ||
+            nodito.key.getTelefono().contains(cualquiera) ||
+            nodito.key.getEmail().contains(cualquiera) ||
+            nodito.key.getNombres().contains(cualquiera) ||
+            nodito.key.getNombres().contains(cualquiera)
+            ) {
+                Encontrados.add(nodito.key);
+        }
+        // datos a derecha
+        if(nodito.derecha != null){
+            Set<Usuario> EncontradosDerecha = findAll(cualquiera, nodito.derecha);
+            for(int i = 0; i< EncontradosDerecha.size; i++){
+                try {
+                    Encontrados.add(EncontradosDerecha.get(i));
+                } catch (Exception e) {
+                }
+            }
+        }
+
+        return Encontrados;
+    }
 }
