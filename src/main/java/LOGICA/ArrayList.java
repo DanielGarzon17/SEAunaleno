@@ -3,7 +3,7 @@ package LOGICA;
 public class ArrayList<T> {
 
     private T[] list;
-    private int capacity, size;
+    public int capacity, size;
 
     public ArrayList(int capacity) {
         this.capacity = capacity;
@@ -89,14 +89,26 @@ public class ArrayList<T> {
         }
     }
 
-    public void popBack() {
-        if (!vacio()) {
-            size--;
-        } else {
-            System.out.println("ERROR, lista vacia");
-        }
-        System.out.println("popback");
-    }
+    // public void popBack() {
+    //     if (!vacio()) {
+    //         size--;
+    //     } else {
+    //         System.out.println("ERROR, lista vacia");
+    //     }
+    //     System.out.println("popback");
+    // }
+
+    // public T popBack() {
+    //     if (vacio()) {
+    //         return null; // Retorna null si el ArrayList está vacío
+    //     }
+    //     int lastIndex = size - 1;
+    //     try{
+    //     T lastElement = get(lastIndex);
+    //     pop(lastIndex);
+    //     return lastElement;
+    // }
+
 
     public T get(int posicion) throws Exception {
         if (posicion < size && posicion >= 0) {

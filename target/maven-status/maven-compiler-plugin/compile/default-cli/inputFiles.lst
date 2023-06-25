@@ -1,33 +1,3 @@
-<<<<<<< HEAD
-c:\Users\Cristian\Documents\Visual Studio Code Projects\SEAunaleno\SEAunaleno\src\main\java\PRUEBAS\EliminarNota_Imp3.java
-c:\Users\Cristian\Documents\Visual Studio Code Projects\SEAunaleno\SEAunaleno\src\main\java\PRUEBAS\GuardarNotas_Imp1.java
-c:\Users\Cristian\Documents\Visual Studio Code Projects\SEAunaleno\SEAunaleno\src\main\java\PRUEBAS\WebPageViewer.java
-c:\Users\Cristian\Documents\Visual Studio Code Projects\SEAunaleno\SEAunaleno\src\main\java\IU\EstadisticasPanel.java
-c:\Users\Cristian\Documents\Visual Studio Code Projects\SEAunaleno\SEAunaleno\src\main\java\LOGICA\BST.java
-c:\Users\Cristian\Documents\Visual Studio Code Projects\SEAunaleno\SEAunaleno\src\main\java\IU\RegistroUsuarios.java
-c:\Users\Cristian\Documents\Visual Studio Code Projects\SEAunaleno\SEAunaleno\src\main\java\DATOS\Evaluacion.java
-c:\Users\Cristian\Documents\Visual Studio Code Projects\SEAunaleno\SEAunaleno\src\main\java\PRUEBAS\BuscarUsuarios.java
-c:\Users\Cristian\Documents\Visual Studio Code Projects\SEAunaleno\SEAunaleno\src\main\java\LOGICA\AVLTree.java
-c:\Users\Cristian\Documents\Visual Studio Code Projects\SEAunaleno\SEAunaleno\src\main\java\LOGICA\Map.java
-c:\Users\Cristian\Documents\Visual Studio Code Projects\SEAunaleno\SEAunaleno\src\main\java\LOGICA\CalificarExamen.java
-c:\Users\Cristian\Documents\Visual Studio Code Projects\SEAunaleno\SEAunaleno\src\main\java\LOGICA\DoubleLinkedList.java
-c:\Users\Cristian\Documents\Visual Studio Code Projects\SEAunaleno\SEAunaleno\src\main\java\PRUEBAS\Conexion.java
-c:\Users\Cristian\Documents\Visual Studio Code Projects\SEAunaleno\SEAunaleno\src\main\java\LOGICA\Grafo.java
-c:\Users\Cristian\Documents\Visual Studio Code Projects\SEAunaleno\SEAunaleno\src\main\java\IU\PanelPerfilUsuario.java
-c:\Users\Cristian\Documents\Visual Studio Code Projects\SEAunaleno\SEAunaleno\src\main\java\IU\PanelBusqueda.java
-c:\Users\Cristian\Documents\Visual Studio Code Projects\SEAunaleno\SEAunaleno\src\main\java\IU\PanelResultados.java
-c:\Users\Cristian\Documents\Visual Studio Code Projects\SEAunaleno\SEAunaleno\src\main\java\DATOS\Usuario.java
-c:\Users\Cristian\Documents\Visual Studio Code Projects\SEAunaleno\SEAunaleno\src\main\java\IU\HojaRespuestas.java
-c:\Users\Cristian\Documents\Visual Studio Code Projects\SEAunaleno\SEAunaleno\src\main\java\IU\LoginUsuarios.java
-c:\Users\Cristian\Documents\Visual Studio Code Projects\SEAunaleno\SEAunaleno\src\main\java\IU\MenuInterfaz.java
-c:\Users\Cristian\Documents\Visual Studio Code Projects\SEAunaleno\SEAunaleno\src\main\java\IU\PanelBiblioteca.java
-c:\Users\Cristian\Documents\Visual Studio Code Projects\SEAunaleno\SEAunaleno\src\main\java\LOGICA\PanelRound.java
-c:\Users\Cristian\Documents\Visual Studio Code Projects\SEAunaleno\SEAunaleno\src\main\java\PRUEBAS\GuardarUsuarios.java
-c:\Users\Cristian\Documents\Visual Studio Code Projects\SEAunaleno\SEAunaleno\src\main\java\LOGICA\LinkedList.java
-c:\Users\Cristian\Documents\Visual Studio Code Projects\SEAunaleno\SEAunaleno\src\main\java\LOGICA\Queue.java
-c:\Users\Cristian\Documents\Visual Studio Code Projects\SEAunaleno\SEAunaleno\src\main\java\LOGICA\Stack.java
-c:\Users\Cristian\Documents\Visual Studio Code Projects\SEAunaleno\SEAunaleno\src\main\java\LOGICA\ArrayList.java
-=======
 c:\Users\delog\OneDrive\Documents\NetBeansProjects\ProyectoFinal.worktrees\main\src\main\java\LOGICA\Map.java
 c:\Users\delog\OneDrive\Documents\NetBeansProjects\ProyectoFinal.worktrees\main\src\main\java\PRUEBAS\Conexion.java
 c:\Users\delog\OneDrive\Documents\NetBeansProjects\ProyectoFinal.worktrees\main\src\main\java\IU\LoginUsuarios.java
@@ -35,6 +5,7 @@ c:\Users\delog\OneDrive\Documents\NetBeansProjects\ProyectoFinal.worktrees\main\
 c:\Users\delog\OneDrive\Documents\NetBeansProjects\ProyectoFinal.worktrees\main\src\main\java\IU\PanelBusqueda.java
 c:\Users\delog\OneDrive\Documents\NetBeansProjects\ProyectoFinal.worktrees\main\src\main\java\IU\PanelPerfilUsuario.java
 c:\Users\delog\OneDrive\Documents\NetBeansProjects\ProyectoFinal.worktrees\main\src\main\java\PRUEBAS\GuardarUsuarios.java
+c:\Users\delog\OneDrive\Documents\NetBeansProjects\ProyectoFinal.worktrees\main\src\main\java\LOGICA\Set.java
 c:\Users\delog\OneDrive\Documents\NetBeansProjects\ProyectoFinal.worktrees\main\src\main\java\LOGICA\AVLTree.java
 c:\Users\delog\OneDrive\Documents\NetBeansProjects\ProyectoFinal.worktrees\main\src\main\java\IU\EstadisticasPanel.java
 c:\Users\delog\OneDrive\Documents\NetBeansProjects\ProyectoFinal.worktrees\main\src\main\java\LOGICA\LinkedList.java
@@ -56,4 +27,3 @@ c:\Users\delog\OneDrive\Documents\NetBeansProjects\ProyectoFinal.worktrees\main\
 c:\Users\delog\OneDrive\Documents\NetBeansProjects\ProyectoFinal.worktrees\main\src\main\java\LOGICA\ArrayList.java
 c:\Users\delog\OneDrive\Documents\NetBeansProjects\ProyectoFinal.worktrees\main\src\main\java\IU\MenuInterfaz.java
 c:\Users\delog\OneDrive\Documents\NetBeansProjects\ProyectoFinal.worktrees\main\src\main\java\IU\PanelBiblioteca.java
->>>>>>> 8f905987e8fbfd4cc2eff75cf60926f8e42a6b34

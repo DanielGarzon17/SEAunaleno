@@ -2,16 +2,35 @@ package IU;
 
 import javax.swing.*;
 
+import org.bson.Document;
+import org.bson.conversions.Bson;
+import org.bson.types.Binary;
+import org.json.simple.JSONObject;
+import org.json.simple.parser.JSONParser;
+import org.json.simple.parser.ParseException;
+
+import static com.mongodb.client.model.Filters.*;
+import com.mongodb.MongoClient;
+import com.mongodb.MongoClientURI;
+import com.mongodb.client.MongoCollection;
+import com.mongodb.client.MongoDatabase;
+import com.mongodb.client.FindIterable;
+
+import DATOS.Evaluacion;
 import DATOS.Usuario;
+import LOGICA.Stack;
+import LOGICA.conexionBD;
 
 import java.awt.*;
 import java.awt.event.*;
+import java.util.Base64;
 
 public class LoginUsuarios extends JFrame {
     private JTextField usernameField;
     private JPasswordField passwordField;
     private JButton loginButton;
     private JButton registrarseButton;
+    private JLabel status;
 
     public LoginUsuarios() {
         // Configurar la ventana
@@ -24,6 +43,7 @@ public class LoginUsuarios extends JFrame {
 
         // Crear el panel de encabezado con la imagen recortada circularmente
         JPanel headerPanel = new JPanel();
+        headerPanel.setLayout(new BorderLayout());
         headerPanel.setPreferredSize(new Dimension(getWidth(), 300));
         headerPanel.setBackground(Color.WHITE); // Color de encabezado personalizado
 
@@ -34,7 +54,12 @@ public class LoginUsuarios extends JFrame {
 
         // Panel superior con la imagen redimensionada
         JLabel logoLabel = new JLabel(resizedIcon);
-        headerPanel.add(logoLabel, CENTER_ALIGNMENT);
+        logoLabel.setHorizontalAlignment(JLabel.CENTER);
+        headerPanel.add(logoLabel, BorderLayout.CENTER);
+        status = new JLabel("");
+        status.setHorizontalAlignment(JLabel.CENTER);
+
+        headerPanel.add(status, BorderLayout.SOUTH);
 
         // Crear los componentes
         JPanel contentPanel = new JPanel(new GridLayout(3, 2, 10, 10));
@@ -64,6 +89,8 @@ public class LoginUsuarios extends JFrame {
         passwordLabel.setFont(labelFont);
         usernameField.setFont(labelFont);
         passwordField.setFont(labelFont);
+        status.setFont(labelFont);
+        status.setForeground(Color.RED);
         usernameField.setBackground(Color.WHITE);
 
         // Agregar los componentes al panel de contenido
@@ -77,21 +104,24 @@ public class LoginUsuarios extends JFrame {
         // Agregar los paneles al marco
         add(headerPanel, BorderLayout.NORTH);
         add(contentPanel, BorderLayout.CENTER);
+        
+        conexionBD conexion= new conexionBD("usuarios");
 
         // Agregar el evento de clic al botón de inicio de sesión
         loginButton.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
                 String username = usernameField.getText();
                 String password = new String(passwordField.getPassword());
-                Usuario objeto_de_prueba = new Usuario(username, username, username, username, username, null, null, username, password);
                 
-                System.out.println(objeto_de_prueba.getPassword());
+                Usuario usuario = conexion.verificarEmail(username, password);
                 
-                /*
-                * Realizar la lógica de autenticación
-                * Verificar el email y la contraseña, etc.
-                * Si la autenticación es exitosa, abrir MnuInterfaz Si no, mostrar un mensaje de error
-                */
+                if (usuario != null) {
+                    System.out.println("USUARIO ENCONTRADO:" + username + ":" + password);
+                    new MenuInterfaz(usuario);
+                    setVisible(false);
+                } else {
+                    status.setText("Verifique su email o contraseña");
+                }
             }
         });
 
@@ -111,6 +141,79 @@ public class LoginUsuarios extends JFrame {
             }
         });
     }
+
+    // public Usuario verificarEmail(String email, String password) {
+    //     Bson filter = eq("email", email);
+    //     MongoClient mongoClient = new MongoClient(
+    //             new MongoClientURI(
+    //                     "mongodb+srv://Admin:passwordAdmin@cluster0.fe0chr9.mongodb.net/"));
+    //     MongoDatabase database = mongoClient.getDatabase("SeaUnalenoDB");
+    //     MongoCollection<Document> collection = database.getCollection("usuarios");
+    //     FindIterable<Document> result = collection.find(filter);
+
+    //     for (Document usuarioEncontrado : result) {
+    //         if (usuarioEncontrado.getString("password").equals(password)) {
+    //             // Obtener los datos del usuario
+    //             System.out.println(usuarioEncontrado.getString("id"));
+    //             String id = usuarioEncontrado.getString("id");
+    //             String nombres = usuarioEncontrado.getString("nombres");
+    //             String apellidos = usuarioEncontrado.getString("apellidos");
+    //             String telefono = usuarioEncontrado.getString("telefono");
+    //             Stack<Evaluacion> historial = null;
+    //             float[] notas = null;
+    //             byte[] imagenBytes = null;
+
+    //             Binary binData = usuarioEncontrado.get("pathImagen", Binary.class);
+    //             if (binData != null) {
+    //                 imagenBytes = binData.getData();
+    //             }
+    //             String usuarioPassword = usuarioEncontrado.getString("password");
+
+    //             // Crear y retornar el objeto Usuario
+    //             return new Usuario(id, nombres, apellidos, telefono, email, historial, notas, imagenBytes,
+    //                     usuarioPassword);
+    //         } else {
+    //             status.setText("contraseña incorrecta");
+    //         }
+    //     }
+    //     // Si el correo electrónico no existe o no se encuentra en la base de datos
+    //     return null;
+    // }
+
+    // private Stack<Evaluacion> obtenerHistorial(Document usuario) {
+    //     Stack<Evaluacion> historial = null;
+
+    //     List<Document> evaluaciones = usuario.getList("historial", Document.class);
+    //     for (Document evaluacionDoc : evaluaciones) {
+    //         String link = evaluacionDoc.getString("link");
+    //         int numeroDePreguntas = evaluacionDoc.getInteger("numeroDePreguntas");
+    //         List<String> respuestasList = evaluacionDoc.getList("respuestas",
+    //                 String.class);
+    //         String[] respuestas = respuestasList.toArray(new String[0]);
+    //         int horas = evaluacionDoc.getInteger("horas");
+    //         int minutos = evaluacionDoc.getInteger("minutos");
+    //         String tipoEvaluacion = evaluacionDoc.getString("tipoEvaluacion");
+    //         String nombre = evaluacionDoc.getString("nombre");
+
+    //         Evaluacion evaluacion = new Evaluacion(link, numeroDePreguntas, respuestas,
+    //                 horas, minutos, tipoEvaluacion,
+    //                 nombre);
+    //         historial = new Stack<Evaluacion>(evaluaciones.size());
+    //         historial.push(evaluacion);
+    //     }
+    //     return historial;
+    // }
+
+    // private float[] obtenerNotas(Document usuario) {
+    // List<Double> notasList = usuario.getList("notas", Double.class);
+    // float[] notas = new float[notasList.size()];
+
+    // for (int i = 0; i < notasList.size(); i++) {
+    // notas[i] = notasList.get(i).floatValue();
+    // }
+
+    // return notas;
+    // }
 
     public static void main(String[] args) {
         SwingUtilities.invokeLater(new Runnable() {

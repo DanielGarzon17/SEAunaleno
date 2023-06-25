@@ -20,7 +20,9 @@ import java.awt.event.*;
 import java.awt.geom.Ellipse2D;
 import java.awt.image.BufferedImage;
 import java.nio.charset.StandardCharsets;
+import java.nio.file.Files;
 import java.security.*;
+import java.util.zip.DeflaterOutputStream;
 import java.io.*;
 
 public class RegistroUsuarios extends JFrame {
@@ -36,13 +38,14 @@ public class RegistroUsuarios extends JFrame {
     private JButton uploadButton;
     private JButton showPasswordButton;
     private boolean showPassword = false;
+    private File PathImageSelected;
     private MongoClientURI uri = new MongoClientURI("mongodb+srv://Admin:passwordAdmin@cluster0.fe0chr9.mongodb.net");
 
     public RegistroUsuarios() {
-        initComponets();        
+        initComponets();
     }
 
-    private void initComponets(){
+    private void initComponets() {
         setTitle("Sea unaleño - Registro de Usuarios");
         setSize(600, 500);
         setDefaultCloseOperation(EXIT_ON_CLOSE);
@@ -114,6 +117,7 @@ public class RegistroUsuarios extends JFrame {
         imagePanel.setLayout(new BorderLayout());
         imageLabel = new JLabel();
         imagePanel.setBorder(BorderFactory.createEmptyBorder(20, 10, 20, 20));
+        setPathImageSelected(new File("src/main/java/RECURSOS/defaultuser1.jpg"));
         try {
             Image originalImage = ImageIO.read(new File("src/main/java/RECURSOS/defaultuser1.jpg"));
             Image scaledImage = originalImage.getScaledInstance(250, 250, Image.SCALE_SMOOTH);
@@ -130,6 +134,7 @@ public class RegistroUsuarios extends JFrame {
         } catch (IOException ex) {
             ex.printStackTrace();
         }
+        
 
         imagePanel.add(imageLabel, BorderLayout.CENTER);
         uploadButton = new JButton("Seleccionar imagen");
@@ -180,7 +185,7 @@ public class RegistroUsuarios extends JFrame {
             uploadButton.setFont(robotoBoldFont);
             idLabel.setFont(robotoBoldFont);
 
-        } catch (FontFormatException e) {
+        } catch (FontFormatException e ) {
             e.printStackTrace();
         } catch (Exception e) {
             e.printStackTrace();
@@ -194,10 +199,23 @@ public class RegistroUsuarios extends JFrame {
                 String telefono = telefonoField.getText();
                 String email = emailField.getText();
                 String password = new String(passwordField.getPassword());
+                byte[] image = null;
+                
+                
+                try {
+                    // Obtener la imagen seleccionada por el usuario
+                    byte[] imagenBytes = Files.readAllBytes(getPathImageSelected().toPath());
+                    byte[] imagenComprimida = ComprimirBytes(imagenBytes);
+                    // // Convertir el arreglo de bytes a una cadena Base64
+                    // String imagenBase64 = Base64.getEncoder().encodeToString(imagenBytes);
+                    System.out.println(imagenBytes);
+                    image = imagenComprimida;
+                } catch (IOException ex) {
+                    ex.printStackTrace();
+                }
 
                 Usuario usuario = new Usuario(id, nombres, apellidos, telefono, email, null, null,
-                        "https://fotografiamejorparavendermas.com/wp-content/uploads/2017/06/La-importancia-de-la-imagen.jpg",
-                        password);
+                        image, password);
                 new MenuInterfaz(usuario);
                 setVisible(false);
                 // CREAR BASE DE DATOS Y ENVIAR INFO DE USUARIOS
@@ -216,6 +234,7 @@ public class RegistroUsuarios extends JFrame {
                 int result = fileChooser.showOpenDialog(RegistroUsuarios.this);
                 if (result == JFileChooser.APPROVE_OPTION) {
                     File selectedFile = fileChooser.getSelectedFile();
+                    setPathImageSelected(selectedFile);
 
                     // Recortar la imagen de forma circular
                     try {
@@ -261,6 +280,15 @@ public class RegistroUsuarios extends JFrame {
         });
 
     }
+
+    private static byte[] ComprimirBytes(byte[] bytes) throws IOException {
+        ByteArrayOutputStream baos = new ByteArrayOutputStream();
+        DeflaterOutputStream dos = new DeflaterOutputStream(baos);
+        dos.write(bytes);
+        dos.close();
+        return baos.toByteArray();
+    }
+
     private void BDconection(Usuario usuario) {
         try (MongoClient mongoClient = new MongoClient(uri)) {
             MongoDatabase database = mongoClient.getDatabase("SeaUnalenoDB");
@@ -276,13 +304,14 @@ public class RegistroUsuarios extends JFrame {
                     .append("email", usuario.getEmail())
                     .append("historial", usuario.getHistorial())
                     .append("notas", usuario.getNotas())
-                    .append("pathImagen", usuario.getPathImagen())
+                    .append("pathImagen", usuario.getImagen())
                     .append("password", usuario.getPassword());
 
             collection.insertOne(userDocument);
             // Document command = new Document("createUser", "myUser")
-            //         .append("pwd", "myPassword")
-            //         .append("roles", Arrays.asList(new Document("role", "readWrite"), new Document("role", "dbAdmin")));
+            // .append("pwd", "myPassword")
+            // .append("roles", Arrays.asList(new Document("role", "readWrite"), new
+            // Document("role", "dbAdmin")));
 
             // database.runCommand(command);
         }
@@ -310,6 +339,14 @@ public class RegistroUsuarios extends JFrame {
             e.printStackTrace();
             return null;
         }
+    }
+
+    public File getPathImageSelected() {
+        return PathImageSelected;
+    }
+
+    public void setPathImageSelected(File pathImageSelected) {
+        PathImageSelected = pathImageSelected;
     }
 
     public static void main(String[] args) {

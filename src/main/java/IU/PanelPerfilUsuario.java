@@ -9,25 +9,28 @@ import LOGICA.PanelRound;
 import java.awt.*;
 import java.awt.geom.Ellipse2D;
 import java.awt.image.BufferedImage;
+import java.io.ByteArrayInputStream;
+import java.io.ByteArrayOutputStream;
 import java.io.File;
 import java.io.IOException;
-import java.net.URI;
-import java.net.URISyntaxException;
+import java.nio.file.Files;
+import java.nio.file.Path;
+import java.util.zip.InflaterInputStream;
 
 public class PanelPerfilUsuario extends JPanel {
     private String nombres;
     private String apellidos;
     private String correoElectronico;
     private String telefono;
-    private String pathImagenPerfil;
+    private byte[] ImagenPerfil;
 
     public PanelPerfilUsuario(String nombres, String apellidos, String correoElectronico, String telefono,
-            String pathImagenPerfil) {
+            byte[] ImagenPerfil) {
         this.nombres = nombres;
         this.apellidos = apellidos;
         this.correoElectronico = correoElectronico;
         this.telefono = telefono;
-        this.pathImagenPerfil = pathImagenPerfil;
+        this.ImagenPerfil = ImagenPerfil;
         initComponents();
     }
 
@@ -66,10 +69,13 @@ public class PanelPerfilUsuario extends JPanel {
         add(infoPanel, BorderLayout.CENTER);
         
         try {
-            String imageUrl = pathImagenPerfil;
-
-            // Leer la imagen desde la URL
-            BufferedImage originalImage = ImageIO.read(new URI(imageUrl).toURL());
+            BufferedImage originalImage =null;
+            if(ImagenPerfil!=null){
+                originalImage = ImageIO.read(new ByteArrayInputStream(DescomprimirBytes(ImagenPerfil)));
+            }else{
+                Path path=new File("src/main/java/RECURSOS/defaultuser1.jpg").toPath();
+                originalImage = ImageIO.read(new ByteArrayInputStream(Files.readAllBytes(path)));
+            }
 
             // Crear una imagen redimensionada de 250x250 píxeles
             BufferedImage resizedImage = new BufferedImage(250, 250, BufferedImage.TYPE_INT_ARGB);
@@ -88,7 +94,7 @@ public class PanelPerfilUsuario extends JPanel {
             imageLabel.setIcon(imageIcon);
 
             System.out.println("La imagen se ha recortado correctamente.");
-        } catch (URISyntaxException | IOException e) {
+        } catch (IOException e) {
             e.printStackTrace();
             System.out.println("No se pudo recortar la imagen desde Internet.");
         }
@@ -120,10 +126,22 @@ public class PanelPerfilUsuario extends JPanel {
         setVisible(true);
     }
 
+    private static byte[] DescomprimirBytes(byte[] bytes) throws IOException {
+        ByteArrayInputStream bais = new ByteArrayInputStream(bytes);
+        InflaterInputStream iis = new InflaterInputStream(bais);
+        ByteArrayOutputStream baos = new ByteArrayOutputStream();
+        byte[] buffer = new byte[1024];
+        int len;
+        while ((len = iis.read(buffer)) > 0) {
+            baos.write(buffer, 0, len);
+        }
+        return baos.toByteArray();
+    }
+
     public static void main(String[] args) {
 
         PanelPerfilUsuario perfilPanel = new PanelPerfilUsuario("NOMBRE", "apellido", "email@gmail.com", "3156165797",
-                "src/main/java/RECURSOS/defaultuser1.jpg");
+                null);
 
         JFrame frame = new JFrame("Perfil de Usuario");
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);

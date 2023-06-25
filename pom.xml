@@ -14,6 +14,7 @@
   </properties>
 
   <dependencies>
+
     <!-- BUSCAR DEPENDENCIAS EN: https://central.sonatype.com/search -->
     <dependency>
       <groupId>org.imgscalr</groupId>
@@ -31,10 +32,11 @@
       <version>RELEASE180</version>
     </dependency>
     <dependency>
-      <groupId>org.mongodb</groupId>
-      <artifactId>mongo-java-driver</artifactId>
-      <version>3.12.7</version>
-    </dependency>
+    <groupId>org.mongodb</groupId>
+    <artifactId>mongo-java-driver</artifactId>
+    <version>3.12.7</version>
+</dependency>
+    
   </dependencies>
 
   <build>

@@ -1,6 +1,6 @@
 package DATOS;
 
-import java.util.List;
+import LOGICA.Stack;
 
 public class Usuario {
     private String id;
@@ -8,13 +8,15 @@ public class Usuario {
     private String apellidos;
     private String telefono;
     private String email;
-    private List<Evaluacion> historial;
-    private String pathImagen;
+    private Stack<Evaluacion> historial;
+    private byte[] Imagen;
+    
+
     private float[] notas;
     private String password;
 
     public Usuario(String id, String nombres, String apellidos, String telefono, String email,
-            List<Evaluacion> historial, float[] notas, String pathImagen, String password) {
+            Stack<Evaluacion> historial, float[] notas, byte[] Imagenbytes, String password) {
         this.id = id;
         this.nombres = nombres;
         this.apellidos = apellidos;
@@ -22,7 +24,7 @@ public class Usuario {
         this.email = email;
         this.historial = historial;
         this.notas = notas;
-        this.pathImagen = pathImagen;
+        this.Imagen = Imagenbytes;
         this.password = password;
     }
 
@@ -74,11 +76,11 @@ public class Usuario {
         this.email = email;
     }
 
-    public List<Evaluacion> getHistorial() {
+    public Stack<Evaluacion> getHistorial() {
         return historial;
     }
 
-    public void setHistorial(List<Evaluacion> historial) {
+    public void setHistorial(Stack<Evaluacion> historial) {
         this.historial = historial;
     }
 
@@ -90,12 +92,11 @@ public class Usuario {
         this.notas = notas;
     }
 
-    public String getPathImagen() {
-        return pathImagen;
+    public byte[] getImagen() {
+        return Imagen;
     }
 
-    public void setPathImagen(String pathImagen) {
-        this.pathImagen = pathImagen;
+    public void setImagen(byte[] imagen) {
+        Imagen = imagen;
     }
-
 }
