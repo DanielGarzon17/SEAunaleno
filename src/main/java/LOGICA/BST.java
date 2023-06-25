@@ -130,9 +130,8 @@ public class BST {
         node nodito = find(nombre, root);
         if (nodito.key.getNombres().compareTo(nombre) == 0) {
             return nodito.key;
-        } else {
-            return null;
         }
+        return null;
     }
     
     public Usuario findEmail(String email){
@@ -143,7 +142,7 @@ public class BST {
             return null;
         }
     }
-    
+
     public void printInOrder(node nodo) {
         if (nodo.izquierda != null) {
             printInOrder(nodo.izquierda);
@@ -178,10 +177,10 @@ public class BST {
     }
 
     // public static void main(String[] args) {
-    // BST bst = new BST();
-    // for (int i = 0; i < 50; i++) {
-    // bst.insert(new Usuario());
-    // }
-    // bst.imprimir();
+    //     BST bst = new BST();
+    //     for (int i = 0; i < 50; i++) {
+    //         bst.insert(new Usuario());
+    //     }
+    //     bst.imprimir();
     // }
 }
