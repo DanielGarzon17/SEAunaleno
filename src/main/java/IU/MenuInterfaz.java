@@ -160,8 +160,7 @@ public class MenuInterfaz extends JFrame {
             @Override
             public void actionPerformed(ActionEvent e) {
                 PanelPerfilUsuario panelUsuario = new PanelPerfilUsuario(usuario.getNombres(), usuario.getApellidos(),
-                        usuario.getEmail(),
-                        usuario.getTelefono(), usuario.getPathImagen());
+                        usuario.getEmail(), usuario.getTelefono(), usuario.getImagen());
                 panelUsuario.setPreferredSize(contentPanel.getSize());
                 repintarPanel(contentPanel, panelUsuario);
             }
@@ -242,11 +241,10 @@ public class MenuInterfaz extends JFrame {
         SwingUtilities.invokeLater(new Runnable() {
             @Override
             public void run() {
-                
 
-                // CREACION DE Usuario
-                new MenuInterfaz(new Usuario("231EDEEA1", "DANIEL", "GARZON", "38784631849", "JWBBCW@email,com", null,
-                        null,"https://fotografiamejorparavendermas.com/wp-content/uploads/2017/06/La-importancia-de-la-imagen.jpg","cualquiera"));
+                // // CREACION DE Usuario
+                // new MenuInterfaz(new Usuario("231EDEEA1", "DANIEL", "GARZON", "38784631849", "JWBBCW@email,com", null,
+                //         null,null));
             }
         });
     }
