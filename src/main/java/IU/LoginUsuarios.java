@@ -32,6 +32,7 @@ public class LoginUsuarios extends JFrame {
     private JPasswordField passwordField;
     private JButton loginButton;
     private JButton registrarseButton;
+    private JLabel status;
 
     public LoginUsuarios() {
         // Configurar la ventana
@@ -44,6 +45,7 @@ public class LoginUsuarios extends JFrame {
 
         // Crear el panel de encabezado con la imagen recortada circularmente
         JPanel headerPanel = new JPanel();
+        headerPanel.setLayout(new BorderLayout());
         headerPanel.setPreferredSize(new Dimension(getWidth(), 300));
         headerPanel.setBackground(Color.WHITE); // Color de encabezado personalizado
 
@@ -54,7 +56,15 @@ public class LoginUsuarios extends JFrame {
 
         // Panel superior con la imagen redimensionada
         JLabel logoLabel = new JLabel(resizedIcon);
-        headerPanel.add(logoLabel, CENTER_ALIGNMENT);
+        logoLabel.setHorizontalAlignment(JLabel.CENTER);
+        headerPanel.add(logoLabel, BorderLayout.CENTER);
+        status = new JLabel("");
+        status.setHorizontalAlignment(JLabel.CENTER);
+        
+        headerPanel.add(status,BorderLayout.SOUTH );
+
+
+
 
         // Crear los componentes
         JPanel contentPanel = new JPanel(new GridLayout(3, 2, 10, 10));
@@ -84,6 +94,8 @@ public class LoginUsuarios extends JFrame {
         passwordLabel.setFont(labelFont);
         usernameField.setFont(labelFont);
         passwordField.setFont(labelFont);
+        status.setFont(labelFont);
+        status.setForeground(Color.RED);
         usernameField.setBackground(Color.WHITE);
 
         // Agregar los componentes al panel de contenido
@@ -178,7 +190,7 @@ public class LoginUsuarios extends JFrame {
                         usuarioPassword);
                 }
                 else{
-                    System.out.println("contraseña incorrecta");
+                    status.setText("contraseña incorrecta");
                 }
         }
         System.out.println(email);
