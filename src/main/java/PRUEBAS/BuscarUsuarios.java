@@ -95,12 +95,12 @@ public class BuscarUsuarios {
         }
         usuarios.insert(new Usuario("id1","DGGG",null,"+5768983464","email@guggw",null,null,null,null));
         long tiempoInicial = System.nanoTime();
-        System.out.println(usuarios.getNombres("Alejandro García García").getTelefono());
+        System.out.println(usuarios.findNombres("Alejandro García García").getTelefono());
         System.out.println("s"+x + "=" + (System.nanoTime() - tiempoInicial));
     }
 
     public static void main(String[] args) {
-        BuscarUsuarios a =new BuscarUsuarios();
+        new BuscarUsuarios();
     }
     public String generarNombreAleatorio() {
         

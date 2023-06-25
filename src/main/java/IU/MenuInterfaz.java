@@ -202,6 +202,15 @@ public class MenuInterfaz extends JFrame {
                 repintarPanel(contentPanel,panelBusqueda);
             }
         });
+
+        statsButton.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                int[] datos = {10, 20, 30, 40, 50, 60, 70, 80, 90, 100};
+                EstadisticasPanel estadisticas = new EstadisticasPanel(datos);
+                repintarPanel(contentPanel,estadisticas);
+            }
+        });
     }
 
     public void AbrirLinks(String str) {

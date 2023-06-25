@@ -126,11 +126,7 @@ public class BST {
         }
     }
 
-<<<<<<< HEAD
     public Usuario findNombres(String nombre){
-=======
-    public Usuario getNombres(String nombre) {
->>>>>>> 808e706e6903f680ae5ed555d97f5076acb182a1
         node nodito = find(nombre, root);
         if (nodito.key.getNombres().compareTo(nombre) == 0) {
             return nodito.key;
@@ -138,13 +134,8 @@ public class BST {
             return null;
         }
     }
-<<<<<<< HEAD
     
     public Usuario findEmail(String email){
-=======
-
-    public Usuario getEmail(String email) {
->>>>>>> 808e706e6903f680ae5ed555d97f5076acb182a1
         node nodito = find(email, root);
         if (nodito.key.getEmail().compareTo(email) == 0) {
             return nodito.key;
@@ -152,44 +143,7 @@ public class BST {
             return null;
         }
     }
-
-    public Set<Usuario> findAll(String cualquiera, node nodito){
-        Set<Usuario> Encontrados = new Set<>();
-        // datos a izquierda
-        if(nodito.izquierda != null){
-            Set<Usuario> EncontradosIzquierda = findAll(cualquiera, nodito.izquierda);
-            for(int i = 0; i< EncontradosIzquierda.size; i++){
-                try {
-                    Encontrados.add(EncontradosIzquierda.get(i));
-                } catch (Exception e) {
-                }
-            }
-        }
-        // dato en el nodo
-        if (nodito.key.getId().contains(cualquiera) || 
-            nodito.key.getNombres().contains(cualquiera) ||
-            nodito.key.getApellidos().contains(cualquiera)  ||
-            nodito.key.getTelefono().contains(cualquiera) ||
-            nodito.key.getEmail().contains(cualquiera) ||
-            nodito.key.getPassword().contains(cualquiera)
-            
-            ) {
-                Encontrados.add(nodito.key);
-        }
-        // datos a derecha
-        if(nodito.derecha != null){
-            Set<Usuario> EncontradosDerecha = findAll(cualquiera, nodito.derecha);
-            for(int i = 0; i< EncontradosDerecha.size; i++){
-                try {
-                    Encontrados.add(EncontradosDerecha.get(i));
-                } catch (Exception e) {
-                }
-            }
-        }
-
-        return Encontrados;
-    }
-
+    
     public void printInOrder(node nodo) {
         if (nodo.izquierda != null) {
             printInOrder(nodo.izquierda);

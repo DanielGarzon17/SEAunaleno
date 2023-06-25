@@ -12,6 +12,7 @@ import LOGICA.conexionBD;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.io.File;
 
 public class BusquedaUsuariosPanel extends JPanel {
     private JTextField searchField;
@@ -113,6 +114,22 @@ public class BusquedaUsuariosPanel extends JPanel {
                 
             }
         });
+    }
+    
+    private Set<Usuario> buscarUsuarios(LinkedList<Usuario> usuarios, String searchTerm) {
+        BST arbolUsuarios = new BST();
+        for (int i = 0; i < usuarios.size; i++) {
+            Usuario n;
+            try {
+                n = usuarios.get(i);
+                arbolUsuarios.insert(n);
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
+        }
+
+        Set<Usuario> querySet = arbolUsuarios.findAll(searchTerm, arbolUsuarios.root);
+        return querySet;
     }
 
     // Método para actualizar los datos en la tabla
