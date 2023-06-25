@@ -4,12 +4,15 @@ import javax.swing.*;
 import javax.swing.table.DefaultTableModel;
 
 import DATOS.Usuario;
+import LOGICA.BST;
 import LOGICA.LinkedList;
 import LOGICA.Set;
+import LOGICA.conexionBD;
 
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.io.File;
 
 public class BusquedaUsuariosPanel extends JPanel {
     private JTextField searchField;
@@ -33,11 +36,19 @@ public class BusquedaUsuariosPanel extends JPanel {
         tableModel.addColumn("Apellidos");
         tableModel.addColumn("Teléfono");
         tableModel.addColumn("Email");
-        tableModel.addColumn("Notas");
-        
-        // AVLTree<Usuario> usuarios = new AVLTree<Usuario>();
-        
+        tableModel.addColumn("Contraseña");
 
+        // AVLTree<Usuario> usuarios = new AVLTree<Usuario>();
+        try {
+            searchButton.setFont(
+                    Font.createFont(Font.TRUETYPE_FONT,
+                            new File("src/main/resources/fonts/Roboto-Light.ttf"))
+                            .deriveFont(12f));
+        } catch (FontFormatException e) {
+            e.printStackTrace();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
         // Crear la tabla con el modelo
         table = new JTable(tableModel);
         table.setBackground(Color.WHITE);
@@ -62,24 +73,36 @@ public class BusquedaUsuariosPanel extends JPanel {
             } catch (Exception e) {
                 System.out.println("error mkas");
             }
-            
+
         }
-        
-        
+
         actualizarTabla(setUsuarios);
         searchButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
                 String searchTerm = searchField.getText();
-                // Aquí puedes realizar la búsqueda en la base de datos con el término de
-                // búsqueda proporcionado
-                // y actualizar los datos en la tabla
-                // Ejemplo:
-                
+                actualizarTabla(buscarUsuarios(usuarios, searchTerm));
+
             }
         });
     }
 
+    private Set<Usuario> buscarUsuarios(LinkedList<Usuario> usuarios, String searchTerm) {
+        BST arbolUsuarios = new BST();
+        for (int i = 0; i < usuarios.size; i++) {
+            Usuario n;
+            try {
+                n = usuarios.get(i);
+                arbolUsuarios.insert(n);
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
+        }
+
+        Set<Usuario> querySet = arbolUsuarios.findAll(searchTerm, arbolUsuarios.root);
+        return querySet;
+    }
+    
     // Método para actualizar los datos en la tabla
     private void actualizarTabla(Set<Usuario> usuarios) {
         // Borrar filas existentes
@@ -106,42 +129,19 @@ public class BusquedaUsuariosPanel extends JPanel {
         model.fireTableDataChanged();
     }
 
-    // // Método de ejemplo para buscar usuarios en la base de datos
-    // private Set<Usuario> traerUsuarios() {
-
-    //     Stack<Usuario> usuarios = new Stack<Usuario>(1000);
-    //     // Aquí puedes realizar la búsqueda en la base de datos utilizando el término de
-    //     // búsqueda
-    //     // y devolver una lista de usuarios encontrados
-    //     Bson filter = ne("id", "");
-    //     FindIterable<Document> result = collection.find(filter);
-        
-    //     for (Document document : result) {
-    //         String id= document.getString("id");
-    //         String nombres=document.getString("nombres");
-    //         String apellidos=document.getString("apellidos");
-    //         String telefono=document.getString("telefono");
-    //         String email=document.getString("email");
-    //         String password= document.getString("password");
-    //         Usuario aux= new Usuario(id, nombres, apellidos, telefono, email, null, null, null, password);
-    //         usuarios.push(aux);
-    //     }
-    //     return usuarios;
-    // }
-
     // Método main para probar la clase
     public static void main(String[] args) {
         SwingUtilities.invokeLater(new Runnable() {
             @Override
             public void run() {
-                // JFrame frame = new JFrame("Búsqueda de Usuarios");
-                // frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-                // frame.setSize(800, 600);
+                JFrame frame = new JFrame("Búsqueda de Usuarios");
+                frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+                frame.setSize(800, 600);
 
-                // BusquedaUsuariosPanel panel = new BusquedaUsuariosPanel();
-                // frame.add(panel);
+                BusquedaUsuariosPanel panel = new BusquedaUsuariosPanel(new conexionBD("usuarios").getUsuarios());
+                frame.add(panel);
 
-                // frame.setVisible(true);
+                frame.setVisible(true);
             }
         });
     }

@@ -69,7 +69,7 @@ public class conexionBD {
             }
         }
 
-        Usuario usuarioEncontrado = arbolUsuarios.getEmail(email);
+        Usuario usuarioEncontrado = arbolUsuarios.findEmail(email);
         if (usuarioEncontrado.getPassword().equals(password)) {
             return usuarioEncontrado;
         }

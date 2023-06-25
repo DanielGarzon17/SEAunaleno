@@ -185,7 +185,7 @@ public class RegistroUsuarios extends JFrame {
             uploadButton.setFont(robotoBoldFont);
             idLabel.setFont(robotoBoldFont);
 
-        } catch (FontFormatException e) {
+        } catch (FontFormatException e ) {
             e.printStackTrace();
         } catch (Exception e) {
             e.printStackTrace();
