@@ -89,9 +89,18 @@ public class BST {
         }
     }
 
-    public Usuario get(String nombre){
+    public Usuario getNombres(String nombre){
         node nodito = find(nombre, root);
         if (nodito.key.getNombres().compareTo(nombre) == 0) {
+            return nodito.key;
+        }else{
+            return null;
+        }
+    }
+    
+    public Usuario getEmail(String email){
+        node nodito = find(email, root);
+        if (nodito.key.getEmail().compareTo(email) == 0) {
             return nodito.key;
         }else{
             return null;

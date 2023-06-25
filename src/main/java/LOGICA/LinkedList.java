@@ -6,7 +6,7 @@ public class LinkedList<T> {
 
     private node head;
     private node tail;
-    private int size;
+    public int size;
 
     public LinkedList() {
         this.head = null;

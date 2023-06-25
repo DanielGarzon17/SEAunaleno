@@ -3,6 +3,8 @@ package IU;
 import javax.swing.*;
 
 import DATOS.Usuario;
+import LOGICA.LinkedList;
+import LOGICA.conexionBD;
 
 import java.awt.*;
 import java.awt.event.ActionEvent;
@@ -10,6 +12,7 @@ import java.awt.event.ActionListener;
 import java.io.File;
 
 public class MenuInterfaz extends JFrame {
+    LinkedList<Usuario> ListaUsuarios = new conexionBD("usuarios").getUsuarios();
     private JPanel sideMenuPanel;
     private JPanel contentPanel;
     private JButton menuButton;
@@ -119,7 +122,7 @@ public class MenuInterfaz extends JFrame {
         contentLogoLabel.setFont(new Font("Arial", Font.BOLD, 18));
 
         // Agregar el label del logo al panel de contenido desplegable
-        contentPanel.add(contentLogoLabel, BorderLayout.NORTH);
+        contentPanel.add(contentLogoLabel, BorderLayout.CENTER);
 
         // Crear un layout de tipo BorderLayout para la ventana principal
         setLayout(new BorderLayout());
@@ -191,6 +194,14 @@ public class MenuInterfaz extends JFrame {
 
             }
         });
+
+        searchButton.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                BusquedaUsuariosPanel panelBusqueda = new BusquedaUsuariosPanel(ListaUsuarios);
+                repintarPanel(contentPanel,panelBusqueda);
+            }
+        });
     }
 
     public void AbrirLinks(String str) {
@@ -241,10 +252,8 @@ public class MenuInterfaz extends JFrame {
         SwingUtilities.invokeLater(new Runnable() {
             @Override
             public void run() {
-
-                // // CREACION DE Usuario
-                // new MenuInterfaz(new Usuario("231EDEEA1", "DANIEL", "GARZON", "38784631849", "JWBBCW@email,com", null,
-                //         null,null));
+                new MenuInterfaz(new Usuario("231EDEEA1", "DANIEL", "GARZON", "38784631849", "JWBBCW@email,com", null,
+                null,null,"contraseña"));
             }
         });
     }

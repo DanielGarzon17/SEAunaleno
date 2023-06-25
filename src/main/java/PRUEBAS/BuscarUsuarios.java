@@ -95,7 +95,7 @@ public class BuscarUsuarios {
         }
         usuarios.insert(new Usuario("id1","DGGG",null,"+5768983464","email@guggw",null,null,null,null));
         long tiempoInicial = System.nanoTime();
-        usuarios.get("Alejandro García García");
+        System.out.println(usuarios.getNombres("Alejandro García García").getTelefono());
         System.out.println("s"+x + "=" + (System.nanoTime() - tiempoInicial));
     }
 

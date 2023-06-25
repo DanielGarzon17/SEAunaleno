@@ -3,6 +3,7 @@ package LOGICA;
 import IU.*;
 import java.util.Scanner;
 
+import DATOS.Evaluacion;
 import DATOS.Usuario;
 
 import java.io.*;
@@ -16,8 +17,29 @@ public class CalificarExamen {
     private int[] posicionesLC, posicionesMA, posicionesCI, posicionesSO, posicionesIM;
     private final double desv = 3.38;
     Usuario usuarioActivo;
+    
 
     
+    public void setCorLC(int corLC) {
+        this.corLC = corLC;
+    }
+
+    public void setCorMA(int corMA) {
+        this.corMA = corMA;
+    }
+
+    public void setCorCI(int corCI) {
+        this.corCI = corCI;
+    }
+
+    public void setCorSO(int corSO) {
+        this.corSO = corSO;
+    }
+
+    public void setCorIM(int corIM) {
+        this.corIM = corIM;
+    }
+
     public CalificarExamen(Usuario usuario){
         setUsuarioActivo(usuario);
     }
@@ -53,6 +75,7 @@ public class CalificarExamen {
         this.respuestasUsuario = respuestasUsuario;
         File fileRespuestas = new File("EXAMENES/RESPUESTAS/" + vectorRespuestas[aleatorio] + ".txt");
         File filecaracter = new File("EXAMENES/CARACTER/" + vectorRespuestas[aleatorio] + "c.txt");
+
         Scanner s = null;
         Scanner s1 = null;
         System.out.println(vectorRespuestas[aleatorio]);
@@ -82,6 +105,7 @@ public class CalificarExamen {
             }
         }
     }
+    
 
     public void dividirRespuestas(String[] caracter) {
         
@@ -137,18 +161,17 @@ public class CalificarExamen {
                     break;
             }
         }
-        corLC=contarCorrectas(posicionesLC);
-        System.out.println(corLC);
-        corMA=contarCorrectas(posicionesMA);
-        corCI=contarCorrectas(posicionesCI);
-        corSO=contarCorrectas(posicionesSO);
-        corIM=contarCorrectas(posicionesIM);
+        setCorLC(contarCorrectas(posicionesLC));
+        setCorMA(contarCorrectas(posicionesMA));
+        setCorCI(contarCorrectas(posicionesCI));
+        setCorSO(contarCorrectas(posicionesSO));
+        setCorIM(contarCorrectas(posicionesIM));
 
-        double puntajeLectura = puntajePorComponente(corLC, 10);
-        double puntajeMatematicas = puntajePorComponente(corMA, 10);
-        double puntajeCiencias = puntajePorComponente(corCI, 10);
-        double puntajeSociales = puntajePorComponente(corSO, 10.5);
-        double puntajeImagen = puntajePorComponente(corIM, 7);
+        double puntajeLectura = puntajePorComponente(getCorLC(), 10);
+        double puntajeMatematicas = puntajePorComponente(getCorMA(), 10);
+        double puntajeCiencias = puntajePorComponente(getCorCI(), 10);
+        double puntajeSociales = puntajePorComponente(getCorSO(), 10.5);
+        double puntajeImagen = puntajePorComponente(getCorIM(), 7);
         double Global = puntajeGlobal(puntajeLectura, puntajeMatematicas, puntajeCiencias, puntajeSociales, puntajeImagen);
 
         PanelResultados n = new PanelResultados(getUsuarioActivo());
@@ -161,15 +184,15 @@ public class CalificarExamen {
     public String toString(String Materia) {
         switch(Materia){
             case "LC":
-                return corLC+"/"+numLC;
+                return getCorLC()+"/"+numLC;
             case "MA":
-                return corMA+"/"+numMA;    
+                return getCorMA()+"/"+numMA;    
             case "CI":
-                return corCI+"/"+numCI;    
+                return getCorCI()+"/"+numCI;    
             case "SO":
-                return corSO+"/"+numSO;    
+                return getCorSO()+"/"+numSO;    
             case "IM":
-                return corIM+"/"+numIM;    
+                return getCorIM()+"/"+numIM;    
             default:
                 return "";              
         }

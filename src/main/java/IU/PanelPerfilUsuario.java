@@ -13,11 +13,8 @@ import java.io.ByteArrayInputStream;
 import java.io.ByteArrayOutputStream;
 import java.io.File;
 import java.io.IOException;
-// import java.net.URI;
-// import java.net.URISyntaxException;
 import java.nio.file.Files;
 import java.nio.file.Path;
-// import java.util.Base64;
 import java.util.zip.InflaterInputStream;
 
 public class PanelPerfilUsuario extends JPanel {
@@ -72,18 +69,13 @@ public class PanelPerfilUsuario extends JPanel {
         add(infoPanel, BorderLayout.CENTER);
         
         try {
-            // String imagenBase64 = ImagenPerfil;
             BufferedImage originalImage =null;
-            // // Decodificar la cadena Base64 a un arreglo de bytes
-            // byte[] imagenBytes = Base64.getDecoder().decode(imagenBase64);
             if(ImagenPerfil!=null){
                 originalImage = ImageIO.read(new ByteArrayInputStream(DescomprimirBytes(ImagenPerfil)));
             }else{
                 Path path=new File("src/main/java/RECURSOS/defaultuser1.jpg").toPath();
                 originalImage = ImageIO.read(new ByteArrayInputStream(Files.readAllBytes(path)));
             }
-            // Leer la imagen desde la URL
-            //  = ImageIO.read(new URI(imageUrl).toURL());
 
             // Crear una imagen redimensionada de 250x250 píxeles
             BufferedImage resizedImage = new BufferedImage(250, 250, BufferedImage.TYPE_INT_ARGB);
