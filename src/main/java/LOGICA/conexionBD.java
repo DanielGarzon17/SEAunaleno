@@ -47,7 +47,7 @@ public class conexionBD {
         this.collectionName = collectionName;
         this.collection = database.getCollection(collectionName);
         collection.createIndex(Indexes.ascending("email"), new IndexOptions().unique(true));
-        
+
         // Creación del BsonArray y asignación del arreglo
         JSONArray jsonArray = new JSONArray();
         for (double dato : usuario.getNotas()) {
@@ -67,10 +67,16 @@ public class conexionBD {
         collection.insertOne(userDocument);
     }
 
-    public conexionBD(Usuario usuario, Queue<Double> notas) {
+    public conexionBD(Usuario usuario, double[] notas) {
+        JSONArray jsonArray = new JSONArray();
+        for (int i = 0; i < notas.length; i++) {
+            double dato = notas[i];
+            jsonArray.add(dato);
+
+        }
         // usuario.setNotas(notas);
         Document filtro = new Document("id", usuario.getId());
-        collection.updateOne(filtro, Updates.push("notas", ));
+        collection.updateOne(filtro, Updates.push("notas", jsonArray.toJSONString()));
 
     }
 
@@ -88,7 +94,7 @@ public class conexionBD {
             String telefono = document.getString("telefono");
             String email = document.getString("email");
             String password = document.getString("password");
-            String notasString= document.getString("notas");
+            String notasString = document.getString("notas");
             byte[] imagenBytes = null;
 
             Binary binData = document.get("pathImagen", Binary.class);
@@ -125,9 +131,11 @@ public class conexionBD {
             }
         }
 
-        Usuario usuarioEncontrado = arbolUsuarios.findEmail(email);
-        if (usuarioEncontrado.getPassword().equals(password)) {
-            return usuarioEncontrado;
+        Set<Usuario> usuariosEncontrados = arbolUsuarios.findAll(email, arbolUsuarios.root);
+        if (!usuariosEncontrados.isEmpty()) {
+            if (usuariosEncontrados.get(0).getPassword().equals(password)) {
+                return usuariosEncontrados.get(0);
+            }
         }
         return null;
     }

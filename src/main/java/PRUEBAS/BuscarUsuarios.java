@@ -1,6 +1,30 @@
 package PRUEBAS;
 
+import java.util.List;
 import java.util.Random;
+import java.util.zip.DeflaterOutputStream;
+
+import com.mongodb.MongoClient;
+import com.mongodb.MongoClientURI;
+import com.mongodb.client.MongoCollection;
+import com.mongodb.client.MongoDatabase;
+import com.mongodb.client.model.IndexOptions;
+import com.mongodb.client.model.Indexes;
+import com.mongodb.client.MongoClients;
+import org.bson.Document;
+import org.json.simple.JSONArray;
+
+import java.io.ByteArrayOutputStream;
+import java.io.File;
+import java.io.IOException;
+import java.nio.charset.StandardCharsets;
+import java.nio.file.Files;
+import java.security.MessageDigest;
+import java.security.NoSuchAlgorithmException;
+import java.util.ArrayList;
+import java.util.List;
+
+
 import LOGICA.*;
 import DATOS.*;
 
@@ -86,25 +110,160 @@ public class BuscarUsuarios {
 
 
     public BuscarUsuarios() {
-        int x = 1000000;
-        BST usuarios = new BST();
+        MongoClient mongoClient = new MongoClient(
+            new MongoClientURI(
+                    "mongodb+srv://Admin:passwordAdmin@cluster0.fe0chr9.mongodb.net/"));
+    MongoDatabase database = mongoClient.getDatabase("SeaUnalenoDB");
+        MongoCollection<Document> collection = database.getCollection("usuarios");
+        collection.createIndex(Indexes.ascending("email"), new IndexOptions().unique(true));
+        
+        // Creación del BsonArray y asignación del arreglo
+        JSONArray jsonArray = new JSONArray();
+        
+        List<Document> users = new ArrayList<>();
+
+        // Cerrar la conexión con la base de datos
+        mongoClient.close();
+        int x = 1;
+        byte[] image=null;
+            try {
+                    // Obtener la imagen seleccionada por el usuario
+                    byte[] imagenBytes = Files.readAllBytes(new File("C:\\Users\\delog\\Downloads\\cris.png").toPath());
+                    byte[] imagenComprimida = ComprimirBytes(imagenBytes);
+                    
+                    image = imagenComprimida;
+                } catch (IOException ex) {
+                    ex.printStackTrace();
+                }
         for (int i = 0; i < x; i++) {
+            long numero=generateRandomNumber();
             String name=generarNombreAleatorio();
-            usuarios.insert(new Usuario("id1",""+name,null,"+5768983464","email@guggw",null,null,null,null));
+            String apellido= generarApellidoAleatorio();
+            String email=apellido.replace(" ","_");
+            System.out.println(i);
+            double[] notas=generateRandomArray();
+            for (double dato : notas) {
+                jsonArray.add(dato);
+            }
+            String id=generateUniqueID(numero+"");
+            
+            
+            
+            Usuario usuario= new Usuario(id,
+            "Cristian Camilo",
+            "Garcia Palacios",
+            "+57"+numero,
+            "crgarciapa@unal.edu.co",
+            null,
+            notas,
+            image,
+            "cualquiera");
+            new conexionBD(usuario, "usuarios");
+            
+        // Document userDocument = new Document()
+        //         .append("id", usuario.getId())
+        //         .append("nombres", usuario.getNombres())
+        //         .append("apellidos", usuario.getApellidos())
+        //         .append("telefono", usuario.getTelefono())
+        //         .append("email", usuario.getEmail())
+        //         .append("historial", usuario.getHistorial())
+        //         .append("notas", jsonArray.toJSONString())
+        //         .append("pathImagen", usuario.getImagen())
+        //         .append("password", usuario.getPassword());
+        //     try {
+        //         collection.insertOne(userDocument);
+        //     } catch (Exception e) {
+        //         // TODO: handle exception
+        //         users.add(userDocument);
+        //     }
+        
+
+            // users.add(new Document()
+            //     .append("id", "id"+i)
+            //     .append("nombres", ""+name)
+            //     .append("apellidos", ""+apellido)
+            //     .append("telefono","+57"+(i*6000))
+            //     .append("email", name+"@gulugulu.com")
+            //     .append("historial", null)
+            //     .append("notas", "[1.0]")
+            //     .append("pathImagen", image)
+            //     .append("password", "cualquiera"));
             // System.out.println(name);
         }
-        usuarios.insert(new Usuario("id1","DGGG",null,"+5768983464","email@guggw",null,null,null,null));
-        long tiempoInicial = System.nanoTime();
-        System.out.println(usuarios.findNombres("Alejandro García García").getTelefono());
-        System.out.println("s"+x + "=" + (System.nanoTime() - tiempoInicial));
+        // collection.insertMany(users);
+    }
+    private String generateUniqueID(String input) {
+        try {
+            MessageDigest digest = MessageDigest.getInstance("SHA-256");
+            byte[] hash = digest.digest(input.getBytes(StandardCharsets.UTF_8));
+
+            // Convertir el hash a una representación hexadecimal
+            StringBuilder hexString = new StringBuilder();
+            for (byte b : hash) {
+                String hex = Integer.toHexString(0xff & b);
+                if (hex.length() == 1) {
+                    hexString.append('0');
+                }
+                hexString.append(hex);
+            }
+
+            // Truncar el resultado a 8 caracteres
+            return hexString.toString().substring(0, 8);
+        } catch (NoSuchAlgorithmException e) {
+            e.printStackTrace();
+            return null;
+        }
+    }
+    
+    public long generateRandomNumber() {
+        Random random = new Random();
+        long randomNumber = random.nextLong();
+        randomNumber = Math.abs(randomNumber); // Asegura que el número es positivo
+
+        // Ajusta el número a 10 dígitos
+        if (String.valueOf(randomNumber).length() > 10) {
+            randomNumber = randomNumber % (long) Math.pow(10, 10);
+        } else {
+            while (String.valueOf(randomNumber).length() < 10) {
+                randomNumber *= 10;
+                randomNumber += random.nextInt(10);
+            }
+        }
+        return randomNumber;
     }
 
     public static void main(String[] args) {
         new BuscarUsuarios();
     }
+
+    private static byte[] ComprimirBytes(byte[] bytes) throws IOException {
+        ByteArrayOutputStream baos = new ByteArrayOutputStream();
+        DeflaterOutputStream dos = new DeflaterOutputStream(baos);
+        dos.write(bytes);
+        dos.close();
+        return baos.toByteArray();
+    }
     public String generarNombreAleatorio() {
         
         Random random = new Random();
-        return fragmentos1[random.nextInt(fragmentos1.length)]+ " " + fragmentos2[random.nextInt(fragmentos2.length)] + " " + fragmentos3[random.nextInt(fragmentos3.length)];
+        return fragmentos1[random.nextInt(fragmentos1.length)]+ " " + fragmentos2[random.nextInt(fragmentos2.length)] ;
     }
+    public String generarApellidoAleatorio() {
+        
+        Random random = new Random();
+        return fragmentos3[random.nextInt(fragmentos3.length)]+ " "+ fragmentos3[random.nextInt(fragmentos3.length)] ;
+    }
+    public double[] generateRandomArray() {
+        Random random = new Random();
+        int size = random.nextInt(1000) + 1; // Genera un tamaño aleatorio entre 1 y 10
+        double[] array = new double[size];
+
+        for (int i = 0; i < size; i++) {
+            double randomValue = random.nextDouble() * 1500 - 200; // Genera un número aleatorio entre -200 y 1300
+            array[i] = randomValue;
+        }
+
+        return array;
+    }
+
 }

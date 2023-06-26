@@ -6,6 +6,8 @@
 package IU;
 
 import LOGICA.CalificarExamen;
+import LOGICA.conexionBD;
+
 import javax.swing.*;
 
 import DATOS.Usuario;
@@ -249,7 +251,22 @@ public class PanelResultados extends JPanel {
         resultadoSociales.setText(String.format("%.4f",Sociales));
         resultadoCiencias.setText(String.format("%.4f",Ciencias));
         resultadoImagen.setText(String.format("%.4f",Imagen));
-        resultadoGlobal.setText(String.format("%.5f",Global));  
+        double[] notasUsuario = usuarioActivo.getNotas();
+        double[] nuevoArreglo = agregarElemento(notasUsuario, Global);
+        usuarioActivo.setNotas(nuevoArreglo);
+        System.out.println(nuevoArreglo[nuevoArreglo.length-1]);
+        resultadoGlobal.setText(String.format("%.5f",Global)); 
+        // new conexionBD(usuarioActivo, nuevoArreglo); 
+    }
+
+    public static double[] agregarElemento(double[] arregloExistente, double nuevoElemento) {
+        int longitudExistente = arregloExistente.length;
+        double[] nuevoArreglo = new double[longitudExistente + 1];
+
+        System.arraycopy(arregloExistente, 0, nuevoArreglo, 0, longitudExistente);
+        nuevoArreglo[longitudExistente] = nuevoElemento;
+
+        return nuevoArreglo;
     }
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private JLabel jLabel1;
