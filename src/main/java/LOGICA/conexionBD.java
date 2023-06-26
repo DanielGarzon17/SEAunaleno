@@ -70,7 +70,7 @@ public class conexionBD {
     public conexionBD(Usuario usuario, Queue<Double> notas) {
         // usuario.setNotas(notas);
         Document filtro = new Document("id", usuario.getId());
-        collection.updateOne(filtro, Updates.push("notas", notas.pop().doubleValue()));
+        collection.updateOne(filtro, Updates.push("notas", ));
 
     }
 

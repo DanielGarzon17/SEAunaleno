@@ -217,7 +217,7 @@ public class RegistroUsuarios extends JFrame {
                 }
                 
                 
-                double[] valores = {1.5, 2.7, 3.9, 4.2};
+                double[] valores = {1.0};
 
                 Usuario usuario = new Usuario(id, nombres, apellidos, telefono, email, null, valores,
                         image, password);

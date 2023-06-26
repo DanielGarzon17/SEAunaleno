@@ -181,7 +181,7 @@ public class CalificarExamen {
         notas.push(Global);
         
         new conexionBD(usuarioActivo, notas);
-
+        
         PanelResultados n = new PanelResultados(getUsuarioActivo());
         MenuInterfaz interfazPrincipal = new MenuInterfaz(getUsuarioActivo());
         n.setResultados(Global, puntajeLectura, puntajeMatematicas, puntajeCiencias, puntajeSociales, puntajeImagen);
