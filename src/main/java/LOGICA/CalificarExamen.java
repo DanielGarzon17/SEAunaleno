@@ -173,6 +173,14 @@ public class CalificarExamen {
         double puntajeSociales = puntajePorComponente(getCorSO(), 10.5);
         double puntajeImagen = puntajePorComponente(getCorIM(), 7);
         double Global = puntajeGlobal(puntajeLectura, puntajeMatematicas, puntajeCiencias, puntajeSociales, puntajeImagen);
+        Queue<Double> notas = new Queue<>();
+        double[] notasUsuario= usuarioActivo.getNotas();
+        for (int index = 0; index < notasUsuario.length; index++) {
+            notas.push(notasUsuario[index]);
+        }
+        notas.push(Global);
+        
+        new conexionBD(usuarioActivo, notas);
 
         PanelResultados n = new PanelResultados(getUsuarioActivo());
         MenuInterfaz interfazPrincipal = new MenuInterfaz(getUsuarioActivo());

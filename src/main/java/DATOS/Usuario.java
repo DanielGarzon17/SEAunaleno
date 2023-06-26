@@ -1,5 +1,6 @@
 package DATOS;
 
+import LOGICA.Queue;
 import LOGICA.Stack;
 
 public class Usuario {
@@ -12,11 +13,11 @@ public class Usuario {
     private byte[] Imagen;
     
 
-    private float[] notas;
+    private double[] notas;
     private String password;
 
     public Usuario(String id, String nombres, String apellidos, String telefono, String email,
-            Stack<Evaluacion> historial, float[] notas, byte[] Imagenbytes, String password) {
+            Stack<Evaluacion> historial, double[] notas, byte[] Imagenbytes, String password) {
         this.id = id;
         this.nombres = nombres;
         this.apellidos = apellidos;
@@ -84,11 +85,11 @@ public class Usuario {
         this.historial = historial;
     }
 
-    public float[] getNotas() {
+    public double[] getNotas() {
         return notas;
     }
 
-    public void setNotas(float[] notas) {
+    public void setNotas(double[] notas) {
         this.notas = notas;
     }
 

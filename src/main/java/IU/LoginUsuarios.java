@@ -2,28 +2,11 @@ package IU;
 
 import javax.swing.*;
 
-import org.bson.Document;
-import org.bson.conversions.Bson;
-import org.bson.types.Binary;
-import org.json.simple.JSONObject;
-import org.json.simple.parser.JSONParser;
-import org.json.simple.parser.ParseException;
-
-import static com.mongodb.client.model.Filters.*;
-import com.mongodb.MongoClient;
-import com.mongodb.MongoClientURI;
-import com.mongodb.client.MongoCollection;
-import com.mongodb.client.MongoDatabase;
-import com.mongodb.client.FindIterable;
-
-import DATOS.Evaluacion;
 import DATOS.Usuario;
-import LOGICA.Stack;
 import LOGICA.conexionBD;
 
 import java.awt.*;
 import java.awt.event.*;
-import java.util.Base64;
 
 public class LoginUsuarios extends JFrame {
     private JTextField usernameField;
@@ -141,79 +124,6 @@ public class LoginUsuarios extends JFrame {
             }
         });
     }
-
-    // public Usuario verificarEmail(String email, String password) {
-    //     Bson filter = eq("email", email);
-    //     MongoClient mongoClient = new MongoClient(
-    //             new MongoClientURI(
-    //                     "mongodb+srv://Admin:passwordAdmin@cluster0.fe0chr9.mongodb.net/"));
-    //     MongoDatabase database = mongoClient.getDatabase("SeaUnalenoDB");
-    //     MongoCollection<Document> collection = database.getCollection("usuarios");
-    //     FindIterable<Document> result = collection.find(filter);
-
-    //     for (Document usuarioEncontrado : result) {
-    //         if (usuarioEncontrado.getString("password").equals(password)) {
-    //             // Obtener los datos del usuario
-    //             System.out.println(usuarioEncontrado.getString("id"));
-    //             String id = usuarioEncontrado.getString("id");
-    //             String nombres = usuarioEncontrado.getString("nombres");
-    //             String apellidos = usuarioEncontrado.getString("apellidos");
-    //             String telefono = usuarioEncontrado.getString("telefono");
-    //             Stack<Evaluacion> historial = null;
-    //             float[] notas = null;
-    //             byte[] imagenBytes = null;
-
-    //             Binary binData = usuarioEncontrado.get("pathImagen", Binary.class);
-    //             if (binData != null) {
-    //                 imagenBytes = binData.getData();
-    //             }
-    //             String usuarioPassword = usuarioEncontrado.getString("password");
-
-    //             // Crear y retornar el objeto Usuario
-    //             return new Usuario(id, nombres, apellidos, telefono, email, historial, notas, imagenBytes,
-    //                     usuarioPassword);
-    //         } else {
-    //             status.setText("contraseña incorrecta");
-    //         }
-    //     }
-    //     // Si el correo electrónico no existe o no se encuentra en la base de datos
-    //     return null;
-    // }
-
-    // private Stack<Evaluacion> obtenerHistorial(Document usuario) {
-    //     Stack<Evaluacion> historial = null;
-
-    //     List<Document> evaluaciones = usuario.getList("historial", Document.class);
-    //     for (Document evaluacionDoc : evaluaciones) {
-    //         String link = evaluacionDoc.getString("link");
-    //         int numeroDePreguntas = evaluacionDoc.getInteger("numeroDePreguntas");
-    //         List<String> respuestasList = evaluacionDoc.getList("respuestas",
-    //                 String.class);
-    //         String[] respuestas = respuestasList.toArray(new String[0]);
-    //         int horas = evaluacionDoc.getInteger("horas");
-    //         int minutos = evaluacionDoc.getInteger("minutos");
-    //         String tipoEvaluacion = evaluacionDoc.getString("tipoEvaluacion");
-    //         String nombre = evaluacionDoc.getString("nombre");
-
-    //         Evaluacion evaluacion = new Evaluacion(link, numeroDePreguntas, respuestas,
-    //                 horas, minutos, tipoEvaluacion,
-    //                 nombre);
-    //         historial = new Stack<Evaluacion>(evaluaciones.size());
-    //         historial.push(evaluacion);
-    //     }
-    //     return historial;
-    // }
-
-    // private float[] obtenerNotas(Document usuario) {
-    // List<Double> notasList = usuario.getList("notas", Double.class);
-    // float[] notas = new float[notasList.size()];
-
-    // for (int i = 0; i < notasList.size(); i++) {
-    // notas[i] = notasList.get(i).floatValue();
-    // }
-
-    // return notas;
-    // }
 
     public static void main(String[] args) {
         SwingUtilities.invokeLater(new Runnable() {

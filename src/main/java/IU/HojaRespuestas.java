@@ -1,6 +1,8 @@
 package IU;
 
 import LOGICA.CalificarExamen;
+import LOGICA.conexionBD;
+
 import java.awt.Color;
 import java.awt.Desktop;
 import java.awt.Dimension;

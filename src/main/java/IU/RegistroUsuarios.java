@@ -4,7 +4,10 @@ import javax.imageio.ImageIO;
 import javax.swing.*;
 import javax.swing.filechooser.FileNameExtensionFilter;
 
+import org.bson.BsonArray;
+import org.bson.BsonDouble;
 import org.bson.Document;
+import org.json.simple.JSONArray;
 
 import com.mongodb.MongoClient;
 import com.mongodb.MongoClientURI;
@@ -14,6 +17,8 @@ import com.mongodb.client.model.IndexOptions;
 import com.mongodb.client.model.Indexes;
 
 import DATOS.Usuario;
+import LOGICA.Queue;
+import LOGICA.conexionBD;
 
 import java.awt.*;
 import java.awt.event.*;
@@ -200,29 +205,29 @@ public class RegistroUsuarios extends JFrame {
                 String email = emailField.getText();
                 String password = new String(passwordField.getPassword());
                 byte[] image = null;
-                
-                
+                                
                 try {
                     // Obtener la imagen seleccionada por el usuario
                     byte[] imagenBytes = Files.readAllBytes(getPathImageSelected().toPath());
                     byte[] imagenComprimida = ComprimirBytes(imagenBytes);
-                    // // Convertir el arreglo de bytes a una cadena Base64
-                    // String imagenBase64 = Base64.getEncoder().encodeToString(imagenBytes);
                     System.out.println(imagenBytes);
                     image = imagenComprimida;
                 } catch (IOException ex) {
                     ex.printStackTrace();
                 }
+                
+                
+                double[] valores = {1.5, 2.7, 3.9, 4.2};
 
-                Usuario usuario = new Usuario(id, nombres, apellidos, telefono, email, null, null,
+                Usuario usuario = new Usuario(id, nombres, apellidos, telefono, email, null, valores,
                         image, password);
-                new MenuInterfaz(usuario);
+                
                 setVisible(false);
                 // CREAR BASE DE DATOS Y ENVIAR INFO DE USUARIOS
                 // conexion a la BD:
                 // mongodb+srv://Admin:passwordAdmin@cluster0.fe0chr9.mongodb.net/
-                BDconection(usuario);
-
+                new conexionBD(usuario,"usuarios");
+                new MenuInterfaz(usuario);
             }
         });
 
@@ -289,33 +294,34 @@ public class RegistroUsuarios extends JFrame {
         return baos.toByteArray();
     }
 
-    private void BDconection(Usuario usuario) {
-        try (MongoClient mongoClient = new MongoClient(uri)) {
-            MongoDatabase database = mongoClient.getDatabase("SeaUnalenoDB");
-            System.out.println("Conectado a la base de datos: " + database.getName());
-            MongoCollection<Document> collection = database.getCollection("usuarios");
 
-            collection.createIndex(Indexes.ascending("email"), new IndexOptions().unique(true));
-            Document userDocument = new Document()
-                    .append("id", usuario.getId())
-                    .append("nombres", usuario.getNombres())
-                    .append("apellidos", usuario.getApellidos())
-                    .append("telefono", usuario.getTelefono())
-                    .append("email", usuario.getEmail())
-                    .append("historial", usuario.getHistorial())
-                    .append("notas", usuario.getNotas())
-                    .append("pathImagen", usuario.getImagen())
-                    .append("password", usuario.getPassword());
+    // private void BDconection(Usuario usuario) {
+    //     JSONArray jsonArray = new JSONArray();
+    //         for (double dato : usuario.getNotas()) {
+    //             System.out.println(dato);
+    //             jsonArray.add(dato);
+    //         }
+    //     try (MongoClient mongoClient = new MongoClient(uri)) {
+    //         MongoDatabase database = mongoClient.getDatabase("SeaUnalenoDB");
+    //         System.out.println("Conectado a la base de datos: " + database.getName());
+    //         MongoCollection<Document> collection = database.getCollection("usuarios");
 
-            collection.insertOne(userDocument);
-            // Document command = new Document("createUser", "myUser")
-            // .append("pwd", "myPassword")
-            // .append("roles", Arrays.asList(new Document("role", "readWrite"), new
-            // Document("role", "dbAdmin")));
+            
+    //         collection.createIndex(Indexes.ascending("email"), new IndexOptions().unique(true));
+    //         Document userDocument = new Document()
+    //                 .append("id", usuario.getId())
+    //                 .append("nombres", usuario.getNombres())
+    //                 .append("apellidos", usuario.getApellidos())
+    //                 .append("telefono", usuario.getTelefono())
+    //                 .append("email", usuario.getEmail())
+    //                 .append("historial", usuario.getHistorial())
+    //                 .append("notas", jsonArray.toJSONString())
+    //                 .append("pathImagen", usuario.getImagen())
+    //                 .append("password", usuario.getPassword());
 
-            // database.runCommand(command);
-        }
-    }
+    //         collection.insertOne(userDocument);
+    //     }
+    // }
 
     // Metodo que genera ID's unicos Hashing
     private String generateUniqueID(String input) {

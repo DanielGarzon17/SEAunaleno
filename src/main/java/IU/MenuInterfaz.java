@@ -117,12 +117,12 @@ public class MenuInterfaz extends JFrame {
         // Crear el label del logo del aplicativo en el panel de contenido desplegable
         JLabel contentLogoLabel = new JLabel();
         contentLogoLabel.setIcon(new ImageIcon("src/main/java/RECURSOS/SEAUNALENOLOGO.jpg"));
-        contentLogoLabel.setVerticalAlignment(JLabel.CENTER);
+        // contentLogoLabel.setVerticalAlignment(JLabel.CENTER);
         contentLogoLabel.setHorizontalAlignment(JLabel.CENTER);
         contentLogoLabel.setFont(new Font("Arial", Font.BOLD, 18));
 
         // Agregar el label del logo al panel de contenido desplegable
-        contentPanel.add(contentLogoLabel, BorderLayout.CENTER);
+        contentPanel.add(contentLogoLabel, BorderLayout.NORTH);
 
         // Crear un layout de tipo BorderLayout para la ventana principal
         setLayout(new BorderLayout());
@@ -206,7 +206,9 @@ public class MenuInterfaz extends JFrame {
         statsButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                int[] datos = {10, 20, 30, 40, 50, 60, 70, 80, 90, 100};
+                double[] datos = {10, 20, 30., 40, 50, 60, 70, 80, 90, 100,98,
+                -12, 583, 427, 456, 590, 324, -46, 618, 256, 39, 542, 280, 434, 181, 37, 604, 105, 602, -176, 414, 326, 367, 18, 590, 514, 7, 53, 365, 640, 229, 95, 197, 484, 52, 356, 361, 458, 224, 78, 459, 373, 166, 225, 35, 273, 400, 384, 20, 54, 97, 569, 439, -102, 605, 596, 405, 558, 267, 392, 234, 112, 93, 484, 643, 446, 313, 7, 285, 532, 8, 603, 43, 20, 503
+                ,12.5, 17.8, 21.3, 15.2, 18.6, 14.7, 20.1, 16.9, 19.8, 13.4};
                 EstadisticasPanel estadisticas = new EstadisticasPanel(datos);
                 repintarPanel(contentPanel,estadisticas);
             }
