@@ -1,6 +1,5 @@
 package DATOS;
 
-import LOGICA.Queue;
 import LOGICA.Stack;
 
 public class Usuario {
