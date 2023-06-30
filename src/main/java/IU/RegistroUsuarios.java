@@ -3,21 +3,7 @@ package IU;
 import javax.imageio.ImageIO;
 import javax.swing.*;
 import javax.swing.filechooser.FileNameExtensionFilter;
-
-import org.bson.BsonArray;
-import org.bson.BsonDouble;
-import org.bson.Document;
-import org.json.simple.JSONArray;
-
-import com.mongodb.MongoClient;
-import com.mongodb.MongoClientURI;
-import com.mongodb.client.MongoCollection;
-import com.mongodb.client.MongoDatabase;
-import com.mongodb.client.model.IndexOptions;
-import com.mongodb.client.model.Indexes;
-
 import DATOS.Usuario;
-import LOGICA.Queue;
 import LOGICA.conexionBD;
 
 import java.awt.*;
@@ -44,8 +30,7 @@ public class RegistroUsuarios extends JFrame {
     private JButton showPasswordButton;
     private boolean showPassword = false;
     private File PathImageSelected;
-    private MongoClientURI uri = new MongoClientURI("mongodb+srv://Admin:passwordAdmin@cluster0.fe0chr9.mongodb.net");
-
+    
     public RegistroUsuarios() {
         initComponets();
     }
@@ -293,35 +278,6 @@ public class RegistroUsuarios extends JFrame {
         dos.close();
         return baos.toByteArray();
     }
-
-
-    // private void BDconection(Usuario usuario) {
-    //     JSONArray jsonArray = new JSONArray();
-    //         for (double dato : usuario.getNotas()) {
-    //             System.out.println(dato);
-    //             jsonArray.add(dato);
-    //         }
-    //     try (MongoClient mongoClient = new MongoClient(uri)) {
-    //         MongoDatabase database = mongoClient.getDatabase("SeaUnalenoDB");
-    //         System.out.println("Conectado a la base de datos: " + database.getName());
-    //         MongoCollection<Document> collection = database.getCollection("usuarios");
-
-            
-    //         collection.createIndex(Indexes.ascending("email"), new IndexOptions().unique(true));
-    //         Document userDocument = new Document()
-    //                 .append("id", usuario.getId())
-    //                 .append("nombres", usuario.getNombres())
-    //                 .append("apellidos", usuario.getApellidos())
-    //                 .append("telefono", usuario.getTelefono())
-    //                 .append("email", usuario.getEmail())
-    //                 .append("historial", usuario.getHistorial())
-    //                 .append("notas", jsonArray.toJSONString())
-    //                 .append("pathImagen", usuario.getImagen())
-    //                 .append("password", usuario.getPassword());
-
-    //         collection.insertOne(userDocument);
-    //     }
-    // }
 
     // Metodo que genera ID's unicos Hashing
     private String generateUniqueID(String input) {

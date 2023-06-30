@@ -6,7 +6,6 @@
 package IU;
 
 import LOGICA.CalificarExamen;
-import LOGICA.conexionBD;
 
 import javax.swing.*;
 
